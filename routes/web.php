@@ -42,10 +42,16 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
     Route::get('/rpu/create', [HomeController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
 });
 
-
 Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
 
     Route::get('/', [ForemanController::class, 'index']);
+   Route::get('/listing', function () {
+        $passing = [
+            'title'=>'Listing',
+            'title-page'=>'Foreman'
+        ];
+        return view('PAGES.PAGES_FM.LISTING.index',['passing'=>$passing]); 
+    });
 });
 
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/werehose'], function () {
