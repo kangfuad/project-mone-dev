@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -29,22 +29,21 @@ class LoginController extends Controller
 
         $role = Auth::user()->role_id;
 
-        switch ($role) {
-            case '1':
-                return redirect('/admin');
-                break;
-            case '2';
-                return redirect('/mcc');
-                break;
-            case '3';
-                return redirect('/foreman');
-                break;
-            case '4';
-                return redirect('/warehose');
-                break;
-            default:
-                return redirect('/login');
-                break;
+        if ($role == 1) {
+            return redirect('/admin');
+        } else if ($role == 2) {
+            return redirect('/mcc');
+        } else if ($role == 3) {
+            return redirect('/foreman');
+        } else if ($role == 4) {
+            return redirect('/warehose');
+        } else {
+            Session::flush();
+
+            Auth::logout();
+
+            return redirect()
+                ->to(route('login'));
         }
     }
     /**

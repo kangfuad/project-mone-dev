@@ -31,6 +31,7 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix' => '/admin'], function () {
     Route::get('/', [AdminController::class, 'index']);
 
+    // Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/menu-manajemen', [AdminController::class, 'menu_manajemen']);
 });
 
