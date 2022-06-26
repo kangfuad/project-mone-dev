@@ -37,6 +37,8 @@ Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix'
 Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix' => '/mcc'], function () {
 
     Route::get('/', [MccController::class, 'index']);
+    Route::get('/rpu/index', [HomeController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
+    Route::get('/rpu/create', [HomeController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
 });
 
 
@@ -48,4 +50,5 @@ Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix'
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/werehose'], function () {
 
     Route::get('/', [WerehoseController::class, 'index']);
+    Route::get('/spb/index', [HomeController::class, 'warehouse_spb'])->name('warehouse.spb.index');
 });

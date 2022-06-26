@@ -118,13 +118,20 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">Daftar Request Perbaikan Unit (RPU)</h5>
+                <div class="row">
+                <div class="col-6">
+                    <h5 class="card-title mb-0">Daftar Request Perbaikan Unit (RPU)</h5>
+                </div>
+                <div class="col-6">
+                    <a type="button" href="{{route('mcc.rpu.create')}}" class="btn btn-primary btn-label waves-effect waves-light float-end"><i class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> Buat Request</a>
+                </div>
+                </div>
             </div>
             <div class="card-body">
                 <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="sobList"
+                            <table id="rpuList"
                                 class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
                                 style="width: 100%;" aria-describedby="example_info">
                                 <thead>
@@ -138,7 +145,6 @@
                                         <th>Kilo Meter (KM)</th>
                                         <th>Laporan Kerusakan</th>
                                         <th>PIC MCC</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -154,9 +160,6 @@
                                             <button class="btn btn-primary">Detail Kerusakan</button>
                                         </td>
                                         <td>Daffa</td>
-                                        <td>
-                                            <button class="btn btn-primary">Generate</button>
-                                        </td>
                                     </tr>
                                     <tr class="">
                                         <td>1</td>
@@ -170,9 +173,6 @@
                                             <button class="btn btn-primary">Detail Kerusakan</button>
                                         </td>
                                         <td>Fuad</td>
-                                        <td>
-                                            <button class="btn btn-primary">Generate</button>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -205,8 +205,8 @@
 <script>
 
     $('document').ready(function () {
-        $('#sobList').DataTable();
-        $('#spbList').DataTable();
+        $('#rpuList').DataTable();
+        // $('#spbList').DataTable();
     })
 
 </script>
