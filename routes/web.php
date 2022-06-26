@@ -35,3 +35,24 @@ Route::group(['prefix' => '/warehouse'], function(){
 Route::group(['prefix' => '/mcc'], function(){
     Route::get('/rpu/index', [HomeController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
 });
+
+
+
+
+
+
+// Group Routing FM start
+
+Route::group(['prefix' => '/foreman'], function(){
+
+    Route::get('/listing', function () {
+        $passing = [
+            'title'=>'Listing',
+            'title-page'=>'Foreman'
+        ];
+        return view('PAGES.PAGES_FM.LISTING.index',['passing'=>$passing]); 
+    });
+
+});
+
+// Group Routing FM end

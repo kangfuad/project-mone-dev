@@ -76,7 +76,7 @@
                 </li>
                 <li class="menu-title"><i class="ri-more-fill"></i> <span>Foreman</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="#">
+                    <a class="nav-link menu-link" href="/foreman/listing">
                         <i class="ri-alert-fill"></i> <span data-key="t-widgets">Listing Sparepart</span>
                     </a>
                 </li>
