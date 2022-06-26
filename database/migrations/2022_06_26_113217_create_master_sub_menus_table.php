@@ -13,15 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('master_sub_menus', function (Blueprint $table) {
             $table->id();
-            $table->string('role_id')->nullable();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->integer('role_id');
+            $table->string('nama_sub_menu');
+            $table->string('slug_sub_menu');
+            $table->string('path_menu');    
+            $table->string('icon_sub_menu');
             $table->integer('is_active')->default(1);
-            $table->rememberToken();
+            $table->integer('updated_by');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('master_sub_menus');
     }
 };

@@ -39,8 +39,8 @@
                     </a>
                 </li>
 
-                <li class="menu-title"><i class="ri-more-fill"></i> <span>-= ROLE USER =-</span></li>
-                <li class="nav-item">
+                {{-- <li class="menu-title"><i class="ri-more-fill"></i> <span>-= ROLE USER =-</span></li> --}}
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarPages" data-bs-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="sidebarPages">
                         <i class="ri-pages-line"></i> <span>MENU</span>
@@ -52,14 +52,17 @@
                             </li>
                         </ul>
                     </div>
-                </li>
-                <li class="menu-title"><i class="ri-more-fill"></i> <span>Warehouse</span></li>
+                </li> --}}
+                <li class="menu-title"><i class="ri-more-fill"></i> <span>{{$passing['menu_head']}}</span></li>
+                @foreach($passing['menu'] as $m)
+                    
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{route('warehouse.spb.index')}}">
-                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Penerimaan (SPB)</span>
+                    <a class="nav-link menu-link" href="{{ url($m->path_menu) }}">
+                        <i class="{{$m->icon_sub_menu}}"></i> <span data-key="t-widgets">{{$m->nama_sub_menu}}</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                @endforeach
+                {{-- <li class="nav-item">
                     <a class="nav-link menu-link" href="#">
                         <i class="ri-alert-fill"></i> <span data-key="t-widgets">Barang Masuk</span>
                     </a>
@@ -110,7 +113,7 @@
                     <a class="nav-link menu-link" href="#">
                         <i class="ri-alert-fill"></i> <span data-key="t-widgets">Penjadwalan Servis</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
         <!-- Sidebar -->
