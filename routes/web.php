@@ -32,16 +32,16 @@ Auth::routes(['verify' => true]);
 
 
 
-Route::group(['middleware' => ['auth', 'role:1']], function () {
+Route::group(['middleware' => ['auth', 'role:1'],'prefix' => '/admin'], function () {
 
-        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+        Route::get('/', [AdminController::class, 'index']);
         
         //semua route dalam grup ini hanya bisa diakses siswa
 });
 
-Route::group(['middleware' => ['auth', 'role:2']], function () {
+Route::group(['middleware' => ['auth', 'role:2'],'prefix' => '/mcc'], function () {
 
-    Route::get('/mcc', [AdminController::class, 'index'])->name('admin');
+    Route::get('/', [AdminController::class, 'index']);
     
     //semua route dalam grup ini hanya bisa diakses siswa
 });

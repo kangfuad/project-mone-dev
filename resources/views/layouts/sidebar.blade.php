@@ -26,13 +26,13 @@
         </button>
     </div>
 
-    <div id="scrollbar" class="mt-3">
+    <div id="scrollbar" class="">
         <div class="container-fluid">
 
             <div id="two-column-menu">
             </div>
 
-            <ul class="navbar-nav mt-5" id="navbar-nav">
+            <ul class="navbar-nav mt-1" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="/">
                         <i class="ri-dashboard-2-line"></i> <span>BERANDA</span>
@@ -52,6 +52,64 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+                <li class="menu-title"><i class="ri-more-fill"></i> <span>Warehouse</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('warehouse.spb.index')}}">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Penerimaan (SPB)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Barang Masuk</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Barang Retur</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Buat PO</span>
+                    </a>
+                </li>
+                <li class="menu-title"><i class="ri-more-fill"></i> <span>Foreman</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Listing Sparepart</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="mdi mdi-clipboard-edit"></i> <span data-key="t-widgets">Work Order (WO)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Status (WO)</span>
+                    </a>
+                </li>
+                <li class="menu-title"><i class="ri-more-fill"></i> <span>MCC</span></li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{route('mcc.rpu.index')}}">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Request Perbaikan Unit (RPU)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Surat Order Barang (SOB)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Work Order (WO)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#">
+                        <i class="ri-alert-fill"></i> <span data-key="t-widgets">Penjadwalan Servis</span>
+                    </a>
                 </li>
             </ul>
         </div>
