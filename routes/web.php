@@ -45,12 +45,12 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
 Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
 
     Route::get('/', [ForemanController::class, 'index']);
-   Route::get('/listing', function () {
+    Route::get('/listing', function () {
         $passing = [
-            'title'=>'Listing',
-            'title-page'=>'Foreman'
+            'title' => 'Listing',
+            'title-page' => 'Foreman'
         ];
-        return view('PAGES.PAGES_FM.LISTING.index',['passing'=>$passing]); 
+        return view('PAGES.PAGES_FM.LISTING.index', ['passing' => $passing]);
     });
 });
 
