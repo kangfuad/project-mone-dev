@@ -27,6 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $passing = [
+            'title' => 'Beranda'
+        ];
         return view('home');
     }
 }

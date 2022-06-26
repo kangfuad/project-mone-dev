@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+// CONTROLLER
+use App\Http\Controllers\HomeController;
+// END CONTROLLER
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $title = "Halaman Masuk";
+    return view('index', ['title' => $title]);
 });
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// BERANDA
+Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
+// BERANDA
