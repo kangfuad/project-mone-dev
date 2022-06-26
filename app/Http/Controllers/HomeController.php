@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Helpers\UtilFunction;
+
 class HomeController extends Controller
 {
     /**
@@ -27,6 +29,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        // dd($menu);
         $passing = [
             'title' => 'Beranda',
             'title-page' => 'Halaman Beranda'

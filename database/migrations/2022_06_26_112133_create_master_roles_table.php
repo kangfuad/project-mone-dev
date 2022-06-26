@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('master_roles', function (Blueprint $table) {
             $table->id();
-            $table->string('role_id')->nullable();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->integer('id_role')->unique();
+            $table->string('nama_role');
+            $table->string('slug_role')->unique();
+            $table->string('deskripsi_role');
             $table->integer('is_active')->default(1);
-            $table->rememberToken();
+            $table->integer('updated_by');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('master_roles');
     }
 };

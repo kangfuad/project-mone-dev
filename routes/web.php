@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 // CONTROLLER
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 // END CONTROLLER
 
 /*
@@ -26,5 +27,21 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 // BERANDA
-Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
+// Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
 // BERANDA
+
+
+
+Route::group(['middleware' => ['auth', 'role:1']], function () {
+
+        Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+        
+        //semua route dalam grup ini hanya bisa diakses siswa
+});
+
+Route::group(['middleware' => ['auth', 'role:2']], function () {
+
+    Route::get('/mcc', [AdminController::class, 'index'])->name('admin');
+    
+    //semua route dalam grup ini hanya bisa diakses siswa
+});

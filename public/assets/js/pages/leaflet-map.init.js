@@ -30,8 +30,8 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(markermap);
 L.marker([51.5, -0.09]).addTo(markermap);
 L.circle([51.508, -0.11], {
-  color: '#0ab39c',
-  fillColor: '#0ab39c',
+  color: '#046842',
+  fillColor: '#046842',
   fillOpacity: 0.5,
   radius: 500
 }).addTo(markermap);

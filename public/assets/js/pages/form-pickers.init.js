@@ -43,7 +43,7 @@ if (monolithColorPickr) monolithColorPickr.forEach(function () {
   Pickr.create({
     el: ".monolith-colorpicker",
     theme: "monolith",
-    "default": "#0ab39c",
+    "default": "#046842",
     swatches: ["rgba(244, 67, 54, 1)", "rgba(233, 30, 99, 0.95)", "rgba(156, 39, 176, 0.9)", "rgba(103, 58, 183, 0.85)", "rgba(63, 81, 181, 0.8)", "rgba(33, 150, 243, 0.75)", "rgba(3, 169, 244, 0.7)"],
     defaultRepresentation: "HEXA",
     components: {
@@ -113,7 +113,7 @@ if (opacityHueColorPickr) opacityHueColorPickr.forEach(function () {
   Pickr.create({
     el: ".colorpicker-opacity-hue",
     theme: "monolith",
-    "default": "#0ab39c",
+    "default": "#046842",
     components: {
       // Main components
       preview: true,
