@@ -2,10 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Helpers\UtilFunction;
 
 // CONTROLLER
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MccController;
+use App\Http\Controllers\ForemanController;
+use App\Http\Controllers\WerehoseController;
 // END CONTROLLER
 
 /*
@@ -19,29 +24,28 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', function () {
-    $title = "Halaman Masuk";
-    return view('index', ['title' => $title]);
-});
+Route::get('/', [LoginController::class, 'index'])->name('login');
 
 Auth::routes(['verify' => true]);
 
-// BERANDA
-// Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
-// BERANDA
+Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix' => '/admin'], function () {
+    Route::get('/', [AdminController::class, 'index']);
 
-
-
-Route::group(['middleware' => ['auth', 'role:1'],'prefix' => '/admin'], function () {
-
-        Route::get('/', [AdminController::class, 'index']);
-        
-        //semua route dalam grup ini hanya bisa diakses siswa
+    Route::get('/menu-manajemen', [AdminController::class, 'menu_manajemen']);
 });
 
-Route::group(['middleware' => ['auth', 'role:2'],'prefix' => '/mcc'], function () {
+Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix' => '/mcc'], function () {
 
-    Route::get('/', [AdminController::class, 'index']);
-    
-    //semua route dalam grup ini hanya bisa diakses siswa
+    Route::get('/', [MccController::class, 'index']);
+});
+
+
+Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
+
+    Route::get('/', [ForemanController::class, 'index']);
+});
+
+Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/werehose'], function () {
+
+    Route::get('/', [WerehoseController::class, 'index']);
 });
