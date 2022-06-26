@@ -31,34 +31,56 @@ class HomeController extends Controller
     {
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
-        // dd($menu);
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU"; // dd($menu);
         $passing = [
             'title' => 'Beranda',
-            'title-page' => 'Halaman Beranda'
+            'title-page' => 'Halaman Beranda',
+            'menu' => $menu,
+            'menu_head' => $menu_head
         ];
-        return view('dashboard',['passing' => $passing]);
+        return view('dashboard', ['passing' => $passing]);
     }
 
-    public function warehouse_spb(){
+    public function warehouse_spb()
+    {
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
         $passing = [
             'title' => 'SPB - Penerimaan Barang',
-            'title-page' => 'Penerimaan Barang'
+            'title-page' => 'Penerimaan Barang',
+            'menu' => $menu,
+            'menu_head' => $menu_head
         ];
         return view('PAGES.PAGES_WH.SPB.index', get_defined_vars());
     }
 
-    public function mcc_rpu_index(){
+    public function mcc_rpu_index()
+    {
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
         $passing = [
             'title' => 'RPU - Request Perbaikan Unit',
-            'title-page' => 'Request Perbaikan Unit'
+            'title-page' => 'Request Perbaikan Unit',
+            'menu' => $menu,
+            'menu_head' => $menu_head
         ];
         return view('PAGES.PAGES_MCC.MCC_RPU.index', get_defined_vars());
     }
 
-    public function mcc_rpu_create(){
+    public function mcc_rpu_create()
+    {
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
         $passing = [
             'title' => 'Buat - Request Perbaikan Unit',
-            'title-page' => 'Request Perbaikan Unit'
+            'title-page' => 'Request Perbaikan Unit',
+            'menu' => $menu,
+            'menu_head' => $menu_head
         ];
         return view('PAGES.PAGES_MCC.MCC_RPU.create', get_defined_vars());
     }

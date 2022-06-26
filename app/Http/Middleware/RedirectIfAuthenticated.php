@@ -45,7 +45,8 @@ class RedirectIfAuthenticated
                     return redirect('/warehose');
                     break;
                 default:
-                    return redirect('/login');
+                return redirect()
+                ->to(route('login'));
                     break;
             }
         }
