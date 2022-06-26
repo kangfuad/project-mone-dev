@@ -49,4 +49,12 @@ class HomeController extends Controller
         ];
         return view('PAGES.PAGES_MCC.MCC_RPU.index', get_defined_vars());
     }
+
+    public function mcc_rpu_create(){
+        $passing = [
+            'title' => 'Buat - Request Perbaikan Unit',
+            'title-page' => 'Request Perbaikan Unit'
+        ];
+        return view('PAGES.PAGES_MCC.MCC_RPU.create', get_defined_vars());
+    }
 }

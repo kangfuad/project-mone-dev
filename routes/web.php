@@ -29,9 +29,27 @@ Auth::routes(['verify' => true]);
 Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
 // BERANDA
 
-Route::group(['prefix' => '/warehouse'], function(){
-    Route::get('/spb/index', [HomeController::class, 'warehouse_spb'])->name('warehouse.spb.index');
+Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix' => '/admin'], function () {
+    Route::get('/', [AdminController::class, 'index']);
+
+    Route::get('/menu-manajemen', [AdminController::class, 'menu_manajemen']);
 });
-Route::group(['prefix' => '/mcc'], function(){
+
+Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix' => '/mcc'], function () {
+
+    Route::get('/', [MccController::class, 'index']);
     Route::get('/rpu/index', [HomeController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
+    Route::get('/rpu/create', [HomeController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
+});
+
+
+Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
+
+    Route::get('/', [ForemanController::class, 'index']);
+});
+
+Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/werehose'], function () {
+
+    Route::get('/', [WerehoseController::class, 'index']);
+    Route::get('/spb/index', [HomeController::class, 'warehouse_spb'])->name('warehouse.spb.index');
 });
