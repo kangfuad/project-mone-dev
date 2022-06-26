@@ -28,3 +28,10 @@ Auth::routes(['verify' => true]);
 // BERANDA
 Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
 // BERANDA
+
+Route::group(['prefix' => '/warehouse'], function(){
+    Route::get('/spb/index', [HomeController::class, 'warehouse_spb'])->name('warehouse.spb.index');
+});
+Route::group(['prefix' => '/mcc'], function(){
+    Route::get('/rpu/index', [HomeController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
+});
