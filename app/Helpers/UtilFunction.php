@@ -19,7 +19,7 @@ class UtilFunction
     {
         $role_user = Auth::user()->role_id;
 
-        $menu = MasterSubMenu::where(['role_id'=> $role_user])->OrderBy('nama_sub_menu','ASC')->get();
+        $menu = MasterSubMenu::where(['role_id' => $role_user, 'is_active' => 1])->OrderBy('nama_sub_menu', 'ASC')->get();
 
 
         return $menu;
