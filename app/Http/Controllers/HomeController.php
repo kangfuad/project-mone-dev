@@ -57,31 +57,7 @@ class HomeController extends Controller
         return view('PAGES.PAGES_WH.SPB.index', get_defined_vars());
     }
 
-    public function mcc_rpu_index()
-    {
-        $GET_MENU = new UtilFunction();
-        $menu = $GET_MENU->GET_MENU();
-        $menu_head = "ADMIN MENU";
-        $passing = [
-            'title' => 'RPU - Request Perbaikan Unit',
-            'title-page' => 'Request Perbaikan Unit',
-            'menu' => $menu,
-            'menu_head' => $menu_head
-        ];
-        return view('PAGES.PAGES_MCC.MCC_RPU.index', get_defined_vars());
-    }
+    
 
-    public function mcc_rpu_create()
-    {
-        $GET_MENU = new UtilFunction();
-        $menu = $GET_MENU->GET_MENU();
-        $menu_head = "ADMIN MENU";
-        $passing = [
-            'title' => 'Buat - Request Perbaikan Unit',
-            'title-page' => 'Request Perbaikan Unit',
-            'menu' => $menu,
-            'menu_head' => $menu_head
-        ];
-        return view('PAGES.PAGES_MCC.MCC_RPU.create', get_defined_vars());
-    }
+    
 }

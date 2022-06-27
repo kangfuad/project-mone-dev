@@ -42,7 +42,7 @@ class RedirectIfAuthenticated
                     return redirect('/foreman');
                     break;
                 case '4';
-                    return redirect('/warehose');
+                    return redirect('/warehouse');
                     break;
                 default:
                 return redirect()

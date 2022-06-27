@@ -36,7 +36,7 @@ class LoginController extends Controller
         } else if ($role == 3) {
             return redirect('/foreman');
         } else if ($role == 4) {
-            return redirect('/warehose');
+            return redirect('/warehouse');
         } else {
             Session::flush();
 
