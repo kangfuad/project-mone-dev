@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix'
     // Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/menu-manajemen', [AdminController::class, 'menu_manajemen']);
     Route::post('/menu-manajemen', [AdminController::class, 'tambah_menu_manajemen']);
+    Route::post('/menu-hapus', [AdminController::class, 'hapus_menu_manajemen']);
+
     Route::get('/user-manajemen', [AdminController::class, 'user_manajemen']);
     Route::post('/user-manajemen', [AdminController::class, 'tambah_user_manajemen']);
     Route::get('/icon', [AdminController::class, 'icon']);

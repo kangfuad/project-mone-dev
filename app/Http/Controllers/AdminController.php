@@ -32,13 +32,14 @@ class AdminController extends Controller
     }
 
 
+    // MENU MANAJEMENt
+
     public function menu_manajemen()
     {
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
         $table_menu = MasterSubMenu::with(['role'])->OrderBy('id', 'desc')->get();
-        // dd($table_menu['role']['nama_role']);
         $passing = [
             'title' => 'Menu Manajemen',
             'title-page' => 'Halaman Menu Manajemen',
@@ -51,7 +52,6 @@ class AdminController extends Controller
 
     public function tambah_menu_manajemen(Request $req)
     {
-        // dd($req->all());
 
         $menu = new MasterSubMenu();
 
@@ -69,6 +69,23 @@ class AdminController extends Controller
         }
     }
 
+    public function hapus_menu_manajemen(Request $req)
+    {
+
+        $menu = MasterSubMenu::where('slug_sub_menu', $req->dSlug)
+            ->update(['is_active' => 0]);
+
+        if ($menu) {
+            return redirect('/admin/menu-manajemen')->with('berhasil', 'Menu baru berhasil hapus');
+        } else {
+            return redirect('/admin/menu-manajemen')->with('error', 'Menu baru gagal hapus');
+        }
+    }
+
+    // END MENU MANAJEMENt
+
+
+    // USERS MANAJEMENT
     public function user_manajemen()
     {
         $GET_MENU = new UtilFunction();
@@ -87,7 +104,6 @@ class AdminController extends Controller
 
     public function tambah_user_manajemen(Request $req)
     {
-        // dd($req->all());
 
         $menu = new User();
 
@@ -102,6 +118,8 @@ class AdminController extends Controller
             return redirect('/admin/user-manajemen')->with('error', 'User baru gagal ditambahkan');
         }
     }
+
+    // END USER MANAJEMENT
 
     public function icon()
     {

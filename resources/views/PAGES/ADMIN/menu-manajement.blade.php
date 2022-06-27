@@ -28,15 +28,15 @@
 </div>
 
 @if (session('berhasil'))
-    <div class="alert alert-success">
-        {{ session('berhasil') }}
-    </div>
+<div class="alert alert-success">
+    {{ session('berhasil') }}
+</div>
 @endif
 
 @if (session('error'))
-    <div class="alert alert-success">
-        {{ session('error') }}
-    </div>
+<div class="alert alert-success">
+    {{ session('error') }}
+</div>
 @endif
 
 
@@ -49,12 +49,6 @@
                         <h5 class="card-title mb-0">Table Menu</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <!-- Grids in modals -->
-                        {{-- <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                            data-bs-target="#ModalTambahMAsterMenu">
-                            <i class="ri-add-circle-line"> Tambah Menu</i>
-                        </button> --}}
-                        <!-- Buttons with Label Right -->
                         <button type="button" class="btn btn-primary btn-label waves-effect right waves-light"
                             data-bs-toggle="modal" data-bs-target="#ModalTambahMAsterMenu">
                             <i class="ri-add-circle-line label-icon align-middle fs-16 ms-2"></i> Tambah Menu
@@ -95,14 +89,16 @@
                                         <i class="ri-more-fill align-middle"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
-                                        <li><a href="#!" class="dropdown-item"><i
-                                                    class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                        <li><a class="dropdown-item edit-item-btn"><i
+                                        <li>
+                                            <a class="dropdown-item edit-item-btn" data-bs-toggle="modal"
+                                                data-bs-target="#deleteMenu"><i
                                                     class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item remove-item-btn">
-                                                <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                            <a class="dropdown-item remove-item-btn text-danger"
+                                                data-slug="{{$tm->slug_sub_menu}}" data-nama="{{$tm->nama_sub_menu}}"
+                                                id="btnDeleteMenu"><i
+                                                    class="ri-delete-bin-fill align-bottom me-2 text-danger"></i> Delete
                                             </a>
                                         </li>
                                     </ul>
@@ -180,6 +176,34 @@
         </div>
     </div>
 </div>
+
+<!-- deleteMenu Modal -->
+<div class="modal fade" id="deleteMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
+    aria-labelledby="deleteMenuLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center p-5">
+                <h1>
+                    <i class=" ri-questionnaire-line text-info"></i>
+                </h1>
+
+                <form action="{{'/admin/menu-hapus'}}" method="post">
+                    @csrf
+                    <input type="hidden" id="dSlug" name="dSlug">
+                    <div class="mt-4">
+                        <p class="text-muted mb-4"> Apakah anda yakin akan menghapus menu.</p>
+                        <h4 class="mb-3" id="msgSlug"></h4>
+                        <div class="hstack gap-2 justify-content-center">
+                            <a href="javascript:void(0);" class="btn btn-link link-success fw-medium"
+                                data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {{-- END MODAL --}}
 
 @endsection
@@ -201,4 +225,23 @@
 <script src="{{ URL::asset('assets/js/pages/datatables.init.js') }}"></script>
 
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+<script>
+    $( document ).ready(function() {
+        // $( "#btnDeleteMenu" ).click(function() {
+        //     var slug = $(this).data('slug'); 
+        //     console.log(slug);
+        //     $("#msgSlug").html(slug);
+        //     $("#deleteMenu").modal('show');
+        // });
+        $('#scroll-horizontal tbody').on( 'click', '#btnDeleteMenu', function () {
+            var slug = $(this).data('slug'); 
+            var nama = $(this).data('nama'); 
+            $("#msgSlug").html(nama);
+            $("#dSlug").val(slug);
+            $("#deleteMenu").modal('show');
+        });
+    });
+
+</script>
 @endsection
