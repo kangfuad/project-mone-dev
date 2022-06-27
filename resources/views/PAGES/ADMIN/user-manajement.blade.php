@@ -46,7 +46,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h5 class="card-title mb-0">Table Menu</h5>
+                        <h5 class="card-title mb-0">Table User</h5>
                     </div>
                     <div class="col-lg-6 text-end">
                         <!-- Grids in modals -->
@@ -57,7 +57,7 @@
                         <!-- Buttons with Label Right -->
                         <button type="button" class="btn btn-primary btn-label waves-effect right waves-light"
                             data-bs-toggle="modal" data-bs-target="#ModalTambahMAsterMenu">
-                            <i class="ri-add-circle-line label-icon align-middle fs-16 ms-2"></i> Tambah Menu
+                            <i class="ri-add-circle-line label-icon align-middle fs-16 ms-2"></i> Tambah User
                         </button>
                     </div>
                 </div>
@@ -67,22 +67,20 @@
                     <thead>
                         <tr>
                             <th>NO.</th>
-                            <th>NAMA MENU</th>
-                            <th>PATH MENU</th>
+                            <th>NAMA</th>
+                            <th>EMAIL USER</th>
                             <th>ROLE MENU</th>
-                            <th>ICON MUENU</th>
                             <th>IS ACTIVE</th>
                             <th>#</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($passing['table_menu'] as $tm)
+                        @foreach($passing['table_user'] as $tm)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$tm->nama_sub_menu}}</td>
-                            <td>{{$tm->path_menu}}</td>
+                            <td>{{$tm->name}}</td>
+                            <td>{{$tm->email}}</td>
                             <td>{{$tm['role']['nama_role']}}</td>
-                            <td class="text-center"> <i class="{{$tm->icon_sub_menu}}"></i></td>
                             @if($tm->is_active == 1)
                             <td class="text-center"><i class="text-success ri-shut-down-line"></i> Aktif</td>
                             @else
@@ -126,34 +124,32 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="ModalTambahMAsterMenuLabel">Tambah Menu</h5>
+                <h5 class="modal-title" id="ModalTambahMAsterMenuLabel">Tambah User</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{url('/admin/menu-manajemen')}}" method="post">
+                <form action="{{url('/admin/user-manajemen')}}" method="post">
                     @csrf
                     <div class="row g-3">
                         <div class="col-xxl-12">
                             <div>
-                                <label for="nama" class="form-label">Nama Menu</label>
+                                <label for="nama" class="form-label">Nama User</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
                                     placeholder="Masukan nama menu">
                             </div>
                         </div>
                         <div class="col-xxl-12">
                             <div>
-                                <label for="path" class="form-label">Path Menu</label>
-                                <input type="text" class="form-control" id="path" name="path"
-                                    placeholder="/[ path grup ]/[ path ]">
+                                <label for="email" class="form-label">Email User</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Masukan email menu">
                             </div>
                         </div>
                         <div class="col-xxl-12">
                             <div>
-                                <label for="icon" class="form-label">icon Menu</label>
-                                <input type="text" class="form-control" id="icon" name="icon"
-                                    placeholder="Masukan hanya class ex: ri-delete-bin-fill ">
-                                <small>List Class yang dapat di gunakan <a href="{{ url('/admin/icon') }}"
-                                        target="_blank">Disini</a></small>
+                                <label for="password" class="form-label">Password User</label>
+                                <input type="text" readonly class="form-control" id="password" name="password"
+                                    value="@Mpe2022">
                             </div>
                         </div>
                         <div class="col-xxl-12">

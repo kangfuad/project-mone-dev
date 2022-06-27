@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-layout="horizontal" data-layout-style="" data-layout-position="fixed"  data-topbar="light">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-layout="horizontal" data-layout-style=""
+    data-layout-position="fixed" data-topbar="light">
 
 <head>
     <meta charset="utf-8" />
@@ -11,6 +12,7 @@
     <link rel="shortcut icon" href="{{ URL::asset('assets/images/favicon.ico')}}">
     @include('layouts.head-css')
 </head>
+
 <body>
 
     <!-- Begin page -->
@@ -40,6 +42,7 @@
     <!-- END Right Sidebar -->
 
     @include('layouts.vendor-scripts')
+
 </body>
 
 </html>

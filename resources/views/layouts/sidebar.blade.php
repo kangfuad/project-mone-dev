@@ -57,7 +57,7 @@
                 @foreach($passing['menu'] as $m)
                     
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ url($m->path_menu) }}">
+                    <a class="nav-link menu-link" href="{{ url($m->path_menu) }}" style="font-size: 7">
                         <i class="{{$m->icon_sub_menu}}"></i> <span data-key="t-widgets">{{$m->nama_sub_menu}}</span>
                     </a>
                 </li>

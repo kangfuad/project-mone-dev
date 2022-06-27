@@ -10,7 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MccController;
 use App\Http\Controllers\ForemanController;
-use App\Http\Controllers\WerehoseController;
+use App\Http\Controllers\warehouseController;
 // END CONTROLLER
 
 /*
@@ -33,13 +33,17 @@ Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix'
 
     // Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/menu-manajemen', [AdminController::class, 'menu_manajemen']);
+    Route::post('/menu-manajemen', [AdminController::class, 'tambah_menu_manajemen']);
+    Route::get('/user-manajemen', [AdminController::class, 'user_manajemen']);
+    Route::post('/user-manajemen', [AdminController::class, 'tambah_user_manajemen']);
+    Route::get('/icon', [AdminController::class, 'icon']);
 });
 
 Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix' => '/mcc'], function () {
 
     Route::get('/', [MccController::class, 'index']);
-    Route::get('/rpu/index', [HomeController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
-    Route::get('/rpu/create', [HomeController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
+    Route::get('/rpu', [MccController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
+    Route::get('/rpu/create', [MccController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
 });
 
 Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
@@ -54,8 +58,8 @@ Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix'
     });
 });
 
-Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/werehose'], function () {
+Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/warehouse'], function () {
 
-    Route::get('/', [WerehoseController::class, 'index']);
-    Route::get('/spb/index', [HomeController::class, 'warehouse_spb'])->name('warehouse.spb.index');
+    Route::get('/', [warehouseController::class, 'index']);
+    Route::get('/spb/index', [warehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
 });
