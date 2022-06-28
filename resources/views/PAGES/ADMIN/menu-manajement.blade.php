@@ -34,7 +34,7 @@
 @endif
 
 @if (session('error'))
-<div class="alert alert-success">
+<div class="alert alert-danger">
     {{ session('error') }}
 </div>
 @endif
@@ -90,16 +90,27 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
                                         <li>
-                                            <a class="dropdown-item edit-item-btn" data-bs-toggle="modal"
-                                                data-bs-target="#deleteMenu"><i
-                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
+                                            <a class="dropdown-item edit-item-btn" id="btnUpdateMenu"
+                                                data-nama="{{$tm->nama_sub_menu}}" data-path="{{$tm->path_menu}}"
+                                                data-role="{{$tm->role_id}}" data-icon="{{$tm->icon_sub_menu}}"
+                                                data-slug="{{$tm->slug_sub_menu}}"><i
+                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i> Ubah</a>
                                         </li>
                                         <li>
+                                            @if($tm->is_active == 1)
                                             <a class="dropdown-item remove-item-btn text-danger"
                                                 data-slug="{{$tm->slug_sub_menu}}" data-nama="{{$tm->nama_sub_menu}}"
-                                                id="btnDeleteMenu"><i
-                                                    class="ri-delete-bin-fill align-bottom me-2 text-danger"></i> Delete
+                                                data-active="0" id="btnDeleteMenu"><i
+                                                    class="ri-delete-bin-fill align-bottom me-2 text-danger"></i> Hapus
                                             </a>
+                                            @elseif($tm->is_active == 0)
+                                            <a class="dropdown-item remove-item-btn text-success"
+                                                data-slug="{{$tm->slug_sub_menu}}" data-nama="{{$tm->nama_sub_menu}}"
+                                                data-active="1" id="btnDeleteMenu"><i
+                                                    class="ri-delete-back-line align-bottom me-2 text-success"></i> Batal
+                                                Hapus
+                                            </a>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
@@ -156,7 +167,7 @@
                             <div class="">
                                 <label for="role" class="form-label">Role Menu</label>
                                 <select class="form-select" name="role" id="role">
-                                    <option selected disabled> --= Pilih Role USer =-- </option>
+                                    <option selected disabled> --= Pilih Role User =-- </option>
                                     <option value="1">SUPER ADMIN</option>
                                     <option value="2">MCC</option>
                                     <option value="3">FOREMAN</option>
@@ -177,6 +188,69 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="modalUpdate" data-bs-backdrop="static" tabindex="-1" aria-labelledby="modalUpdateLabel"
+    aria-modal="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdateLabel">Update Menu</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{url('/admin/menu-ubah')}}" method="post">
+                    @csrf
+                    <div class="row g-3">
+                        <div class="col-xxl-12">
+                            <div>
+                                <label for="unama" class="form-label">Nama Menu</label>
+                                <input type="text" class="form-control" id="unama" name="unama"
+                                    placeholder="Masukan nama menu">
+                            </div>
+                        </div>
+                        <div class="col-xxl-12">
+                            <div>
+                                <label for="upath" class="form-label">Path Menu</label>
+                                <input type="text" class="form-control" id="upath" name="upath"
+                                    placeholder="/[ path grup ]/[ path ]">
+                            </div>
+                        </div>
+                        <div class="col-xxl-12">
+                            <div>
+                                <label for="uicon" class="form-label">Icon Menu</label>
+                                <input type="text" class="form-control" id="uicon" name="uicon"
+                                    placeholder="Masukan hanya class ex: ri-delete-bin-fill ">
+                                <small>List Class yang dapat di gunakan <a href="{{ url('/admin/icon') }}"
+                                        target="_blank">Disini</a></small>
+                            </div>
+                        </div>
+                        <div class="col-xxl-12">
+                            <div class="">
+                                <label for="urole" class="form-label">Role Menu</label>
+                                <select class="form-select" name="urole" id="urole">
+                                    <option value="1">SUPER ADMIN</option>
+                                    <option value="2">MCC</option>
+                                    <option value="3">FOREMAN</option>
+                                    <option value="4">WEREHOUSE</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="uslug" id="uslug">
+                        <div class="col-lg-12">
+                            <div class="hstack gap-2 justify-content-end">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- deleteMenu Modal -->
 <div class="modal fade" id="deleteMenu" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog"
     aria-labelledby="deleteMenuLabel" aria-hidden="true">
@@ -190,13 +264,14 @@
                 <form action="{{'/admin/menu-hapus'}}" method="post">
                     @csrf
                     <input type="hidden" id="dSlug" name="dSlug">
+                    <input type="hidden" id="dStatus" name="dStatus">
                     <div class="mt-4">
-                        <p class="text-muted mb-4"> Apakah anda yakin akan menghapus menu.</p>
+                        <p class="text-muted mb-4" id="msgConfrim"> </p>
                         <h4 class="mb-3" id="msgSlug"></h4>
                         <div class="hstack gap-2 justify-content-center">
                             <a href="javascript:void(0);" class="btn btn-link link-success fw-medium"
                                 data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</a>
-                            <button type="submit" class="btn btn-danger">Hapus</button>
+                            <button type="submit" class="btn" id="dBtnMessage"></button>
                         </div>
                     </div>
                 </form>
@@ -237,9 +312,36 @@
         $('#scroll-horizontal tbody').on( 'click', '#btnDeleteMenu', function () {
             var slug = $(this).data('slug'); 
             var nama = $(this).data('nama'); 
+            var active = $(this).data('active'); 
+            if (active == "0") {
+                $('#msgConfrim').html('Apakah anda yakin akan menghapus menu.')
+                $('#dBtnMessage').html('hapus')
+                $('#dBtnMessage').addClass('btn-danger');
+            } else if(active == "1"){
+                $('#msgConfrim').html('Apakah anda yakin akan mengembalikan menu.')
+                $('#dBtnMessage').html('kembalikan')
+                $('#dBtnMessage').addClass('btn-success');
+            }
+
             $("#msgSlug").html(nama);
             $("#dSlug").val(slug);
+            $("#dStatus").val(active);
             $("#deleteMenu").modal('show');
+        });
+        $('#scroll-horizontal tbody').on( 'click', '#btnUpdateMenu', function () {
+            var nama = $(this).data('nama'); 
+            var path = $(this).data('path'); 
+            var role = $(this).data('role'); 
+            var icon = $(this).data('icon'); 
+            var slug = $(this).data('slug'); 
+            // var active = $(this).data('active'); 
+            $("#unama").val(nama);
+            $("#upath").val(path);
+            $("#urole").val(role);
+            $("#uicon").val(icon);
+            $("#uslug").val(slug);
+            // $("#uactive").val(active);
+            $("#modalUpdate").modal('show');
         });
     });
 

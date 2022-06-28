@@ -17,9 +17,6 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">{{ $passing['title'] }}</a></li>
-                    {{-- @if(isset($title))
-                    <li class="breadcrumb-item active">{{ $title }}</li>
-                    @endif --}}
                 </ol>
             </div>
 
@@ -49,12 +46,6 @@
                         <h5 class="card-title mb-0">Table User</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <!-- Grids in modals -->
-                        {{-- <button type="button" class="btn btn-link" data-bs-toggle="modal"
-                            data-bs-target="#ModalTambahMAsterMenu">
-                            <i class="ri-add-circle-line"> Tambah Menu</i>
-                        </button> --}}
-                        <!-- Buttons with Label Right -->
                         <button type="button" class="btn btn-primary btn-label waves-effect right waves-light"
                             data-bs-toggle="modal" data-bs-target="#ModalTambahMAsterMenu">
                             <i class="ri-add-circle-line label-icon align-middle fs-16 ms-2"></i> Tambah User
@@ -93,15 +84,25 @@
                                         <i class="ri-more-fill align-middle"></i>
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
-                                        <li><a href="#!" class="dropdown-item"><i
-                                                    class="ri-eye-fill align-bottom me-2 text-muted"></i> View</a></li>
-                                        <li><a class="dropdown-item edit-item-btn"><i
-                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i> Edit</a>
+                                        <li>
+                                            <a class="dropdown-item edit-item-btn" id="btnUpdateMenu"><i
+                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i> Ubah</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item remove-item-btn">
-                                                <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i> Delete
+                                            @if($tm->is_active == 1)
+                                            <a class="dropdown-item remove-item-btn text-danger"
+                                                data-email="{{$tm->email}}" data-nama="{{$tm->name}}"
+                                                data-active="0" id="btnDeleteUser"><i
+                                                    class="ri-delete-bin-fill align-bottom me-2 text-danger"></i> Hapus
                                             </a>
+                                            @elseif($tm->is_active == 0)
+                                            <a class="dropdown-item remove-item-btn text-success"
+                                                data-email="{{$tm->email}}" data-nama="{{$tm->name}}"
+                                                data-active="1" id="btnDeleteUser"><i
+                                                    class="ri-delete-back-line align-bottom me-2 text-success"></i> Batal
+                                                Hapus
+                                            </a>
+                                            @endif
                                         </li>
                                     </ul>
                                 </div>
@@ -197,4 +198,44 @@
 <script src="{{ URL::asset('assets/js/pages/datatables.init.js') }}"></script>
 
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+<script>
+    $( document ).ready(function() {
+        $('#scroll-horizontal tbody').on( 'click', '#btnDeleteUser', function () {
+            var email = $(this).data('email'); 
+            var nama = $(this).data('nama'); 
+            var active = $(this).data('active'); 
+            if (active == "0") {
+                $('#msgConfrim').html('Apakah anda yakin akan menghapus user.')
+                $('#dBtnMessage').html('hapus')
+                $('#dBtnMessage').addClass('btn-danger');
+            } else if(active == "1"){
+                $('#msgConfrim').html('Apakah anda yakin akan mengembalikan user.')
+                $('#dBtnMessage').html('kembalikan')
+                $('#dBtnMessage').addClass('btn-success');
+            }
+
+            $("#msgSlug").html(nama);
+            $("#dSlug").val(slug);
+            $("#dStatus").val(active);
+            $("#deleteMenu").modal('show');
+        });
+        $('#scroll-horizontal tbody').on( 'click', '#btnUpdateMenu', function () {
+            var nama = $(this).data('nama'); 
+            var path = $(this).data('path'); 
+            var role = $(this).data('role'); 
+            var icon = $(this).data('icon'); 
+            var slug = $(this).data('slug'); 
+            // var active = $(this).data('active'); 
+            $("#unama").val(nama);
+            $("#upath").val(path);
+            $("#urole").val(role);
+            $("#uicon").val(icon);
+            $("#uslug").val(slug);
+            // $("#uactive").val(active);
+            $("#modalUpdate").modal('show');
+        });
+    });
+
+</script>
 @endsection
