@@ -52,17 +52,26 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
 Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
 
     Route::get('/', [ForemanController::class, 'index']);
-    Route::get('/listing', function () {
-        $passing = [
-            'title' => 'Listing',
-            'title-page' => 'Foreman'
-        ];
-        return view('PAGES.PAGES_FM.LISTING.index', ['passing' => $passing]);
-    });
+    Route::get('/list-barang', [ForemanController::class, 'list_barang']);
+    // Route::get('/listing', function () {
+    //     $passing = [
+    //         'title' => 'Listing',
+    //         'title-page' => 'Foreman'
+    //     ];
+    //     return view('PAGES.PAGES_FM.LISTING.index', ['passing' => $passing]);
+    // });
 });
 
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/warehouse'], function () {
 
     Route::get('/', [warehouseController::class, 'index']);
     Route::get('/spb/index', [warehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
+});
+
+Route::get('/listing', function () {
+    $passing = [
+        'title' => 'Listing',
+        'title-page' => 'Foreman'
+    ];
+    return view('PAGES.PAGES_FM.LISTING.index', ['passing' => $passing]);
 });
