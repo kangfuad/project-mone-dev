@@ -69,17 +69,47 @@ class AdminController extends Controller
         }
     }
 
+    public function ubah_menu_manajemen(Request $req)
+    {
+
+        $menu = MasterSubMenu::where('slug_sub_menu', $req->uslug)
+            ->update([
+                'role_id' => $req->urole,
+                'nama_sub_menu' => $req->unama,
+                'path_menu' => $req->upath,
+                'icon_sub_menu' => $req->uicon,
+                'updated_by' => Auth::user()->id
+            ]);
+
+        if ($menu) {
+            return redirect('/admin/menu-manajemen')->with('berhasil', 'Menu baru berhasil ubah');
+        } else {
+            return redirect('/admin/menu-manajemen')->with('error', 'Menu baru gagal ubah');
+        }
+    }
+
     public function hapus_menu_manajemen(Request $req)
     {
 
         $menu = MasterSubMenu::where('slug_sub_menu', $req->dSlug)
-            ->update(['is_active' => 0]);
+            ->update(['is_active' => $req->dStatus]);
 
-        if ($menu) {
-            return redirect('/admin/menu-manajemen')->with('berhasil', 'Menu baru berhasil hapus');
+        if ($req->dStatus == "1") {
+            if ($menu) {
+                return redirect('/admin/menu-manajemen')->with('berhasil', 'Menu berhasil di kembalikan');
+            } else {
+                return redirect('/admin/menu-manajemen')->with('error', 'Menu gagal di kembalikan');
+            }
         } else {
-            return redirect('/admin/menu-manajemen')->with('error', 'Menu baru gagal hapus');
+            if ($menu) {
+                return redirect('/admin/menu-manajemen')->with('berhasil', 'Menu baru berhasil hapus');
+            } else {
+                return redirect('/admin/menu-manajemen')->with('error', 'Menu baru gagal hapus');
+            }
         }
+        
+
+        
     }
 
     // END MENU MANAJEMENt
