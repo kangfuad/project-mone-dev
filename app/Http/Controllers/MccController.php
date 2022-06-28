@@ -49,4 +49,9 @@ class MccController extends Controller
         ];
         return view('PAGES.PAGES_MCC.MCC_RPU.create', get_defined_vars());
     }
+
+    public function mcc_rpu_post(request $request){
+        dd($request->all());
+        
+    }
 }

@@ -34,11 +34,21 @@ $(document).ready(function () {
   var t = $('#add-rows').DataTable();
   var counter = 1;
   $('#addRow').on('click', function () {
-    t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
-    counter++;
+      // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
+      t.row.add([
+          `<div><textarea class="form-control" name="keluhan[]" id="keluhan[]"></textarea></div>`,
+          '<button class="btn btn-danger" id="delteRow">Hapus</button>'
+      ]).draw(false);
+      counter++;
   }); // Automatically add a first row of data
 
   $('#addRow').click();
+  $('#add-rows tbody').on('click', '#delteRow', function () {
+      t
+          .row($(this).parents('tr'))
+          .remove()
+          .draw();
+  });
 });
 $(document).ready(function () {
   $('#example').DataTable();
