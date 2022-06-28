@@ -157,7 +157,7 @@
                                         <td>99</td>
                                         <td>1010</td>
                                         <td>
-                                            <button class="btn btn-primary">Detail Kerusakan</button>
+                                            <button class="btn btn-primary" data-bs-target="#listKerusakan" data-bs-toggle="modal">Detail Kerusakan</button>
                                         </td>
                                         <td>Daffa</td>
                                     </tr>
@@ -170,7 +170,7 @@
                                         <td>99</td>
                                         <td>1010</td>
                                         <td>
-                                            <button class="btn btn-primary">Detail Kerusakan</button>
+                                            <button class="btn btn-primary" data-bs-target="#listKerusakan" data-bs-toggle="modal">Detail Kerusakan</button>
                                         </td>
                                         <td>Fuad</td>
                                     </tr>
@@ -184,6 +184,31 @@
     </div>
     <!--end col-->
 </div>
+
+
+
+{{-- Modal List Kerusakan --}}
+<div id="listKerusakan" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Daftar Kerusakan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="ri-information-fill align-middle me-2"></i>Rusak oi</li>
+                    <li class="list-group-item"><i class="ri-information-fill align-middle me-2"></i>Send over all the documentation.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
+                {{-- <button type="button" class="btn btn-primary ">Save Changes</button> --}}
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection
 @section('script')
 {{-- Jquery CDN --}}
