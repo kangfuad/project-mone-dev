@@ -36,7 +36,7 @@
                 <div class="card-header bg-primary">
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title mb-0 text-white">Form Request Perbaikan Unit (RPU)</h5>
+                            <h5 class="card-title mb-0 text-white">Data Request Perbaikan Unit (RPU)</h5>
                         </div>
                         <div class="col-6">
                             <h4 class="card-title mb-0 float-end"><span
@@ -45,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body"> 
 
                     @csrf
                     <div class="row">
@@ -64,91 +64,72 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="no_unit" class="form-label">Nomer Unit</label>
-                                <select class="js-example-basic-single" name="no_unit" id="no_unit">
-                                    <option value="">Pilih Kendaraan</option>
-                                    <option value="DD 1234 MPE">DD 1234 MPE</option>
-                                    <option value="DD 1233 MPE">DD 1233 MPE</option>
-                                    <option value="DD 1235 MPE">DD 1235 MPE</option>
-                                    <option value="DD 1236 MPE">DD 1236 MPE</option>
-                                    <option value="DD 1237 MPE">DD 1237 MPE</option>
-                                </select>
-                                {{-- <select class="form-select mb-3" aria-label="Default select example">
-                                    <option value="">Pilih Kendaraan</option>
-                                    <option value="">DD 1234 MPE</option>
-                                    <option value="">DD 1233 MPE</option>
-                                    <option value="">DD 1235 MPE</option>
-                                    <option value="">DD 1236 MPE</option>
-                                    <option value="">DD 1237 MPE</option>
-                                </select> --}}
+                                <input type="text" name="no_unit" id="no_unit" class="form-control" value="DD 1234 MPE" readonly>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="jenis_rpu" class="form-label">Jenis RPU</label>
-                            <select class="form-select" aria-label="Default select example" id="jenis_rpu" name="jenis_rpu">
-                                <option value="">Pilih Jenis Servis</option>
-                                <option value="Servis Rutin">Servis Rutin</option>
-                                <option value="Servis Dadakan">Servis Dadakan</option>
-                            </select>
+                            <input type="text" name="jenis_rpu" id="jenis_rpu" class="form-control" value="Servis Rutin" readonly>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="lokasi" class="form-label">Lokasi</label>
-                                <select class="form-select" aria-label="Default select example" id="lokasi" name="lokasi">
-                                    <option value="">Pilih Lokasi</option>
-                                    <option value="Workshop">Workshop</option>
-                                    <option value="Jalan Hawling">Jalan Hawling</option>
-                                </select>
+                                <input type="text" name="lokasi" id="lokasi" class="form-control" value="Workshop" readonly>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div>
                                 <label for="hour_meter" class="form-label">Hour Meter (HM)</label>
-                                <input type="number" class="form-control" id="hour_meter" name="hour_meter" min="0">
+                                <input type="number" class="form-control" id="hour_meter" name="hour_meter" min="0" value="90" readonly>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div>
                                 <label for="kilo_meter" class="form-label">Kilo Meter (KM)</label>
-                                <input type="number" class="form-control" id="kilo_meter" name="kilo_meter" min="0">
+                                <input type="number" class="form-control" id="kilo_meter" name="kilo_meter" min="0" value="90" readonly>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            {{-- Card Daftar kerusakan --}}
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-title mb-0">Daftar Kerusakan</h5>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" id="addRow"
-                                class="btn btn-primary btn-label waves-effect waves-light float-end"><i
-                                    class="ri-tools-fill label-icon align-middle fs-16 me-2"></i>Tambah Laporan
-                                Kerusakan</button>
+
+            {{-- Card List Kerusakan --}}
+            <div id="loop_item">
+                @for($a = 1; $a<4; $a++)
+                    <div class="card ribbon-box border shadow-none mb-3">
+                        <div class="card-body">
+                            <div class="ribbon ribbon-primary round-shape">{{$a}}. Nama Kerusakan</div>
+                            <button type="button" data-id="{{$a}}" id="addRowBarang"
+                            class="btn btn-sm btn-primary btn-label waves-effect waves-light float-end mb-2"><i
+                                class="ri-tools-fill label-icon align-middle fs-16 me-2"></i>Tambah Sparepart</button>
+                            <div class="ribbon-content mt-4 text-muted">
+                                <table id="add-rows{{$a}}" class="table table-nowrap dt-responsive table-bordered display"
+                                style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th width="70%">Barang</th>
+                                        <th width="20%">Jumlah</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <table id="add-rows" class="table table-nowrap dt-responsive table-bordered display"
-                        style="width:100%">
-                        <thead>
-                            <tr>
-                                <th width="90%">Keluhan</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="card-footer">
-                    <a type="submit" href="{{route('mcc.rpu.index')}}" class="btn btn-danger btn-label waves-effect waves-light float-start mt-3"><i
-                        class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
-                    <button type="submit" class="btn btn-primary btn-label waves-effect waves-light float-end mt-3"><i
-                            class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
-                </div>
+                @endfor
             </div>
+
+            {{-- <div class="row"> --}}
+                <a type="button" id="" href="{{route('list.barang')}}"
+                            class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
+                class=" ri-arrow-left-down-line label-icon align-middle fs-16 me-2"></i>Kembali</a>
+                <button type="submit"  id=""
+                            class="btn btn-primary btn-label waves-effect waves-light float-end mb-2"><i
+                class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
+
+            {{-- </div> --}}
+           
         </div>
 
         <!--end col-->
@@ -183,4 +164,48 @@
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+    
+    $('#loop_item').on('click', '#addRowBarang', function(){
+        var id = $(this).data('id');
+        console.log(id);
+        addrows(id);
+    });
+
+    function addrows(id){
+        console.log(id);
+        var t = $('#add-rows'+id).DataTable();
+        var counter = 1;
+        // $('#addRowBarang').on('click', function () {
+            // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
+            t.row.add([
+                `<div>
+                    <select class="form-control" name="barang[]" id="barang[]">
+                        <option>Kode Barang - Nama Barang (Stock)</option>
+                        <option>B001 - Ban Dalam (stock : 20)</option>
+                        <option>BT001 - Baut 18cm (Stock : 1020)</option>
+                        <option>AI001 - Aki Truck (Stock : 7)</option>
+                    </select>
+                </div>`,
+                `<div>
+                    <input type="number" class="form-control" id="jumlah_barang" name="jumlah_barang" min="0">
+                </div>`,
+                '<button class="btn btn-danger" id="delteRow">Hapus</button>'
+            ]).draw(false);
+            counter++;
+        // }); // Automatically add a first row of data
+
+        // $('#addRowBarang').click();
+        $('#add-rows'+id+' tbody').on('click', '#delteRow', function () {
+            t
+                .row($(this).parents('tr'))
+                .remove()
+                .draw();
+        });
+    }
+
+  
+    });
+</script>
 @endsection
