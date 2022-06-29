@@ -47,9 +47,9 @@
                                         <th>Lokasi</th>
                                         <th>Hour Mater (HM)</th>
                                         <th>Kilo Meter (KM)</th>
-                                        <th>Laporan Kerusakan</th>
+                                        <th width="10%">Laporan Kerusakan</th>
                                         <th>PIC MCC</th>
-                                        <th>Action</th>
+                                        <th width="10%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,7 +66,7 @@
                                         </td>
                                         <td>Fuad</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#modal-listing">Input Sparepart</button>
+                                            <a type="button" class="btn btn-primary" href="{{route('list.barang.create')}}">Input Sparepart</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -79,7 +79,7 @@
     </div>
     <!--end col-->
 </div>
-@include('PAGES.PAGES_FM.LISTING.modal')
+@include('PAGES.PAGES_FM.FM_LISTING.modal')
 @endsection
 @section('script')
 {{-- Jquery CDN --}}
