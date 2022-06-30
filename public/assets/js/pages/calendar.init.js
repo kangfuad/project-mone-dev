@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             start: new Date(y, m, 1),
             className: 'bg-soft-primary',
             location: 'San Francisco, US',
-            allDay: false,
+            allDay: true,
             extendedProps: {
                 department: 'All Day Event'
             },
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 112,
             title: 'Meeting With Designer',
             start: new Date(y, m, d, 12, 30),
-            allDay: false,
+            allDay: true,
             className: 'bg-soft-success',
             location: 'Head Office, US',
             extendedProps: {
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
             id: 875,
             title: 'Birthday Party',
             start: new Date(y, m, d + 1, 19, 0),
-            allDay: false,
+            allDay: true,
             className: 'bg-soft-success',
             location: 'Los Angeles, US',
             extendedProps: {

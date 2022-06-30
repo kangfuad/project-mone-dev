@@ -9,5 +9,5 @@ class Mpe_rpu_keluhan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-
+    public $timestamps = true;
 }

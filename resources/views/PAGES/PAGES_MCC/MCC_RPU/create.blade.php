@@ -18,9 +18,6 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">{{ $passing['title'] }}</a></li>
-                    {{-- @if(isset($title))
-                        <li class="breadcrumb-item active">{{ $title }}</li>
-                    @endif --}}
                 </ol>
             </div>
 
@@ -52,16 +49,29 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="no_rpu" class="form-label">No. RPU</label>
-                                <input type="text" class="form-control" id="no_rpu" name="no_rpu" readonly value="SR-01022022">
+                                <input type="text" class="form-control" id="no_rpu" name="no_rpu" readonly
+                                    value="SR-<?=TIME()?>">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="tanggal_rpu" class="form-label">Tanggal Pembuatan RPU</label>
-                                <input type="date" class="form-control" id="tanggal_rpu" name="tanggal_rpu" readonly value="2022-08-10">
+                                <input type="text" class="form-control" id="tanggal_rpu" name="tanggal_rpu" readonly
+                                    value="{{ date('d-m-Y', time()) }}">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="id_foreman" class="form-label">Foreman</label>
+                                <select class="js-example-basic-single" name="id_foreman" id="id_foreman">
+                                    <option value="" disabled selected>Pilih Foreman</option>
+                                    @foreach($passing['foreman'] as $fm)
+                                        <option value="{{$fm->id}}">{{$fm->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
                             <div>
                                 <label for="no_unit" class="form-label">Nomer Unit</label>
                                 <select class="js-example-basic-single" name="no_unit" id="no_unit">
@@ -72,19 +82,12 @@
                                     <option value="DD 1236 MPE">DD 1236 MPE</option>
                                     <option value="DD 1237 MPE">DD 1237 MPE</option>
                                 </select>
-                                {{-- <select class="form-select mb-3" aria-label="Default select example">
-                                    <option value="">Pilih Kendaraan</option>
-                                    <option value="">DD 1234 MPE</option>
-                                    <option value="">DD 1233 MPE</option>
-                                    <option value="">DD 1235 MPE</option>
-                                    <option value="">DD 1236 MPE</option>
-                                    <option value="">DD 1237 MPE</option>
-                                </select> --}}
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-3 mb-3">
                             <label for="jenis_rpu" class="form-label">Jenis RPU</label>
-                            <select class="form-select" aria-label="Default select example" id="jenis_rpu" name="jenis_rpu">
+                            <select class="form-select" aria-label="Default select example" id="jenis_rpu"
+                                name="jenis_rpu">
                                 <option value="">Pilih Jenis Servis</option>
                                 <option value="Servis Rutin">Servis Rutin</option>
                                 <option value="Servis Dadakan">Servis Dadakan</option>
@@ -93,7 +96,8 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="lokasi" class="form-label">Lokasi</label>
-                                <select class="form-select" aria-label="Default select example" id="lokasi" name="lokasi">
+                                <select class="form-select" aria-label="Default select example" id="lokasi"
+                                    name="lokasi">
                                     <option value="">Pilih Lokasi</option>
                                     <option value="Workshop">Workshop</option>
                                     <option value="Jalan Hawling">Jalan Hawling</option>
@@ -143,8 +147,9 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a type="submit" href="{{route('mcc.rpu.index')}}" class="btn btn-danger btn-label waves-effect waves-light float-start mt-3"><i
-                        class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
+                    <a type="submit" href="{{route('mcc.rpu.index')}}"
+                        class="btn btn-danger btn-label waves-effect waves-light float-start mt-3"><i
+                            class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
                     <button type="submit" class="btn btn-primary btn-label waves-effect waves-light float-end mt-3"><i
                             class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
                 </div>
