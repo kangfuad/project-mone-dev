@@ -114,7 +114,6 @@
 </div>
 
 
-
 {{-- Modal List Kerusakan --}}
 <div id="listKerusakan" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
     style="display: none;">

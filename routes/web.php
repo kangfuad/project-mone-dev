@@ -48,6 +48,7 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
     Route::get('/rpu', [MccController::class, 'mcc_rpu_index'])->name('mcc.rpu.index');
     Route::get('/rpu/create', [MccController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
     Route::post('/rpu/post', [MccController::class, 'mcc_rpu_post'])->name('mcc.rpu.post');
+    Route::get('/sob', [MccController::class, 'mcc_sob_index'])->name('mcc.sob.index');
 });
 
 Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
