@@ -13,16 +13,13 @@ var checkAll = document.getElementById("checkAll");
 if (checkAll) {
   checkAll.onclick = function () {
     var checkboxes = document.querySelectorAll('.form-check-all input[type="checkbox"]');
-    if (checkAll.checked == true) {
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = true;
-        checkbox.closest("tr").classList.add("table-active");
-      });
-    } else {
-      checkboxes.forEach(function (checkbox) {
-        checkbox.checked = false;
-        checkbox.closest("tr").classList.remove("table-active");
-      });
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = this.checked;
+      if (checkboxes[i].checked) {
+          checkboxes[i].closest("tr").classList.add("table-active");
+      } else {
+          checkboxes[i].closest("tr").classList.remove("table-active");
+      }
     }
   };
 }
@@ -388,22 +385,39 @@ function clearFields() {
 function deleteMultiple() {
   ids_array = [];
   var items = document.getElementsByName('chk_child');
-  items.forEach(function (ele) {
-    if (ele.checked == true) {
-      var trNode = ele.parentNode.parentNode.parentNode;
-      var id = trNode.querySelector('.id a').innerHTML;
+  for (i = 0; i < items.length; i++) {
+    if (items[i].checked == true) {
+      var trNode = items[i].parentNode.parentNode.parentNode;
+      var id = trNode.querySelector("td a").innerHTML;
       ids_array.push(id);
     }
-  });
+  }
   if (typeof ids_array !== 'undefined' && ids_array.length > 0) {
-    if (confirm('Are you sure you want to delete this?')) {
-      ids_array.forEach(function (id) {
-        customerList.remove("id", `<a href="javascript:void(0);" class="fw-medium link-primary">${id}</a>`);
-      });
-      document.getElementById('checkAll').checked = false;
-    } else {
-      return false;
-    }
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonClass: 'btn btn-primary w-xs me-2 mt-2',
+      cancelButtonClass: 'btn btn-danger w-xs mt-2',
+      confirmButtonText: "Yes, delete it!",
+      buttonsStyling: false,
+      showCloseButton: true
+    }).then(function (result) {
+      if (result.value) {
+          for (i = 0; i < ids_array.length; i++) {
+            customerList.remove("id", `<a href="javascript:void(0);" class="fw-medium link-primary">${ids_array[i]}</a>`);
+          }
+          document.getElementById("checkAll").checked = false;
+          Swal.fire({
+              title: 'Deleted!',
+              text: 'Your data has been deleted.',
+              icon: 'success',
+              confirmButtonClass: 'btn btn-info w-xs mt-2',
+              buttonsStyling: false
+          });
+      }
+    });
   } else {
     Swal.fire({
       title: 'Please select at least one checkbox',

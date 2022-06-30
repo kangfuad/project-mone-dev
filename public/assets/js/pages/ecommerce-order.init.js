@@ -10,21 +10,21 @@ var str_dt = function formatDate(date) {
     var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var d = new Date(date),
         time_s = (d.getHours() + ':' + d.getMinutes());
-    var t = time_s.split(":");
-    var hours = t[0];
-    var minutes = t[1];
-    var newformat = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    month = '' + monthNames[(d.getMonth())],
+        var t = time_s.split(":");
+        var hours = t[0];
+        var minutes = t[1];
+        var newformat = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        month = '' + monthNames[(d.getMonth())],
         day = '' + d.getDate(),
         year = d.getFullYear();
     if (month.length < 2)
         month = '0' + month;
     if (day.length < 2)
         day = '0' + day;
-    return [day + " " + month + "," + year + " <small class='text-muted'>" + hours + ':' + minutes + ' ' + newformat + "</small>"];
+    return [day + " " + month+","+ year +" <small class='text-muted'>"+ hours + ':' + minutes + ' ' + newformat +"</small>"];
 };
 
 var isChoiceEl = document.getElementById("idStatus");
@@ -39,18 +39,15 @@ var choices = new Choices(isPaymentEl, {
 
 var checkAll = document.getElementById("checkAll");
 if (checkAll) {
-    checkAll.onclick = function() {
+    checkAll.onclick = function () {
         var checkboxes = document.querySelectorAll('.form-check-all input[type="checkbox"]');
-        if (checkAll.checked == true) {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-                checkbox.closest("tr").classList.add("table-active");
-            });
-        } else {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-                checkbox.closest("tr").classList.remove("table-active");
-            });
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = this.checked;
+            if (checkboxes[i].checked) {
+                checkboxes[i].closest("tr").classList.add("table-active");
+            } else {
+                checkboxes[i].closest("tr").classList.remove("table-active");
+            }
         }
     };
 }
@@ -77,7 +74,7 @@ var options = {
     ],
 };
 // Init list
-var orderList = new List("orderList", options).on("updated", function(list) {
+var orderList = new List("orderList", options).on("updated", function (list) {
     list.matchingItems.length == 0 ?
         (document.getElementsByClassName("noresult")[0].style.display = "block") :
         (document.getElementsByClassName("noresult")[0].style.display = "none");
@@ -112,22 +109,22 @@ var orderList = new List("orderList", options).on("updated", function(list) {
 });
 
 const xhttp = new XMLHttpRequest();
-xhttp.onload = function() {
+xhttp.onload = function () {
     var json_records = JSON.parse(this.responseText);
-    json_records.forEach(function(element) {
+    json_records.forEach(function(element){
         orderList.add({
-            id: '<a href="apps-ecommerce-order-details" class="fw-medium link-primary">#VZ' + element.id + '</a>',
+            id: '<a href="apps-ecommerce-order-details.html" class="fw-medium link-primary">#VZ'+element.id+'</a>',
             customer_name: element.customer_name,
             product_name: element.product_name,
             date: str_dt(element.date),
             amount: element.amount,
-            payment: element.payment,
+            payment:element.payment,
             status: isStatus(element.status)
         });
         orderList.sort('id', { order: "desc" });
         refreshCallbacks();
     });
-    orderList.remove("id", `<a href="apps-ecommerce-order-details" class="fw-medium link-primary">#VZ2101</a>`);
+    orderList.remove("id", `<a href="apps-ecommerce-order-details.html" class="fw-medium link-primary">#VZ2101</a>`);
 }
 xhttp.open("GET", "assets/json/orders-list.init.json");
 xhttp.send();
@@ -154,15 +151,15 @@ refreshCallbacks();
 //filterOrder("All");
 
 var tabEl = document.querySelectorAll('a[data-bs-toggle="tab"]');
-tabEl.forEach(function(item) {
-    item.addEventListener("shown.bs.tab", function(event) {
+tabEl.forEach(function (item) {
+    item.addEventListener("shown.bs.tab", function (event) {
         filterOrder(event.target.id);
     });
 });
 
 function filterOrder(isValue) {
     var values_status = isValue;
-    orderList.filter(function(data) {
+    orderList.filter(function (data) {
         var statusFilter = false;
         matchData = new DOMParser().parseFromString(
             data.values().status,
@@ -183,7 +180,7 @@ function filterOrder(isValue) {
 function updateList() {
     var values_status = document.querySelector("input[name=status]:checked").value;
 
-    data = userList.filter(function(item) {
+    data = userList.filter(function (item) {
         var statusFilter = false;
 
         if (values_status == "All") {
@@ -196,7 +193,7 @@ function updateList() {
     userList.update();
 }
 
-document.getElementById("showModal").addEventListener("show.bs.modal", function(e) {
+document.getElementById("showModal").addEventListener("show.bs.modal", function (e) {
     if (e.relatedTarget.classList.contains("edit-item-btn")) {
         document.getElementById("exampleModalLabel").innerHTML = "Edit Order";
         document.getElementById("showModal").querySelector(".modal-footer").style.display = "block";
@@ -215,11 +212,11 @@ document.getElementById("showModal").addEventListener("show.bs.modal", function(
 });
 ischeckboxcheck();
 
-document.getElementById("showModal").addEventListener("hidden.bs.modal", function() {
+document.getElementById("showModal").addEventListener("hidden.bs.modal", function () {
     clearFields();
 });
 
-document.querySelector("#orderList").addEventListener("click", function() {
+document.querySelector("#orderList").addEventListener("click", function () {
     refreshCallbacks();
     ischeckboxcheck();
 });
@@ -237,7 +234,7 @@ function SearchData() {
     var date1 = pickerVal.split(" to ")[0];
     var date2 = pickerVal.split(" to ")[1];
 
-    orderList.filter(function(data) {
+    orderList.filter(function (data) {
         matchData = new DOMParser().parseFromString(
             data.values().status,
             "text/html"
@@ -280,7 +277,7 @@ function SearchData() {
 }
 
 var count = 13;
-addBtn.addEventListener("click", function(e) {
+addBtn.addEventListener("click", function (e) {
     if (
         customerNameField.value !== "" &&
         productNameField.value !== "" &&
@@ -289,7 +286,7 @@ addBtn.addEventListener("click", function(e) {
         paymentField.value !== ""
     ) {
         orderList.add({
-            id: '<a href="apps-ecommerce-order-details" class="fw-medium link-primary">#VZ' + count + "</a>",
+            id: '<a href="apps-ecommerce-order-details.html" class="fw-medium link-primary">#VZ'+count+"</a>",
             customer_name: customerNameField.value,
             product_name: productNameField.value,
             date: dateField.value,
@@ -314,20 +311,20 @@ addBtn.addEventListener("click", function(e) {
     }
 });
 
-editBtn.addEventListener("click", function(e) {
+editBtn.addEventListener("click", function (e) {
     document.getElementById("exampleModalLabel").innerHTML = "Edit Order";
     var editValues = orderList.get({
         id: idField.value,
     });
-    editValues.forEach(function(x) {
+    editValues.forEach(function (x) {
         isid = new DOMParser().parseFromString(x._values.id, "text/html");
         var selectedid = isid.body.firstElementChild.innerHTML;
         if (selectedid == itemId) {
             x.values({
-                id: '<a href="javascript:void(0);" class="fw-medium link-primary">' + idField.value + "</a>",
+                id: '<a href="javascript:void(0);" class="fw-medium link-primary">'+idField.value+"</a>",
                 customer_name: customerNameField.value,
                 product_name: productNameField.value,
-                date: dateField.value.slice(0, 14) + '<small class="text-muted">' + dateField.value.slice(14, 22),
+                date: dateField.value.slice(0, 14) +'<small class="text-muted">' +dateField.value.slice(14, 22),
                 amount: amountField.value,
                 payment: paymentField.value,
                 status: isStatus(statusField.value),
@@ -389,8 +386,8 @@ function isStatus(val) {
 }
 
 function ischeckboxcheck() {
-    document.getElementsByName("checkAll").forEach(function(x) {
-        x.addEventListener("click", function(e) {
+    document.getElementsByName("checkAll").forEach(function (x) {
+        x.addEventListener("click", function (e) {
             if (e.target.checked) {
                 e.target.closest("tr").classList.add("table-active");
             } else {
@@ -401,22 +398,22 @@ function ischeckboxcheck() {
 }
 
 function refreshCallbacks() {
-    removeBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
+    removeBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
             e.target.closest("tr").children[1].innerText;
             itemId = e.target.closest("tr").children[1].innerText;
             var itemValues = orderList.get({
                 id: itemId,
             });
 
-            itemValues.forEach(function(x) {
+            itemValues.forEach(function (x) {
                 deleteid = new DOMParser().parseFromString(x._values.id, "text/html");
 
                 var isElem = deleteid.body.firstElementChild;
                 var isdeleteid = deleteid.body.firstElementChild.innerHTML;
 
                 if (isdeleteid == itemId) {
-                    document.getElementById("delete-record").addEventListener("click", function() {
+                    document.getElementById("delete-record").addEventListener("click", function () {
                         orderList.remove("id", isElem.outerHTML);
                         document.getElementById("deleteOrder").click();
                     });
@@ -425,15 +422,15 @@ function refreshCallbacks() {
         });
     });
 
-    editBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
+    editBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
             e.target.closest("tr").children[1].innerText;
             itemId = e.target.closest("tr").children[1].innerText;
             var itemValues = orderList.get({
                 id: itemId,
             });
 
-            itemValues.forEach(function(x) {
+            itemValues.forEach(function (x) {
                 isid = new DOMParser().parseFromString(x._values.id, "text/html");
                 var selectedid = isid.body.firstElementChild.innerHTML;
                 if (selectedid == itemId) {
@@ -493,37 +490,54 @@ function clearFields() {
     statusVal = new Choices(statusField);
 }
 
-document.querySelector(".pagination-next").addEventListener("click", function() {
+document.querySelector(".pagination-next").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active") ?
-        document.querySelector(".pagination.listjs-pagination").querySelector(".active").nextElementSibling.children[0].click() : "" : "";
+            document.querySelector(".pagination.listjs-pagination").querySelector(".active").nextElementSibling.children[0].click() : "" : "";
 });
-document.querySelector(".pagination-prev").addEventListener("click", function() {
+document.querySelector(".pagination-prev").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active") ?
-        document.querySelector(".pagination.listjs-pagination").querySelector(".active").previousSibling.children[0].click() : "" : "";
+            document.querySelector(".pagination.listjs-pagination").querySelector(".active").previousSibling.children[0].click() : "" : "";
 });
 
 // Delete Multiple Records
-function deleteMultiple() {
+function deleteMultiple(){
     ids_array = [];
     var items = document.querySelectorAll('.form-check [value=option1]');
-    items.forEach(function(ele) {
-        if (ele.checked == true) {
-            var id_value = ele.parentNode.parentNode.parentNode;
-            var id_get = id_value.querySelector("td a").innerHTML;
-            ids_array.push(id_get);
+    for (i = 0; i < items.length; i++) {
+        if (items[i].checked == true) {
+            var trNode = items[i].parentNode.parentNode.parentNode;
+            var id = trNode.querySelector("td a").innerHTML;
+            ids_array.push(id);
         }
-    });
+    }
     if (typeof ids_array !== 'undefined' && ids_array.length > 0) {
-        if (confirm('Are you sure you want to delete this?')) {
-            ids_array.forEach(function(id) {
-                orderList.remove("id", `<a href="apps-ecommerce-order-details" class="fw-medium link-primary">` + id + `</a>`);
-            });
-            document.getElementById("checkAll").checked = false;
-        } else {
-            return false;
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-primary w-xs me-2 mt-2',
+            cancelButtonClass: 'btn btn-danger w-xs mt-2',
+            confirmButtonText: "Yes, delete it!",
+            buttonsStyling: false,
+            showCloseButton: true
+        }).then(function (result) {
+            if (result.value) {
+                for (i = 0; i < ids_array.length; i++) {
+                    orderList.remove("id", `<a href="apps-ecommerce-order-details.html" class="fw-medium link-primary">` + ids_array[i] +`</a>`);
+                }
+                document.getElementById("checkAll").checked = false;
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your data has been deleted.',
+                    icon: 'success',
+                    confirmButtonClass: 'btn btn-info w-xs mt-2',
+                    buttonsStyling: false
+                });
+            }
+        });
     } else {
         Swal.fire({
             title: 'Please select at least one checkbox',

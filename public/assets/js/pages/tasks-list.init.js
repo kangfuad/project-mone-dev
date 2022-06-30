@@ -8,18 +8,15 @@ File: Tasks-list init js
 
 var checkAll = document.getElementById("checkAll");
 if (checkAll) {
-    checkAll.onclick = function() {
+    checkAll.onclick = function () {
         var checkboxes = document.querySelectorAll('.form-check-all input[type="checkbox"]');
-        if (checkAll.checked == true) {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-                checkbox.closest("tr").classList.add("table-active");
-            });
-        } else {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-                checkbox.closest("tr").classList.remove("table-active");
-            });
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = this.checked;
+            if (checkboxes[i].checked) {
+                checkboxes[i].closest("tr").classList.add("table-active");
+            } else {
+                checkboxes[i].closest("tr").classList.remove("table-active");
+            }
         }
     };
 }
@@ -48,7 +45,7 @@ var options = {
 };
 
 // Init list
-var tasksList = new List("tasksList", options).on("updated", function(list) {
+var tasksList = new List("tasksList", options).on("updated", function (list) {
     list.matchingItems.length == 0 ?
         (document.getElementsByClassName("noresult")[0].style.display = "block") :
         (document.getElementsByClassName("noresult")[0].style.display = "none");
@@ -76,11 +73,11 @@ var tasksList = new List("tasksList", options).on("updated", function(list) {
 });
 
 const xhttp = new XMLHttpRequest();
-xhttp.onload = function() {
+xhttp.onload = function () {
     var json_records = JSON.parse(this.responseText);
-    json_records.forEach(function(raw) {
+    json_records.forEach(function (raw) {
         var imgHtml = `<div class="avatar-group">`;
-        raw.assignedto.forEach(function(img) {
+        raw.assignedto.forEach(function (img) {
             imgHtml += `
                 <a href="javascript: void(0);" class="avatar-group-item" data-img="${img}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Username">
                     <img src="assets/images/users/${img}" alt="" class="rounded-circle avatar-xxs" />
@@ -89,8 +86,8 @@ xhttp.onload = function() {
         });
         imgHtml += `</div>`;
         tasksList.add({
-            id: '<a href="apps-tasks-details" class="fw-medium link-primary">#VLZ' + raw.id + "</a>",
-            project_name: '<a href="apps-projects-overview" class="fw-medium link-primary">' + raw.project_name + "</a>",
+            id: '<a href="apps-tasks-details.html" class="fw-medium link-primary">#VLZ' + raw.id + "</a>",
+            project_name: '<a href="apps-projects-overview.html" class="fw-medium link-primary">' + raw.project_name + "</a>",
             tasks_name: raw.tasks_name,
             client_name: raw.client_name,
             assignedto: imgHtml,
@@ -101,7 +98,7 @@ xhttp.onload = function() {
         tasksList.sort('id', { order: "desc" });
         refreshCallbacks();
     });
-    tasksList.remove("id", `<a href="apps-tasks-details" class="fw-medium link-primary">#VLZ501</a>`);
+    tasksList.remove("id", `<a href="apps-tasks-details.html" class="fw-medium link-primary">#VLZ501</a>`);
 }
 xhttp.open("GET", "assets/json/tasks-list.json");
 xhttp.send();
@@ -130,7 +127,7 @@ refreshCallbacks();
 
 function filterOrder(isValue) {
     var values_status = isValue;
-    tasksList.filter(function(data) {
+    tasksList.filter(function (data) {
         var statusFilter = false;
         matchData = new DOMParser().parseFromString(
             data.values().status,
@@ -152,7 +149,7 @@ function updateList() {
         "input[name=status]:checked"
     ).value;
 
-    data = userList.filter(function(item) {
+    data = userList.filter(function (item) {
         var statusFilter = false;
 
         if (values_status == "All") {
@@ -166,7 +163,7 @@ function updateList() {
     userList.update();
 }
 
-document.getElementById("showModal").addEventListener("show.bs.modal", function(e) {
+document.getElementById("showModal").addEventListener("show.bs.modal", function (e) {
     if (e.relatedTarget.classList.contains("edit-item-btn")) {
         document.getElementById("exampleModalLabel").innerHTML = "Edit Task";
         document.getElementById("showModal").querySelector(".modal-footer").style.display = "block";
@@ -183,11 +180,11 @@ document.getElementById("showModal").addEventListener("show.bs.modal", function(
     }
 });
 
-document.getElementById("showModal").addEventListener("hidden.bs.modal", function() {
+document.getElementById("showModal").addEventListener("hidden.bs.modal", function () {
     clearFields();
 });
 
-document.querySelector("#tasksList").addEventListener("click", function() {
+document.querySelector("#tasksList").addEventListener("click", function () {
     refreshCallbacks();
     ischeckboxcheck();
 });
@@ -198,7 +195,7 @@ var tr = table.getElementsByTagName("tr");
 var trlist = table.querySelectorAll(".list tr");
 
 var count = 11;
-addBtn.addEventListener("click", function(e) {
+addBtn.addEventListener("click", function (e) {
     e.preventDefault();
     if (
         projectNameField.value !== "" &&
@@ -209,8 +206,8 @@ addBtn.addEventListener("click", function(e) {
         statusField.value !== ""
     ) {
         tasksList.add({
-            id: '<a href="apps-tasks-details" class="fw-medium link-primary">#VLZ' + count + "</a>",
-            project_name: '<a href="apps-projects-overview" class="fw-medium link-primary">' + projectNameField.value + "</a>",
+            id: '<a href="apps-tasks-details.html" class="fw-medium link-primary">#VLZ'+count+"</a>",
+            project_name: '<a href="apps-projects-overview.html" class="fw-medium link-primary">'+projectNameField.value+"</a>",
             tasks_name: tasksTitleField.value,
             client_name: clientNameField.value,
             assignedto: assignToUsers(),
@@ -234,18 +231,18 @@ addBtn.addEventListener("click", function(e) {
     }
 });
 
-editBtn.addEventListener("click", function(e) {
+editBtn.addEventListener("click", function (e) {
     document.getElementById("exampleModalLabel").innerHTML = "Edit Order";
     var editValues = tasksList.get({
         id: idField.value,
     });
-    editValues.forEach(function(x) {
+    editValues.forEach(function (x) {
         isid = new DOMParser().parseFromString(x._values.id, "text/html");
         var selectedid = isid.body.firstElementChild.innerHTML;
         if (selectedid == itemId) {
             x.values({
-                id: '<a href="javascript:void(0);" class="fw-medium link-primary">' + idField.value + "</a>",
-                project_name: '<a href="apps-projects-overview" class="fw-medium link-primary">' + projectNameField.value + "</a>",
+                id: '<a href="javascript:void(0);" class="fw-medium link-primary">'+idField.value+"</a>",
+                project_name: '<a href="apps-projects-overview.html" class="fw-medium link-primary">' +projectNameField.value+"</a>",
                 tasks_name: tasksTitleField.value,
                 client_name: clientNameField.value,
                 assignedto: assignToUsers(),
@@ -283,7 +280,7 @@ function SearchData() {
     var date1 = pickerVal.split(" to ")[0];
     var date2 = pickerVal.split(" to ")[1];
 
-    tasksList.filter(function(data) {
+    tasksList.filter(function (data) {
         matchData = new DOMParser().parseFromString(
             data.values().status,
             "text/html"
@@ -319,8 +316,8 @@ function SearchData() {
 }
 
 function ischeckboxcheck() {
-    document.getElementsByName("checkAll").forEach(function(x) {
-        x.addEventListener("click", function(e) {
+    document.getElementsByName("checkAll").forEach(function (x) {
+        x.addEventListener("click", function (e) {
             if (e.target.checked) {
                 e.target.closest("tr").classList.add("table-active");
             } else {
@@ -331,21 +328,21 @@ function ischeckboxcheck() {
 }
 
 function refreshCallbacks() {
-    removeBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
+    removeBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
             e.target.closest("tr").children[1].innerText;
             itemId = e.target.closest("tr").children[1].innerText;
             var itemValues = tasksList.get({
                 id: itemId,
             });
 
-            itemValues.forEach(function(x) {
+            itemValues.forEach(function (x) {
                 deleteid = new DOMParser().parseFromString(x._values.id, "text/html");
                 var isElem = deleteid.body.firstElementChild;
                 var isdeleteid = deleteid.body.firstElementChild.innerHTML;
 
                 if (isdeleteid == itemId) {
-                    document.getElementById("delete-record").addEventListener("click", function() {
+                    document.getElementById("delete-record").addEventListener("click", function () {
                         tasksList.remove("id", isElem.outerHTML);
                         document.getElementById("deleteOrder").click();
                     });
@@ -354,15 +351,15 @@ function refreshCallbacks() {
         });
     });
 
-    editBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
+    editBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
             e.target.closest("tr").children[1].innerText;
             itemId = e.target.closest("tr").children[1].innerText;
             var itemValues = tasksList.get({
                 id: itemId,
             });
 
-            itemValues.forEach(function(x) {
+            itemValues.forEach(function (x) {
                 isid = new DOMParser().parseFromString(x._values.id, "text/html");
                 var selectedid = isid.body.firstElementChild.innerHTML;
                 if (selectedid == itemId) {
@@ -420,13 +417,13 @@ function clearFields() {
     statusVal = new Choices(statusField);
 }
 
-document.querySelector(".pagination-next").addEventListener("click", function() {
+document.querySelector(".pagination-next").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active").nextElementSibling.children[0].click() : "" : "";
 });
 
-document.querySelector(".pagination-prev").addEventListener("click", function() {
+document.querySelector(".pagination-prev").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active").previousSibling.children[0].click() : "" : "";
@@ -467,7 +464,7 @@ function assignToUsers() {
     var assignedtousers = `<div class="avatar-group">`;
 
     if (assignedTo.length > 0) {
-        assignedTo.forEach(function(ele) {
+        assignedTo.forEach(function (ele) {
             assignedtousers += `<a href="javascript: void(0);" class="avatar-group-item" data-img="${ele.value}" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-placement="top" title="Username">
                     <img src="assets/images/users/${ele.value}" alt="" class="rounded-circle avatar-xxs" />
                 </a>`;
@@ -484,21 +481,39 @@ function assignToUsers() {
 function deleteMultiple() {
     ids_array = [];
     var items = document.getElementsByName('chk_child');
-    items.forEach(function(ele) {
-        if (ele.checked == true) {
-            var trNode = ele.parentNode.parentNode.parentNode;
-            var id = trNode.querySelector('.id a').innerHTML;
+    for (i = 0; i < items.length; i++) {
+        if (items[i].checked == true) {
+            var trNode = items[i].parentNode.parentNode.parentNode;
+            var id = trNode.querySelector("td a").innerHTML;
             ids_array.push(id);
         }
-    });
+    }
     if (typeof ids_array !== 'undefined' && ids_array.length > 0) {
-        if (confirm('Are you sure you want to delete this?')) {
-            ids_array.forEach(function(id) {
-                tasksList.remove("id", `<a href="apps-tasks-details" class="fw-medium link-primary">${id}</a>`);
-            });
-        } else {
-            return false;
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-primary w-xs me-2 mt-2',
+            cancelButtonClass: 'btn btn-danger w-xs mt-2',
+            confirmButtonText: "Yes, delete it!",
+            buttonsStyling: false,
+            showCloseButton: true
+        }).then(function (result) {
+            if (result.value) {
+                for (i = 0; i < ids_array.length; i++) {
+                    tasksList.remove("id", `<a href="apps-tasks-details.html" class="fw-medium link-primary">${ids_array[i]}</a>`);
+                }
+                document.getElementById("checkAll").checked = false;
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your data has been deleted.',
+                    icon: 'success',
+                    confirmButtonClass: 'btn btn-info w-xs mt-2',
+                    buttonsStyling: false
+                });
+            }
+        });
         document.getElementById('checkAll').checked = false;
     } else {
         Swal.fire({

@@ -12,7 +12,7 @@ function getTime(params) {
     params = new Date(params);
     if (params.getHours() != null) {
         var hour = params.getHours();
-        var minute = (params.getMinutes()) ? params.getMinutes() : 0;
+        var minute = (params.getMinutes()) ? params.getMinutes() : 00;
         return hour + ":" + minute;
     }
 }
@@ -1481,7 +1481,7 @@ if ((localStorage.getItem("invoices-list") === null) && (localStorage.getItem("n
 }
 
 //ist form-check-all
-Invoices.forEach(function(raw) {
+Invoices.forEach(function (raw) {
     let badge;
     switch (raw.status) {
         case 'Paid':
@@ -1557,9 +1557,9 @@ Invoices.forEach(function(raw) {
     document.getElementById('invoice-list-data').innerHTML += tableRawData;
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var genericExamples = document.querySelectorAll('[data-plugin="choices"]');
-    genericExamples.forEach(function(genericExamp) {
+    genericExamples.forEach(function (genericExamp) {
         var element = genericExamp;
         new Choices(element, {
             placeholderValue: "This is a placeholder set in the config",
@@ -1579,18 +1579,15 @@ flatpickr("#date-field", {
 
 var checkAll = document.getElementById("checkAll");
 if (checkAll) {
-    checkAll.onclick = function() {
+    checkAll.onclick = function () {
         var checkboxes = document.querySelectorAll('.form-check-all input[type="checkbox"]');
-        if (checkAll.checked == true) {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = true;
-                checkbox.closest("tr").classList.add("table-active");
-            });
-        } else {
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-                checkbox.closest("tr").classList.remove("table-active");
-            });
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = this.checked;
+            if (checkboxes[i].checked) {
+                checkboxes[i].closest("tr").classList.add("table-active");
+            } else {
+                checkboxes[i].closest("tr").classList.remove("table-active");
+            }
         }
     };
 }
@@ -1621,7 +1618,7 @@ var options = {
 // Init list
 var invoiceList = new List("invoiceList", options).on(
     "updated",
-    function(list) {
+    function (list) {
         list.matchingItems.length == 0 ?
             (document.getElementsByClassName("noresult")[0].style.display = "block") :
             (document.getElementsByClassName("noresult")[0].style.display = "none");
@@ -1676,7 +1673,7 @@ filterContact("All");
 
 function filterContact(isValue) {
     var values_status = isValue;
-    invoiceList.filter(function(data) {
+    invoiceList.filter(function (data) {
         var statusFilter = false;
         matchData = new DOMParser().parseFromString(
             data.values().status,
@@ -1696,7 +1693,7 @@ function filterContact(isValue) {
 
 function updateList() {
     var values_status = document.querySelector("input[name=status]:checked").value;
-    data = userList.filter(function(item) {
+    data = userList.filter(function (item) {
         var statusFilter = false;
         if (values_status == "All") {
             statusFilter = true;
@@ -1720,7 +1717,7 @@ function SearchData() {
     var date1 = pickerVal.split(" to ")[0];
     var date2 = pickerVal.split(" to ")[1];
 
-    invoiceList.filter(function(data) {
+    invoiceList.filter(function (data) {
         matchData = new DOMParser().parseFromString(
             data.values().status,
             "text/html"
@@ -1753,8 +1750,8 @@ function SearchData() {
 }
 
 function ischeckboxcheck() {
-    document.getElementsByName("checkAll").forEach(function(x) {
-        x.addEventListener("click", function(e) {
+    document.getElementsByName("checkAll").forEach(function (x) {
+        x.addEventListener("click", function (e) {
             if (e.target.checked) {
                 e.target.closest("tr").classList.add("table-active");
             } else {
@@ -1765,21 +1762,21 @@ function ischeckboxcheck() {
 }
 
 function refreshCallbacks() {
-    removeBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(e) {
+    removeBtns.forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
             e.target.closest("tr").children[1].innerText;
             itemId = e.target.closest("tr").children[1].innerText;
             var itemValues = invoiceList.get({
                 id: itemId,
             });
 
-            itemValues.forEach(function(x) {
+            itemValues.forEach(function (x) {
                 deleteid = new DOMParser().parseFromString(x._values.id, "text/html");
 
                 var isElem = deleteid.body.firstElementChild;
                 var isdeleteid = deleteid.body.firstElementChild.innerHTML;
                 if (isdeleteid == itemId) {
-                    document.getElementById("delete-record").addEventListener("click", function() {
+                    document.getElementById("delete-record").addEventListener("click", function () {
                         invoiceList.remove("id", isElem.outerHTML);
                         document.getElementById("deleteOrder").click();
                     });
@@ -1789,7 +1786,7 @@ function refreshCallbacks() {
     });
 }
 
-document.querySelector("#invoiceList").addEventListener("click", function() {
+document.querySelector("#invoiceList").addEventListener("click", function () {
     refreshCallbacks();
     ischeckboxcheck();
 });
@@ -1801,13 +1798,13 @@ function clearFields() {
     countryField.value = "";
 }
 
-document.querySelector(".pagination-next").addEventListener("click", function() {
+document.querySelector(".pagination-next").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active").nextElementSibling.children[0].click() : "" : "";
 });
 
-document.querySelector(".pagination-prev").addEventListener("click", function() {
+document.querySelector(".pagination-prev").addEventListener("click", function () {
     document.querySelector(".pagination.listjs-pagination") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active") ?
         document.querySelector(".pagination.listjs-pagination").querySelector(".active").previousSibling.children[0].click() : "" : "";
@@ -1818,7 +1815,7 @@ function ViewInvoice(data) {
     localStorage.setItem("invoices-list", JSON.stringify(Invoices));
     localStorage.setItem("option", "view-invoice");
     localStorage.setItem("invoice_no", invoice_no);
-    window.location.assign("apps-invoices-details")
+    window.location.assign("apps-invoices-details.html")
 }
 
 function EditInvoice(data) {
@@ -1826,28 +1823,45 @@ function EditInvoice(data) {
     localStorage.setItem("invoices-list", JSON.stringify(Invoices));
     localStorage.setItem("option", "edit-invoice");
     localStorage.setItem("invoice_no", invoice_no);
-    window.location.assign("apps-invoices-create")
+    window.location.assign("apps-invoices-create.html")
 }
 
 // Delete Multiple Records
 function deleteMultiple() {
     ids_array = [];
     var items = document.getElementsByName('chk_child');
-    items.forEach(function(ele) {
-        if (ele.checked == true) {
-            ids_array.push(ele.value);
+    for (i = 0; i < items.length; i++) {
+        if (items[i].checked == true) {
+            ids_array.push(items[i].value);
         }
-    });
-
+    }
+    
     if (typeof ids_array !== 'undefined' && ids_array.length > 0) {
-        if (confirm('Are you sure you want to delete this?')) {
-            ids_array.forEach(function(id) {
-                invoiceList.remove("id", `<a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="` + id.slice(3) + `" class="fw-medium link-primary">${id}</a>`);
-            });
-            document.getElementById('checkAll').checked = false;
-        } else {
-            return false;
-        }
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonClass: 'btn btn-primary w-xs me-2 mt-2',
+            cancelButtonClass: 'btn btn-danger w-xs mt-2',
+            confirmButtonText: "Yes, delete it!",
+            buttonsStyling: false,
+            showCloseButton: true
+        }).then(function (result) {
+            if (result.value) {
+                for (i = 0; i < ids_array.length; i++) {
+                    invoiceList.remove("id", `<a href="javascript:void(0);" onclick="ViewInvoice(this);" data-id="` + ids_array[i].slice(3) + `" class="fw-medium link-primary">${ids_array[i]}</a>`);
+                }
+                document.getElementById("checkAll").checked = false;
+                Swal.fire({
+                    title: 'Deleted!',
+                    text: 'Your data has been deleted.',
+                    icon: 'success',
+                    confirmButtonClass: 'btn btn-info w-xs mt-2',
+                    buttonsStyling: false
+                });
+            }
+        });
     } else {
         Swal.fire({
             title: 'Please select at least one checkbox',

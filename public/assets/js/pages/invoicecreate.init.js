@@ -555,7 +555,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				};
 				localStorage.setItem("new_data_object", JSON.stringify(new_data_object));
 			}
-			window.location.href = "apps-invoices-list";
+			window.location.href = "apps-invoices-list.html";
 		}
 	});
 });
