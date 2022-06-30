@@ -1,8 +1,3 @@
-/******/ (() => { // webpackBootstrap
-var __webpack_exports__ = {};
-/*!***********************************************!*\
-  !*** ./resources/js/pages/datatables.init.js ***!
-  \***********************************************/
 /*
 Template Name: Velzon - Admin & Dashboard Template
 Author: Themesbrand
@@ -10,85 +5,98 @@ Website: https://Themesbrand.com/
 Contact: Themesbrand@gmail.com
 File: datatables init js
 */
+
 document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#example');
+    let table = new DataTable('#example', );
 });
+
+
 document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#scroll-vertical', {
-    "scrollY": "210px",
-    "scrollCollapse": true,
-    "paging": false
-  });
+    let table = new DataTable('#scroll-vertical', {
+        "scrollY": "210px",
+        "scrollCollapse": true,
+        "paging": false
+    });
+
 });
+
 document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#scroll-horizontal', {
-    "scrollX": true
-  });
+    let table = new DataTable('#scroll-horizontal', {
+        "scrollX": true
+    });
 });
+
 document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#alternative-pagination', {
-    "pagingType": "full_numbers"
-  });
+    let table = new DataTable('#alternative-pagination', {
+        "pagingType": "full_numbers"
+    });
 });
 $(document).ready(function () {
-  var t = $('#add-rows').DataTable();
-  var counter = 1;
-  $('#addRow').on('click', function () {
-      // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
-      t.row.add([
-          `<div><textarea class="form-control" name="keluhan[]" id="keluhan[]"></textarea></div>`,
-          '<button class="btn btn-danger" id="delteRow">Hapus</button>'
-      ]).draw(false);
-      counter++;
-  }); // Automatically add a first row of data
+    var t = $('#add-rows').DataTable();
+    var counter = 1;
+    $('#addRow').on('click', function () {
+        // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
+        t.row.add([
+            `<div><textarea class="form-control" name="keluhan[]" id="keluhan[]"></textarea></div>`,
+            '<button class="btn btn-danger" id="delteRow">Hapus</button>'
+        ]).draw(false);
+        counter++;
+    }); // Automatically add a first row of data
 
-  $('#addRow').click();
-  $('#add-rows tbody').on('click', '#delteRow', function () {
-      t
-          .row($(this).parents('tr'))
-          .remove()
-          .draw();
-  });
+    $('#addRow').click();
+    $('#add-rows tbody').on('click', '#delteRow', function () {
+        t
+            .row($(this).parents('tr'))
+            .remove()
+            .draw();
+    });
 });
+
 $(document).ready(function () {
-  $('#example').DataTable();
-}); //fixed header
-
-document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#fixed-header', {
-    "fixedHeader": true
-  });
-}); //modal data datables
-
-document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#model-datatables', {
-    responsive: {
-      details: {
-        display: $.fn.dataTable.Responsive.display.modal({
-          header: function header(row) {
-            var data = row.data();
-            return 'Details for ' + data[0] + ' ' + data[1];
-          }
-        }),
-        renderer: $.fn.dataTable.Responsive.renderer.tableAll({
-          tableClass: 'table'
-        })
-      }
-    }
-  });
-}); //buttons exmples
-
-document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#buttons-datatables', {
-    dom: 'Bfrtip',
-    buttons: ['copy', 'csv', 'excel', 'print', 'pdf']
-  });
-}); //buttons exmples
-
-document.addEventListener('DOMContentLoaded', function () {
-  var table = new DataTable('#ajax-datatables', {
-    "ajax": 'assets/json/datatable.json'
-  });
+    $('#example').DataTable();
 });
-/******/ })()
-;
+
+//fixed header
+document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#fixed-header', {
+        "fixedHeader": true
+    });
+
+});
+
+//modal data datables
+document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#model-datatables', {
+        responsive: {
+            details: {
+                display: $.fn.dataTable.Responsive.display.modal({
+                    header: function (row) {
+                        var data = row.data();
+                        return 'Details for ' + data[0] + ' ' + data[1];
+                    }
+                }),
+                renderer: $.fn.dataTable.Responsive.renderer.tableAll({
+                    tableClass: 'table'
+                })
+            }
+        }
+    });
+
+});
+
+//buttons exmples
+document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#buttons-datatables', {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'print', 'pdf'
+        ]
+    });
+});
+
+//buttons exmples
+document.addEventListener('DOMContentLoaded', function () {
+    let table = new DataTable('#ajax-datatables', {
+        "ajax": 'assets/json/datatable.json'
+    });
+});
