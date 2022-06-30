@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('lokasi');
             $table->string('hm');
             $table->string('km');    
+            $table->integer('id_pic_foreman');
             $table->integer('status_id');
             $table->integer('is_active')->default(1);
             $table->integer('created_by');
