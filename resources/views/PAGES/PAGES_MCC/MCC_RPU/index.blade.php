@@ -186,7 +186,6 @@
 </div>
 
 
-
 {{-- Modal List Kerusakan --}}
 <div id="listKerusakan" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-centered">

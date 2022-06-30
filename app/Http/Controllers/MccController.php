@@ -54,4 +54,17 @@ class MccController extends Controller
         dd($request->all());
         
     }
+
+    public function mcc_sob_index(){
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
+        $passing = [
+            'title' => 'Buat - Surat Order Barang',
+            'title-page' => 'Order Barang',
+            'menu' => $menu,
+            'menu_head' => $menu_head
+        ];
+        return view('PAGES.PAGES_MCC.MCC_SOB.index', get_defined_vars());
+    }
 }
