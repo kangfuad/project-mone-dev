@@ -134,7 +134,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="rpuList"
-                                class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
+                                class="table dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
                                 style="width: 100%;" aria-describedby="example_info">
                                 <thead>
                                     <tr>
@@ -146,7 +146,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for($i = 1; $i < 1100; $i++)
+                                    @for($i = 1; $i < 100; $i++)
                                         <tr class="">
                                             <td width="10%" class="">{{$i}}</td>
                                             <td width="15%" class="">SR-16565350{{$i}}</td>
