@@ -18,7 +18,7 @@ class ForemanController extends Controller
             'menu' => $menu,
             'menu_head' => $menu_head
         ];
-        return view('PAGES.PAGES_FM.FM_LISTING.index', ['passing' => $passing]);
+        return view('PAGES.PAGES_FM.index', ['passing' => $passing]);
     }
 
     public function list_barang(){
