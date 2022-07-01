@@ -41,10 +41,7 @@ Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix'
     Route::post('/user-manajemen', [AdminController::class, 'tambah_user_manajemen']);
     Route::get('/icon', [AdminController::class, 'icon']);
 
-    // Master Unit 
-    Route::get('/master-unit', [AdminController::class, 'master_unit']);
-
-    // End Master Unit 
+    Route::get('/unit-manajemen', [AdminController::class, 'unit_manajemen']);
 });
 
 Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix' => '/mcc'], function () {

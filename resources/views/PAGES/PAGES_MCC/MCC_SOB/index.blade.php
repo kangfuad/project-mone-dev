@@ -134,7 +134,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <table id="rpuList"
-                                class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
+                                class="table dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
                                 style="width: 100%;" aria-describedby="example_info">
                                 <thead>
                                     <tr>
@@ -146,135 +146,62 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="">
-                                        <td>1</td>
-                                        <td>01</td>
-                                        <td>
-                                            {{-- <button class="btn btn-primary" data-bs-target="#listKerusakan" data-bs-toggle="modal">Detail</button> --}}
-                                            <ul class="list-group">
-                                                <li class="list-group-item"><i
-                                                        class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send the
-                                                    billing agreement</li>
-                                                <li class="list-group-item"><i
-                                                        class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send over
-                                                    all the documentation.</li>
-                                                <li class="list-group-item"><i
-                                                        class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Meeting
-                                                    with daron to review the intake form</li>
-                                                <li class="list-group-item"><i
-                                                        class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Check
-                                                    uikings theme and give customer support</li>
-                                                <li class="list-group-item"><i
-                                                        class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Start
-                                                    making a presentation</li>
-                                            </ul>
-                                        </td>
-                                        <td>Daffa</td>
-                                        <td>
-                                            <button type="button"
-                                                class="btn btn-success btn-label waves-effect waves-light"><i
-                                                    class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
-                                                Terima</button>
-                                            <button type="button"
-                                                class="btn btn-danger btn-label waves-effect waves-light"><i
-                                                    class=" ri-close-circle-fill label-icon align-middle fs-16 me-2"></i>
-                                                Tolak</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>1</td>
-                                        <td>01</td>
-                                        <td>
-                                            {{-- <button class="btn btn-primary" data-bs-target="#listKerusakan" data-bs-toggle="modal">Detail</button> --}}
-                                            <!-- Accordions with Icons -->
-                                            <div class="accordion custom-accordionwithicon" id="accordionWithicon">
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="accordionwithiconExample1">
-                                                        <button class="accordion-button" type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accor_withouticoncollapse1"
-                                                            aria-expanded="true"
-                                                            aria-controls="accor_iconExamplecollapse1">
-                                                            <i class="ri-global-line"></i> How Does Age Verification
-                                                            Work?
-                                                        </button>
-                                                    </h2>
-                                                    <div id="accor_iconExamplecollapse1"
-                                                        class="accordion-collapse collapse show"
-                                                        aria-labelledby="accordionwithiconExample1"
-                                                        data-bs-parent="#accordionWithicon">
-                                                        <div class="accordion-body">
-                                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                                            accusamus terry richardson ad squid. 3 wolf moon officia
-                                                            aute, non cupidatat skateboard dolor brunch. Food truck
-                                                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                                                            sunt aliqua nulla assumenda shoreditch et.
+                                    @for($i = 1; $i < 100; $i++)
+                                        <tr class="">
+                                            <td width="10%" class="">{{$i}}</td>
+                                            <td width="15%" class="">SR-16565350{{$i}}</td>
+                                            <td width="55%">
+                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="accordionwithiconExample2{{$i}}">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#accor_iconExamplecollapse2{{$i}}"
+                                                                aria-expanded="false"
+                                                                aria-controls="accor_iconExamplecollapse2">
+                                                                <i class="ri-user-location-line"></i> Tampilkan List Sparepart
+                                                            </button>
+                                                        </h2>
+                                                        <div id="accor_iconExamplecollapse2{{$i}}"
+                                                            class="accordion-collapse collapse"
+                                                            aria-labelledby="accordionwithiconExample2"
+                                                            data-bs-parent="#accordionWithicon">
+                                                            <div class="accordion-body">
+                                                                <ul class="list-group">
+                                                                    <li class="list-group-item"><i
+                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send the
+                                                                        billing agreement</li>
+                                                                    <li class="list-group-item"><i
+                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send over
+                                                                        all the documentation.</li>
+                                                                    <li class="list-group-item"><i
+                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Meeting
+                                                                        with daron to review the intake form</li>
+                                                                    <li class="list-group-item"><i
+                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Check
+                                                                        uikings theme and give customer support</li>
+                                                                    <li class="list-group-item"><i
+                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Start
+                                                                        making a presentation</li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="accordionwithiconExample2">
-                                                        <button class="accordion-button collapsed" type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accor_iconExamplecollapse2"
-                                                            aria-expanded="false"
-                                                            aria-controls="accor_iconExamplecollapse2">
-                                                            <i class="ri-user-location-line"></i> How Does Link Tracking
-                                                            Work?
-                                                        </button>
-                                                    </h2>
-                                                    <div id="accor_iconExamplecollapse2"
-                                                        class="accordion-collapse collapse"
-                                                        aria-labelledby="accordionwithiconExample2"
-                                                        data-bs-parent="#accordionWithicon">
-                                                        <div class="accordion-body">
-                                                            Nullam quis ante. Etiam sit amet orci eget eros faucibus
-                                                            tincidunt. Duis leo. Sed fringilla mauris sit amet nibh.
-                                                            Donec sodales sagittis magna. Sed consequat, leo eget
-                                                            bibendum sodales, augue velit cursus nunc, quis gravida
-                                                            magna mi a libero. Fusce vulputate eleifend sapien.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="accordion-item">
-                                                    <h2 class="accordion-header" id="accordionwithiconExample3">
-                                                        <button class="accordion-button collapsed" type="button"
-                                                            data-bs-toggle="collapse"
-                                                            data-bs-target="#accor_iconExamplecollapse3"
-                                                            aria-expanded="false"
-                                                            aria-controls="accor_iconExamplecollapse3">
-                                                            <i class="ri-pen-nib-line"></i> How Do I Set Up the Drip
-                                                            Feature?
-                                                        </button>
-                                                    </h2>
-                                                    <div id="accor_iconExamplecollapse3"
-                                                        class="accordion-collapse collapse"
-                                                        aria-labelledby="accordionwithiconExample3"
-                                                        data-bs-parent="#accordionWithicon">
-                                                        <div class="accordion-body">
-                                                            Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum
-                                                            ante ipsum primis in faucibus orci luctus et ultrices
-                                                            posuere cubilia Curae; In ac dui quis mi consectetuer
-                                                            lacinia. Nam pretium turpis et arcu arcu tortor, suscipit
-                                                            eget, imperdiet nec, imperdiet iaculis aliquam ultrices
-                                                            mauris.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>Daffa</td>
-                                        <td>
-                                            <button type="button"
-                                                class="btn btn-success btn-label waves-effect waves-light"><i
-                                                    class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
-                                                Terima</button>
-                                            <button type="button"
-                                                class="btn btn-danger btn-label waves-effect waves-light"><i
-                                                    class=" ri-close-circle-fill label-icon align-middle fs-16 me-2"></i>
-                                                Tolak</button>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                            <td width="10%" class="">Daffa</td>
+                                            <td width="10%" class="">
+                                                <button type="button"
+                                                    class="btn btn-success btn-label waves-effect waves-light"><i
+                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
+                                                    Terima</button>
+                                                <button type="button"
+                                                    class="btn btn-danger btn-label waves-effect waves-light"><i
+                                                        class=" ri-close-circle-fill label-icon align-middle fs-16 me-2"></i>
+                                                    Tolak</button>
+                                            </td>
+                                        </tr>
+                                    @endfor
                                 </tbody>
                             </table>
                         </div>

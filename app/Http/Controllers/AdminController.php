@@ -181,4 +181,18 @@ class AdminController extends Controller
         ];
         return view('PAGES.ADMIN.icon', ['passing' => $passing]);
     }
+
+    // Unit Manajement
+    public function unit_manajemen(){
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
+        $passing = [
+            'title' => 'Unit Manajemen',
+            'title-page' => 'Halaman Unit Manajemen',
+            'menu' => $menu,
+            'menu_head' => $menu_head
+        ];
+        return view('PAGES.ADMIN.unit-manajement', ['passing' => $passing]);
+    }
 }
