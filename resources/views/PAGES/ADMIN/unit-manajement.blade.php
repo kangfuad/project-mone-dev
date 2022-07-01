@@ -59,7 +59,7 @@
                             <th>NO.</th>
                             <th>TRUCK ID</th>
                             <th>BRAND TRUCK</th>
-                            <th>SERIES/th>
+                            <th>SERIES</th>
                             <th>PPROD TYPE</th>
                             <th>VIN</th>
                             <th>BRAND VESSEL</th>

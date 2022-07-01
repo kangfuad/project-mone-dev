@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MccController;
 use App\Http\Controllers\ForemanController;
 use App\Http\Controllers\warehouseController;
+use App\Http\Controllers\PublicController;
 // END CONTROLLER
 
 /*
@@ -25,6 +26,9 @@ use App\Http\Controllers\warehouseController;
 */
 
 Route::get('/', [LoginController::class, 'index'])->name('login');
+
+// History
+Route::get('/history', [LoginController::class, 'history_page'])->name('history.page');
 
 Auth::routes(['verify' => true]);
 
