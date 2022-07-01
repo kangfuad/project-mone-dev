@@ -92,10 +92,8 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
                                                         <li>
-                                                            <a href="{{ url('/log') }}/{{$rpu->no_rpu}}" target="_blank" class="dropdown-item edit-item-btn"><i
-                                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                Hystory RPU
-                                                            </a>
+                                                            <button class="btn dropdown-item" data-bs-target="#rpu_history"
+                                                             data-bs-toggle="modal">History</button>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -130,10 +128,80 @@
                         documentation.</li>
                 </ul>
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
-                {{-- <button type="button" class="btn btn-primary ">Save Changes</button> --}}
+                <button type="button" class="btn btn-primary ">Save Changes</button>
+            </div> --}}
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{{-- Modal History --}}
+<div id="rpu_history" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">History</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
             </div>
+            <div class="modal-body">
+                <div class="acitivity-timeline acitivity-main">
+                    <div class="acitivity-item d-flex">
+                        <div class="flex-shrink-0 avatar-xs acitivity-avatar">
+                            <div class="avatar-title bg-success text-white rounded-circle">
+                                <i class="ri-home-gear-fill"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-1 lh-base">Step 1</h6>
+                            <p class="text-muted mb-1">Selesai  (Lorem ipsum dolor sit.)</p>
+                            <small class="mb-0 text-muted">02:14 PM Today</small>
+                        </div>
+                    </div>
+                    <div class="acitivity-item d-flex py-3">
+                        <div class="flex-shrink-0 avatar-xs acitivity-avatar">
+                            <div class="avatar-title bg-warning text-white rounded-circle">
+                                <i class="ri-hammer-fill"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-1 lh-base">Step 2</h6>
+                            <p class="text-muted mb-1">On Progress  (Lorem ipsum dolor sit.)</p>
+                            <small class="mb-0 text-muted">09:14 PM Today</small>
+                        </div>
+                    </div>
+                    <div class="acitivity-item d-flex py-3">
+                        <div class="flex-shrink-0 avatar-xs acitivity-avatar">
+                            <div class="avatar-title bg-danger text-white rounded-circle">
+                                <i class="ri-charging-pile-2-fill"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-1 lh-base">Step 3</h6>
+                            <p class="text-muted mb-1">Belum Selesai  (Lorem ipsum dolor sit.)</p>
+                            <small class="mb-0 text-muted">10:14 PM Today</small>
+                        </div>
+                    </div>
+                    <div class="acitivity-item d-flex">
+                        <div class="flex-shrink-0 avatar-xs acitivity-avatar">
+                            <div class="avatar-title bg-danger text-white rounded-circle">
+                                <i class="ri-charging-pile-2-fill"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h6 class="mb-1 lh-base">Step 4</h6>
+                            <p class="text-muted mb-1">Belum Selesai  (Lorem ipsum dolor sit.)</p>
+                            <small class="mb-0 text-muted">20:14 PM Today</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
+                <button type="button" class="btn btn-primary ">Save Changes</button>
+            </div> --}}
 
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
