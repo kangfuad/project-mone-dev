@@ -55,9 +55,7 @@ class HomeController extends Controller
             'menu_head' => $menu_head
         ];
         return view('PAGES.PAGES_WH.SPB.index', get_defined_vars());
-    }
-
-    
+    }    
 
     
 }
