@@ -43,7 +43,7 @@ class MccController extends Controller
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
-        $rpus = Mpe_rpu::with(['foreman'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->OrderBy('id','DESC')->get();
+        $rpus = Mpe_rpu::with(['foreman'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->OrderBy('id', 'DESC')->get();
         $passing = [
             'title' => 'RPU - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',
@@ -74,19 +74,20 @@ class MccController extends Controller
     {
         $pf = new ProsessFunction();
         $flaging = $pf->get_flaging($request->no_rpu) + 1;
-        $pf->insert_log(10, $request->no_rpu,'','');
+        $pf->insert_log(10, $request->no_rpu, '', '');
 
         $create = $pf->create($request, $flaging);
 
         if ($create == true) {
-            $pf->insert_log(11, $request->no_rpu,'','');
+            $pf->insert_log(11, $request->no_rpu, '', '');
             return redirect('/mcc/rpu')->with('berhasil', 'RPU berhail di buat');
         } else {
             return redirect('/mcc/rpu')->with('error', 'RPU gagal di buat, Silahkan coba kembali nanti!');
         }
     }
 
-    public function mcc_sob_index(){
+    public function mcc_sob_index()
+    {
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
@@ -98,4 +99,26 @@ class MccController extends Controller
         ];
         return view('PAGES.PAGES_MCC.MCC_SOB.index', get_defined_vars());
     }
+
+
+    // AJAX FUNCTION
+    function get_kerusakan_with_barang(Request $req)
+    {
+        $pf = new ProsessFunction();
+        $keluhan = $pf->get_keluhan_with_barang($req->no_rpu);
+
+        if (count($keluhan) > 0) {
+            $keluhan = $keluhan;
+            $pesan = "sukses";
+        } else {
+            $keluhan = $keluhan;
+            $pesan = "error";
+        }
+
+        return response()->json([
+            'pesan' => $pesan,
+            'data' => $keluhan
+        ]);
+    }
+    // END AJAX FUNCTION
 }

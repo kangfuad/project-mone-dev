@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 // MODELS
 use App\Models\MasterSubMenu;
 use App\Models\User;
+use App\Models\Master_unit;
 // END MODELS
 
 
@@ -107,9 +108,6 @@ class AdminController extends Controller
                 return redirect('/admin/menu-manajemen')->with('error', 'Menu baru gagal hapus');
             }
         }
-        
-
-        
     }
 
     // END MENU MANAJEMENt
@@ -150,6 +148,25 @@ class AdminController extends Controller
     }
 
     // END USER MANAJEMENT
+
+
+    // MASTER UNIT
+    public function master_unit()
+    {
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
+        $table_unit = Master_unit::OrderBy('id', 'desc')->get();
+        $passing = [
+            'title' => 'Master Unit',
+            'title-page' => 'Halaman Master Unit',
+            'menu' => $menu,
+            'menu_head' => $menu_head,
+            'table_unit' => $table_unit
+        ];
+        return view('PAGES.ADMIN.master-unit', ['passing' => $passing]);
+    }
+    // END MASTER UNIT
 
     public function icon()
     {
