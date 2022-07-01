@@ -97,4 +97,22 @@ class ProsessFunction
         $log->created_by = trim(Auth::user()->id);
         $log->save();
     }
+
+
+    // AJAX HELPERS
+    function get_keluhan_with_barang($no_rpu)
+    {
+
+
+        $keluhan = Mpe_rpu_keluhan::with(['barang'])->where(['no_rpu' => $no_rpu, 'is_active' => 1])->OrderBy('keluhan', 'ASC')->get();
+
+        if (count($keluhan) > 0) {
+            $keluhan = $keluhan;
+        } else {
+            $keluhan = "error";
+        }
+
+        return $keluhan;
+    }
+    // END AJAX HELPERS
 }

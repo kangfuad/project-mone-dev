@@ -80,8 +80,9 @@
                                             <td>{{ $rpu->hm }}</td>
                                             <td>{{ $rpu->km }}</td>
                                             <td>
-                                                <button class="btn btn-primary" data-bs-target="#listKerusakan"
-                                                    data-bs-toggle="modal">Detail Kerusakan</button>
+                                                <button class="btn btn-primary" data-no-rpu="{{$rpu->no_rpu}}"
+                                                    id="btnViewKerusakan">Detail
+                                                    Kerusakan</button>
                                             </td>
                                             <td>{{ $rpu['foreman']['name'] }}</td>
                                             <td>
@@ -92,8 +93,11 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
                                                         <li>
-                                                            <button class="btn dropdown-item" data-bs-target="#rpu_history"
-                                                             data-bs-toggle="modal">History</button>
+                                                            <a class="dropdown-item edit-item-btn"
+                                                                data-no-rpu="{{$rpu->no_rpu}}"><i
+                                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                                Hystory RPU
+                                                            </a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -122,11 +126,28 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
             </div>
             <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item"><i class="ri-information-fill align-middle me-2"></i>Rusak oi</li>
-                    <li class="list-group-item"><i class="ri-information-fill align-middle me-2"></i>Send over all the
-                        documentation.</li>
-                </ul>
+                <!-- Accordions Bordered -->
+                <div class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
+                    id="accordionBordered">
+                    {{-- <div class="accordion-item">
+                        <h2 class="accordion-header" id="accordionborderedExample1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#accor_borderedExamplecollapse1" aria-expanded="true"
+                                aria-controls="accor_borderedExamplecollapse1">
+                                What is User Interface Design?
+                            </button>
+                        </h2>
+                        <div id="accor_borderedExamplecollapse1" class="accordion-collapse collapse show"
+                            aria-labelledby="accordionborderedExample1" data-bs-parent="#accordionBordered">
+                            <div class="accordion-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
+                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua nulla assumenda
+                                shoreditch et.
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
             </div>
             {{-- <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
@@ -206,16 +227,12 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('script')
 
 <!-- JAVASCRIPT -->
-<script src="{{ URL::asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
-<script src="{{ URL::asset('assets/libs/node-waves/waves.min.js')}}"></script>
-<script src="{{ URL::asset('assets/libs/feather-icons/feather.min.js')}}"></script>
-<script src="{{ URL::asset('assets/js/pages/plugins/lord-icon-2.1.0.js')}}"></script>
-<script src="{{ URL::asset('assets/js/plugins.js')}}"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -235,11 +252,83 @@
 <!-- App js -->
 <script src="{{ URL::asset('assets/js/app.js')}}"></script>
 
-{{-- <script>
+<script>
     $('document').ready(function () {
-        $('#rpuList').DataTable();
-        // $('#spbList').DataTable();
+        $('#scroll-horizontal tbody').on( 'click', '#btnViewKerusakan', function () {
+            var rpu = $(this).data('no-rpu'); 
+            VIEW_DETAIL_KERUSAKAN(rpu);
+        });
+
+
+        function VIEW_DETAIL_KERUSAKAN(no_rpu){
+            let _token   = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type:'POST',
+                url: "{{ url('/mcc/get-kerusakan-with-barang') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    no_rpu :no_rpu,
+                    _token : _token
+                },
+                success: (data) => {
+                    // console.log(data.data)   
+                    var html = '';
+                    var i;
+                    for(i=0; i<data.data.length;i++){
+                        if(i !== 0 ){
+                            var x = 'collapsed';
+                            y = 'false';
+                            xx = ''
+
+                        }else{
+                            var x = '';
+                            y = 'false';
+                            xx = 'show';
+
+                        }
+                        
+                        if(data.data[i].barang !== null){
+                            var ul = '';
+                            for(m=0;m<data.data[i].barang.length;m++){
+                                ul += '<li>'+data.data[i].barang[m].nama_barang+'</li>';
+                            }
+                        }else{
+                            var ul = '<li>Tidak Ada listing barang yang di butuhkan</li>';
+                        }
+                        html += '<div class="accordion-item">'+
+                                    '<h2 class="accordion-header" id="dancok'+data.data[i].id+'">'+
+                                        '<button class="accordion-button '+x+'" type="button" data-bs-toggle="collapse" data-bs-target="#CVAR'+data.data[i].id+'" aria-expanded="'+y+'" aria-controls="CVAR'+data.data[i].id+'">'+
+                                            data.data[i].keluhan+
+                                        ' </button>'+
+                                    ' </h2>'+
+                                    '<div id="CVAR'+data.data[i].id+'" class="accordion-collapse collapse '+xx+'" aria-labelledby="dancok'+data.data[i].id+'" data-bs-parent="#accordionBordered">'+
+                                        '<div class="accordion-body">'+
+                                            '<ul>'+
+                                                ul+
+                                            '</ul>'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div> ';
+                    }
+                    $('#accordionBordered').html(html);
+                    $('#listKerusakan').modal('show');
+
+                },
+                error: function(data){
+                    // $("body").removeClass("spinner");
+                    // swal({
+                    //     title: "Opss..",
+                    //     text: "Terjadi kesalahan.",
+                    //     icon: "error"
+                    // });
+                }
+            });
+
+        }
     })
 
-</script> --}}
+</script>
 @endsection

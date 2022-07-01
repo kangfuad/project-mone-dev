@@ -51,6 +51,13 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
     Route::get('/rpu/create', [MccController::class, 'mcc_rpu_create'])->name('mcc.rpu.create');
     Route::post('/rpu/post', [MccController::class, 'mcc_rpu_post'])->name('mcc.rpu.post');
     Route::get('/sob', [MccController::class, 'mcc_sob_index'])->name('mcc.sob.index');
+
+
+    // AJAX
+    Route::post('/get-kerusakan-with-barang', [MccController::class, 'get_kerusakan_with_barang'])->name('get.kerusakan.with.barang');
+    Route::post('/get-kerusakan', [MccController::class, 'get_kerusakan'])->name('get.kerusakan');
+
+    // END AJAX
 });
 
 Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix' => '/foreman'], function () {
@@ -65,11 +72,3 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
     Route::get('/', [warehouseController::class, 'index']);
     Route::get('/spb/index', [warehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
 });
-
-// Route::get('/listing', function () {
-//     $passing = [
-//         'title' => 'Listing',
-//         'title-page' => 'Foreman'
-//     ];
-//     return view('PAGES.PAGES_FM.FM_LISTING.index', ['passing' => $passing]);
-// });
