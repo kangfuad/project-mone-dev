@@ -72,3 +72,5 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
     Route::get('/', [warehouseController::class, 'index']);
     Route::get('/spb/index', [warehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
 });
+
+
