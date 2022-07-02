@@ -96,7 +96,7 @@
                                                             <a class="dropdown-item edit-item-btn"
                                                                 data-no-rpu="{{$rpu->no_rpu}}"><i
                                                                     class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                Hystory RPU
+                                                                History RPU
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -127,7 +127,7 @@
             </div>
             <div class="modal-body">
                 <!-- Accordions Bordered -->
-                <div class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-secondary"
+                <div class="accordion custom-accordionwithicon accordion-fill-primary"
                     id="accordionBordered">
                     {{-- <div class="accordion-item">
                         <h2 class="accordion-header" id="accordionborderedExample1">
