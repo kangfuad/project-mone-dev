@@ -129,12 +129,10 @@
 <script>
     $('document').ready(function () {
         $('#scroll-horizontal tbody').on( 'click', '#btnViewKerusakan', function () {
+            $(this).text('Loading detail..');
             var rpu = $(this).data('no-rpu'); 
-            VIEW_DETAIL_KERUSAKAN(rpu);
-        });
+            // VIEW_DETAIL_KERUSAKAN(rpu);
 
-
-        function VIEW_DETAIL_KERUSAKAN(no_rpu){
             let _token   = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({
@@ -144,7 +142,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    no_rpu :no_rpu,
+                    no_rpu :rpu,
                     _token : _token
                 },
                 success: (data) => {
@@ -189,7 +187,7 @@
                     }
                     $('#accordionBordered').html(html);
                     $('#listKerusakan').modal('show');
-
+                    $(this).text('Detail Kerusakan');
                 },
                 error: function(data){
                     // $("body").removeClass("spinner");
@@ -200,8 +198,9 @@
                     // });
                 }
             });
+        });
 
-        }
+
     })
 
 </script>

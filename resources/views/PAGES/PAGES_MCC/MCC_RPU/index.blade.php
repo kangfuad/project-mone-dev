@@ -126,8 +126,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
             </div>
             <div class="modal-body">
-                <div class="accordion custom-accordionwithicon accordion-fill-primary"
-                    id="accordionBordered">
+                <div class="accordion custom-accordionwithicon accordion-fill-primary" id="accordionBordered">
 
                 </div>
             </div>
@@ -155,7 +154,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="mb-1 lh-base">Step 1</h6>
-                            <p class="text-muted mb-1">Selesai  (Lorem ipsum dolor sit.)</p>
+                            <p class="text-muted mb-1">Selesai (Lorem ipsum dolor sit.)</p>
                             <small class="mb-0 text-muted">02:14 PM Today</small>
                         </div>
                     </div>
@@ -167,7 +166,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="mb-1 lh-base">Step 2</h6>
-                            <p class="text-muted mb-1">On Progress  (Lorem ipsum dolor sit.)</p>
+                            <p class="text-muted mb-1">On Progress (Lorem ipsum dolor sit.)</p>
                             <small class="mb-0 text-muted">09:14 PM Today</small>
                         </div>
                     </div>
@@ -179,7 +178,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="mb-1 lh-base">Step 3</h6>
-                            <p class="text-muted mb-1">Belum Selesai  (Lorem ipsum dolor sit.)</p>
+                            <p class="text-muted mb-1">Belum Selesai (Lorem ipsum dolor sit.)</p>
                             <small class="mb-0 text-muted">10:14 PM Today</small>
                         </div>
                     </div>
@@ -191,7 +190,7 @@
                         </div>
                         <div class="flex-grow-1 ms-3">
                             <h6 class="mb-1 lh-base">Step 4</h6>
-                            <p class="text-muted mb-1">Belum Selesai  (Lorem ipsum dolor sit.)</p>
+                            <p class="text-muted mb-1">Belum Selesai (Lorem ipsum dolor sit.)</p>
                             <small class="mb-0 text-muted">20:14 PM Today</small>
                         </div>
                     </div>
@@ -233,12 +232,10 @@
 <script>
     $('document').ready(function () {
         $('#scroll-horizontal tbody').on( 'click', '#btnViewKerusakan', function () {
+            $(this).text('Loading detail..');
             var rpu = $(this).data('no-rpu'); 
-            VIEW_DETAIL_KERUSAKAN(rpu);
-        });
+            // VIEW_DETAIL_KERUSAKAN(rpu);
 
-
-        function VIEW_DETAIL_KERUSAKAN(no_rpu){
             let _token   = $('meta[name="csrf-token"]').attr('content');
 
             $.ajax({
@@ -248,7 +245,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    no_rpu :no_rpu,
+                    no_rpu :rpu,
                     _token : _token
                 },
                 success: (data) => {
@@ -293,7 +290,7 @@
                     }
                     $('#accordionBordered').html(html);
                     $('#listKerusakan').modal('show');
-
+                    $(this).text('Detail Kerusakan');
                 },
                 error: function(data){
                     // $("body").removeClass("spinner");
@@ -304,8 +301,9 @@
                     // });
                 }
             });
+        });
 
-        }
+
     })
 
 </script>
