@@ -66,7 +66,7 @@
                                 <select class="js-example-basic-single" name="id_foreman" id="id_foreman">
                                     <option value="" disabled selected>Pilih Foreman</option>
                                     @foreach($passing['foreman'] as $fm)
-                                        <option value="{{$fm->id}}">{{$fm->name}}</option>
+                                    <option value="{{$fm->id}}">{{$fm->name}} / {{ count($fm['count_foreman']) }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -76,11 +76,9 @@
                                 <label for="no_unit" class="form-label">Nomer Unit</label>
                                 <select class="js-example-basic-single" name="no_unit" id="no_unit">
                                     <option value="">Pilih Kendaraan</option>
-                                    <option value="DD 1234 MPE">DD 1234 MPE</option>
-                                    <option value="DD 1233 MPE">DD 1233 MPE</option>
-                                    <option value="DD 1235 MPE">DD 1235 MPE</option>
-                                    <option value="DD 1236 MPE">DD 1236 MPE</option>
-                                    <option value="DD 1237 MPE">DD 1237 MPE</option>
+                                    @foreach($passing['units'] as $un)
+                                        <option value="{{$un->TRUCK_ID}}">{{ $un->TRUCK_ID }} - {{ $un->BRAND_TRUCK }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>

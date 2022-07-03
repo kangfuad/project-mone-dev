@@ -57,9 +57,6 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
     Route::get('/sob', [MccController::class, 'mcc_sob_index'])->name('mcc.sob.index');
 
 
-    // AJAX
-    Route::post('/get-kerusakan-with-barang', [MccController::class, 'get_kerusakan_with_barang'])->name('get.kerusakan.with.barang');
-    Route::post('/get-kerusakan', [MccController::class, 'get_kerusakan'])->name('get.kerusakan');
 
     // END AJAX
 });
@@ -68,7 +65,7 @@ Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix'
 
     Route::get('/', [ForemanController::class, 'index']);
     Route::get('/list-barang', [ForemanController::class, 'list_barang'])->name('list.barang');
-    Route::get('/list-barang/create', [ForemanController::class, 'list_barang_create'])->name('list.barang.create');
+    Route::get('/list-barang/create/{no_rpu}', [ForemanController::class, 'list_barang_create'])->name('list.barang.create');
 });
 
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/warehouse'], function () {
@@ -78,3 +75,6 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
 });
 
 
+// AJAX
+Route::post('/get-kerusakan-with-barang', [HomeController::class, 'get_kerusakan_with_barang'])->name('get.kerusakan.with.barang');
+Route::post('/get-kerusakan', [HomeController::class, 'get_kerusakan'])->name('get.kerusakan');

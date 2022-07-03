@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\ProsessFunction;
 use App\Helpers\UtilFunction;
-
 // USE MODEL
 use App\Models\User;
 use App\Models\Mpe_rpu;
@@ -15,6 +14,7 @@ use App\Models\Mpe_rpu_wo;
 use App\Models\Mpe_rpu_keluhan_listbarang;
 use App\Models\Mpe_rpu_sob;
 use App\Models\Mpe_rpu_spb;
+use App\Models\Master_unit;
 use Illuminate\Support\Facades\Auth;
 
 // END USE MODEL
@@ -59,13 +59,17 @@ class MccController extends Controller
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
-        $foreman = User::where(['role_id' => 3, 'is_active' => 1])->OrderBy('name', 'ASC')->get();
+        $foreman = User::with(['count_foreman'])->where(['role_id' => 3, 'is_active' => 1])->OrderBy('name', 'ASC')->get();
+        // dd(count($foreman[0]['count_foreman']));
+        $unit_list = Mpe_rpu::select(['nomer_unit'])->where(['is_active' => 1])->whereNot('status_id', 100)->get();
+        $units = Master_unit::where(['is_active' => 1])->whereNotIn('TRUCK_ID', $unit_list)->OrderBy('TRUCK_ID', 'ASC')->get();
         $passing = [
             'title' => 'Buat - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',
             'menu' => $menu,
             'menu_head' => $menu_head,
-            'foreman' => $foreman
+            'foreman' => $foreman,
+            'units' => $units
         ];
         return view('PAGES.PAGES_MCC.MCC_RPU.create', get_defined_vars());
     }
@@ -101,24 +105,5 @@ class MccController extends Controller
     }
 
 
-    // AJAX FUNCTION
-    function get_kerusakan_with_barang(Request $req)
-    {
-        $pf = new ProsessFunction();
-        $keluhan = $pf->get_keluhan_with_barang($req->no_rpu);
 
-        if (count($keluhan) > 0) {
-            $keluhan = $keluhan;
-            $pesan = "sukses";
-        } else {
-            $keluhan = $keluhan;
-            $pesan = "error";
-        }
-
-        return response()->json([
-            'pesan' => $pesan,
-            'data' => $keluhan
-        ]);
-    }
-    // END AJAX FUNCTION
 }

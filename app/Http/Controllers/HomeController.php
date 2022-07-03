@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Helpers\UtilFunction;
+use App\Helpers\ProsessFunction;
 
 class HomeController extends Controller
 {
@@ -55,7 +56,27 @@ class HomeController extends Controller
             'menu_head' => $menu_head
         ];
         return view('PAGES.PAGES_WH.SPB.index', get_defined_vars());
-    }    
+    }
 
-    
+    // AJAX FUNCTION
+    function get_kerusakan_with_barang(Request $req)
+    {
+        $pf = new ProsessFunction();
+        $keluhan = $pf->get_keluhan_with_barang($req->no_rpu);
+
+        if (count($keluhan) > 0) {
+            $keluhan = $keluhan;
+            $pesan = "sukses";
+        } else {
+            $keluhan = $keluhan;
+            $pesan = "error";
+        }
+
+        return response()->json([
+            'pesan' => $pesan,
+            'data' => $keluhan
+        ]);
+    }
+    // END AJAX FUNCTION
+
 }

@@ -47,4 +47,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(MasterRole::class, 'role_id', 'id_role');
     }
+    public function count_foreman()
+    {
+        return $this->hasMany(Mpe_rpu::class, 'id_pic_foreman','id')->where('is_active','=', 1);
+    }
+
+
 }

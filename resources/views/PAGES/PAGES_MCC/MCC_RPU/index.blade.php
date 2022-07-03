@@ -126,33 +126,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
             </div>
             <div class="modal-body">
-                <!-- Accordions Bordered -->
                 <div class="accordion custom-accordionwithicon accordion-fill-primary"
                     id="accordionBordered">
-                    {{-- <div class="accordion-item">
-                        <h2 class="accordion-header" id="accordionborderedExample1">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#accor_borderedExamplecollapse1" aria-expanded="true"
-                                aria-controls="accor_borderedExamplecollapse1">
-                                What is User Interface Design?
-                            </button>
-                        </h2>
-                        <div id="accor_borderedExamplecollapse1" class="accordion-collapse collapse show"
-                            aria-labelledby="accordionborderedExample1" data-bs-parent="#accordionBordered">
-                            <div class="accordion-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
-                                squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck
-                                quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua nulla assumenda
-                                shoreditch et.
-                            </div>
-                        </div>
-                    </div> --}}
+
                 </div>
             </div>
-            {{-- <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
-                <button type="button" class="btn btn-primary ">Save Changes</button>
-            </div> --}}
 
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -265,7 +243,7 @@
 
             $.ajax({
                 type:'POST',
-                url: "{{ url('/mcc/get-kerusakan-with-barang') }}",
+                url: "{{ url('/get-kerusakan-with-barang') }}",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

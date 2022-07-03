@@ -18,9 +18,6 @@
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">{{ $passing['title'] }}</a></li>
-                    {{-- @if(isset($title))
-                        <li class="breadcrumb-item active">{{ $title }}</li>
-                    @endif --}}
                 </ol>
             </div>
 
@@ -45,48 +42,52 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body"> 
+                <div class="card-body">
 
                     @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="no_rpu" class="form-label">No. RPU</label>
-                                <input type="text" class="form-control" id="no_rpu" name="no_rpu" readonly value="SR-01022022">
+                                <input type="text" class="form-control" readonly
+                                    value="{{ $passing['rpu']['no_rpu'] }}">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="tanggal_rpu" class="form-label">Tanggal Pembuatan RPU</label>
-                                <input type="date" class="form-control" id="tanggal_rpu" name="tanggal_rpu" readonly value="2022-08-10">
+                                <input type="text" class="form-control" readonly
+                                    value="{{ $passing['until']->hari_tanggal($passing['rpu']['created_at'])}}">
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="no_unit" class="form-label">Nomer Unit</label>
-                                <input type="text" name="no_unit" id="no_unit" class="form-control" value="DD 1234 MPE" readonly>
+                                <input type="text" class="form-control" value="{{ $passing['rpu']['nomer_unit'] }}"
+                                    readonly>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="jenis_rpu" class="form-label">Jenis RPU</label>
-                            <input type="text" name="jenis_rpu" id="jenis_rpu" class="form-control" value="Servis Rutin" readonly>
+                            <input type="text" class="form-control" value="{{ $passing['rpu']['jenis_rpu'] }}" readonly>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="lokasi" class="form-label">Lokasi</label>
-                                <input type="text" name="lokasi" id="lokasi" class="form-control" value="Workshop" readonly>
+                                <input type="text" class="form-control" value="{{ $passing['rpu']['lokasi'] }}"
+                                    readonly>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div>
                                 <label for="hour_meter" class="form-label">Hour Meter (HM)</label>
-                                <input type="number" class="form-control" id="hour_meter" name="hour_meter" min="0" value="90" readonly>
+                                <input type="number" class="form-control" value="{{ $passing['rpu']['hm'] }}" readonly>
                             </div>
                         </div>
                         <div class="col-md-3 mb-3">
                             <div>
                                 <label for="kilo_meter" class="form-label">Kilo Meter (KM)</label>
-                                <input type="number" class="form-control" id="kilo_meter" name="kilo_meter" min="0" value="90" readonly>
+                                <input type="number" class="form-control" value="{{ $passing['rpu']['km'] }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -96,15 +97,16 @@
 
             {{-- Card List Kerusakan --}}
             <div id="loop_item">
-                @for($a = 1; $a<4; $a++)
-                    <div class="card ribbon-box border shadow-none mb-3">
-                        <div class="card-body">
-                            <div class="ribbon ribbon-primary round-shape">{{$a}}. Nama Kerusakan</div>
-                            <button type="button" data-id="{{$a}}" id="addRowBarang"
+                {{-- @for($a = 1; $a<4; $a++) --}} 
+                @foreach($passing['rpu']['keluhan'] as $kel) 
+                <div class="card ribbon-box border shadow-none mb-3">
+                    <div class="card-body">
+                        <div class="ribbon ribbon-primary round-shape">{{ $loop->iteration }}. {{ $kel->keluhan }}</div>
+                        <button type="button" data-id="{{$kel->id}}" id="addRowBarang"
                             class="btn btn-sm btn-primary btn-label waves-effect waves-light float-end mb-2"><i
                                 class="ri-tools-fill label-icon align-middle fs-16 me-2"></i>Tambah Sparepart</button>
-                            <div class="ribbon-content mt-4 text-muted">
-                                <table id="add-rows{{$a}}" class="table table-nowrap dt-responsive table-bordered display"
+                        <div class="ribbon-content mt-4 text-muted">
+                            <table id="add-rows{{$kel->id}}" class="table table-nowrap dt-responsive table-bordered display"
                                 style="width:100%">
                                 <thead>
                                     <tr>
@@ -114,26 +116,27 @@
                                     </tr>
                                 </thead>
                             </table>
-                            </div>
                         </div>
                     </div>
-                @endfor
             </div>
-
-            {{-- <div class="row"> --}}
-                <a type="button" id="" href="{{route('list.barang')}}"
-                            class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
-                class=" ri-arrow-left-down-line label-icon align-middle fs-16 me-2"></i>Kembali</a>
-                <button type="submit"  id=""
-                            class="btn btn-primary btn-label waves-effect waves-light float-end mb-2"><i
-                class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
-
-            {{-- </div> --}}
-           
+            @endforeach
+            {{-- @endfor --}}
         </div>
 
-        <!--end col-->
-    </form>
+        {{-- <div class="row"> --}}
+            <a type="button" id="" href="{{route('list.barang')}}"
+                class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
+                    class=" ri-arrow-left-down-line label-icon align-middle fs-16 me-2"></i>Kembali</a>
+            <button type="submit" id="" class="btn btn-primary btn-label waves-effect waves-light float-end mb-2"><i
+                    class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
+
+            {{--
+        </div> --}}
+
+</div>
+
+<!--end col-->
+</form>
 </div>
 
 
