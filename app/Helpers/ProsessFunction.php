@@ -15,6 +15,7 @@ use App\Models\MasterStatus;
 use App\Models\Mpe_rpu;
 use App\Models\Mpe_rpu_keluhan;
 use App\Models\Mpe_log;
+use App\Models\Mpe_master_barang;
 use App\Models\Mpe_rpu_wo;
 use App\Models\Mpe_rpu_keluhan_listbarang;
 use App\Models\Mpe_rpu_sob;
@@ -113,6 +114,19 @@ class ProsessFunction
         }
 
         return $keluhan;
+    }
+
+    function get_master_barang()
+    {
+        $barang = Mpe_master_barang::OrderBy('nama_barang', 'ASC')->get();
+
+        if (count($barang) > 0) {
+            $barang = $barang;
+        } else {
+            $barang = "error";
+        }
+
+        return $barang;
     }
     // END AJAX HELPERS
 }

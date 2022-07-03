@@ -62,7 +62,7 @@ class MccController extends Controller
         $foreman = User::with(['count_foreman'])->where(['role_id' => 3, 'is_active' => 1])->OrderBy('name', 'ASC')->get();
         // dd(count($foreman[0]['count_foreman']));
         $unit_list = Mpe_rpu::select(['nomer_unit'])->where(['is_active' => 1])->whereNot('status_id', 100)->get();
-        $units = Master_unit::where(['is_active' => 1])->whereNotIn('TRUCK_ID', $unit_list)->OrderBy('TRUCK_ID', 'ASC')->get();
+        $units = Master_unit::where(['is_active' => 1])->whereNotIn('UNIT_ID', $unit_list)->OrderBy('UNIT_ID', 'ASC')->get();
         $passing = [
             'title' => 'Buat - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',

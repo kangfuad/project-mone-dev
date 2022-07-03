@@ -77,6 +77,25 @@ class HomeController extends Controller
             'data' => $keluhan
         ]);
     }
+
+    function get_all_items(Request $req)
+    {
+        $pf = new ProsessFunction();
+        $barang = $pf->get_master_barang();
+
+        if (count($barang) > 0) {
+            $barang = $barang;
+            $pesan = "sukses";
+        } else {
+            $barang = $barang;
+            $pesan = "error";
+        }
+
+        return response()->json([
+            'pesan' => $pesan,
+            'data' => $barang
+        ]);
+    }
     // END AJAX FUNCTION
 
 }

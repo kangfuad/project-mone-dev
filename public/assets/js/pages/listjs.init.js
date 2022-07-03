@@ -81,20 +81,22 @@ if (document.getElementById("customerList"))
 
 const xhttp = new XMLHttpRequest();
 xhttp.onload = function () {
-  var json_records = JSON.parse(this.responseText);
-  json_records.forEach(raw => {
-    customerList.add({
-      id: '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ'+raw.id+"</a>",
-      customer_name: raw.customer_name,
-      email: raw.email,
-      date: raw.date,
-      phone: raw.phone,
-      status: isStatus(raw.status)
+    var json_records = JSON.parse(this.responseText);
+    json_records.forEach(raw => {
+        customerList.add({
+            id: '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ' + raw.id + "</a>",
+            customer_name: raw.customer_name,
+            email: raw.email,
+            date: raw.date,
+            phone: raw.phone,
+            status: isStatus(raw.status)
+        });
+        customerList.sort('id', {
+            order: "desc"
+        });
+        refreshCallbacks();
     });
-    customerList.sort('id', { order: "desc" });
-    refreshCallbacks();
-  });
-  customerList.remove("id", '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a>');
+    customerList.remove("id", '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ2101</a>');
 }
 xhttp.open("GET", "assets/json/table-customer-list.json");
 xhttp.send();
@@ -198,26 +200,28 @@ if (addBtn)
             phoneField.value !== ""
         ) {
             customerList.add({
-                id: '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ'+count+"</a>",
+                id: '<a href="javascript:void(0);" class="fw-medium link-primary">#VZ' + count + "</a>",
                 customer_name: customerNameField.value,
                 email: emailField.value,
                 date: dateField.value,
                 phone: phoneField.value,
                 status: isStatus(statusField.value),
             });
-            customerList.sort('id', { order: "desc" });
+            customerList.sort('id', {
+                order: "desc"
+            });
             document.getElementById("close-modal").click();
             clearFields();
             refreshCallbacks();
             filterContact("All");
             count++;
             Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Customer inserted successfully!',
-              showConfirmButton: false,
-              timer: 2000,
-              showCloseButton: true
+                position: 'center',
+                icon: 'success',
+                title: 'Customer inserted successfully!',
+                showConfirmButton: false,
+                timer: 2000,
+                showCloseButton: true
             });
         }
     });
@@ -232,7 +236,7 @@ if (editBtn)
             var selectedid = isid.body.firstElementChild.innerHTML;
             if (selectedid == itemId) {
                 x.values({
-                    id: '<a href="javascript:void(0);" class="fw-medium link-primary">'+idField.value+"</a>",
+                    id: '<a href="javascript:void(0);" class="fw-medium link-primary">' + idField.value + "</a>",
                     customer_name: customerNameField.value,
                     email: emailField.value,
                     date: dateField.value,
@@ -351,32 +355,32 @@ function clearFields() {
 }
 
 function deleteMultiple() {
-  ids_array = [];
-  var items = document.getElementsByName('chk_child');
-  items.forEach(function (ele) {
-    if (ele.checked == true) {
-      var trNode = ele.parentNode.parentNode.parentNode;
-      var id = trNode.querySelector('.id a').innerHTML;
-      ids_array.push(id);
-    }
-  });
-  if (typeof ids_array !== 'undefined' && ids_array.length > 0) {
-    if (confirm('Are you sure you want to delete this?')) {
-      ids_array.forEach(function (id) {
-        customerList.remove("id", `<a href="javascript:void(0);" class="fw-medium link-primary">${id}</a>`);
-      });
-      document.getElementById('checkAll').checked = false;
-    } else {
-      return false;
-    }
-  } else {
-    Swal.fire({
-      title: 'Please select at least one checkbox',
-      confirmButtonClass: 'btn btn-info',
-      buttonsStyling: false,
-      showCloseButton: true
+    ids_array = [];
+    var items = document.getElementsByName('chk_child');
+    items.forEach(function (ele) {
+        if (ele.checked == true) {
+            var trNode = ele.parentNode.parentNode.parentNode;
+            var id = trNode.querySelector('.id a').innerHTML;
+            ids_array.push(id);
+        }
     });
-  }
+    if (typeof ids_array !== 'undefined' && ids_array.length > 0) {
+        if (confirm('Are you sure you want to delete this?')) {
+            ids_array.forEach(function (id) {
+                customerList.remove("id", `<a href="javascript:void(0);" class="fw-medium link-primary">${id}</a>`);
+            });
+            document.getElementById('checkAll').checked = false;
+        } else {
+            return false;
+        }
+    } else {
+        Swal.fire({
+            title: 'Please select at least one checkbox',
+            confirmButtonClass: 'btn btn-info',
+            buttonsStyling: false,
+            showCloseButton: true
+        });
+    }
 }
 
 if (document.querySelector(".pagination-next"))

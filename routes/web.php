@@ -77,4 +77,4 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
 
 // AJAX
 Route::post('/get-kerusakan-with-barang', [HomeController::class, 'get_kerusakan_with_barang'])->name('get.kerusakan.with.barang');
-Route::post('/get-kerusakan', [HomeController::class, 'get_kerusakan'])->name('get.kerusakan');
+Route::post('/get-all-items', [HomeController::class, 'get_all_items'])->name('get.all.items');

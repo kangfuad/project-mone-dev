@@ -77,7 +77,7 @@
                                 <select class="js-example-basic-single" name="no_unit" id="no_unit">
                                     <option value="">Pilih Kendaraan</option>
                                     @foreach($passing['units'] as $un)
-                                        <option value="{{$un->TRUCK_ID}}">{{ $un->TRUCK_ID }} - {{ $un->BRAND_TRUCK }}</option>
+                                        <option value="{{$un->UNIT_ID}}">{{ $un->UNIT_ID }} - {{ $un->BRAND_UNIT }}</option>
                                     @endforeach
                                 </select>
                             </div>
