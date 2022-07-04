@@ -113,6 +113,19 @@
                                         <th width="20%">Jumlah</th>
                                         <th>Action</th>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <select class="js-example-basic-single" name="state">
+                                                <option value="AL">Alabama</option>
+                                                <option value="MA">Madrid</option>
+                                                <option value="TO">Toronto</option>
+                                                <option value="LO">Londan</option>
+                                                <option value="WY">Wyoming</option>
+                                            </select>
+                                        </td>
+                                        <td>#</td>
+                                        <td>#</td>
+                                    </tr>
                                 </thead>
                             </table>
                         </div>
@@ -201,7 +214,7 @@
                         var i;
                         
                         for(i=0; i<data.data.length;i++){
-                            html += '<option value="'+data.data[i].kode_barang+'">'+data.data[i].kode_barang+' - '+data.data[i].nama_barang+' / '+data.data[i].jumlah+'</option>';
+                            html += '<option value="'+data.data[i].kode_barang+'">'+data.data[i].kode_barang+' - '+data.data[i].nama_barang+' (Stock : '+data.data[i].jumlah+')</option>';
                         }
 
 
@@ -256,7 +269,7 @@
                 // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
                 t.row.add([
                     `<div>
-                        <select class="js-example-basic-single" name="barang[]" id="barang[]">
+                        <select class="form-select js-example-basic-single" name="barang[]" id="barang[]">
                             <option>Kode Barang - Nama Barang (Stock)</option>
                             `+option+`
                         </select>

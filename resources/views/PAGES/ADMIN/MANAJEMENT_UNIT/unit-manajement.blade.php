@@ -45,10 +45,9 @@
                         <h5 class="card-title mb-0">Table Menu</h5>
                     </div>
                     <div class="col-lg-6 text-end">
-                        <button type="button" class="btn btn-primary btn-label waves-effect right waves-light"
-                        data-bs-toggle="modal" data-bs-target="#exampleModalgrid">
+                        <a type="button" class="btn btn-primary btn-label waves-effect right waves-light" href="{{route('unit.create')}}" >
                             <i class="ri-add-circle-line label-icon align-middle fs-16 ms-2"></i> Tambah Unit
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>

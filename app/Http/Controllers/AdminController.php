@@ -193,6 +193,33 @@ class AdminController extends Controller
             'menu' => $menu,
             'menu_head' => $menu_head
         ];
-        return view('PAGES.ADMIN.unit-manajement', ['passing' => $passing]);
+        return view('PAGES.ADMIN..MANAJEMENT_UNIT.unit-manajement', ['passing' => $passing]);
+    }
+
+    public function unit_manajemen_create(){
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
+        $passing = [
+            'title' => 'Unit Manajemen',
+            'title-page' => 'Halaman Unit Manajemen',
+            'menu' => $menu,
+            'menu_head' => $menu_head
+        ];
+        return view('PAGES.ADMIN.MANAJEMENT_UNIT.create', ['passing' => $passing]);
+    }
+
+    // Master Satuan
+    public function satuan_manajemen(){
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "ADMIN MENU";
+        $passing = [
+            'title' => 'Satuan Manajemen',
+            'title-page' => 'Halaman Satuan Manajemen',
+            'menu' => $menu,
+            'menu_head' => $menu_head
+        ];
+        return view('PAGES.ADMIN.satuan-manajement', ['passing' => $passing]);
     }
 }

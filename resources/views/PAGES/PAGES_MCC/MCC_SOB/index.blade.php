@@ -3,6 +3,7 @@
 @section('css')
 
 <link href="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.css') }}" rel="stylesheet">
+<link href="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
 @endsection
 @section('content')
@@ -192,8 +193,8 @@
                                             <td width="10%" class="">Daffa</td>
                                             <td width="10%" class="">
                                                 <button type="button"
-                                                    class="btn btn-success btn-label waves-effect waves-light"><i
-                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
+                                                    class="btn btn-success btn-label waves-effect waves-light" id="approveList"><i
+                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2" ></i>
                                                     Terima</button>
                                                 <button type="button"
                                                     class="btn btn-danger btn-label waves-effect waves-light"><i
@@ -212,32 +213,6 @@
     </div>
     <!--end col-->
 </div>
-
-
-{{-- Modal List Kerusakan --}}
-<div id="listKerusakan" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
-    style="display: none;">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Daftar Kerusakan</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
-            </div>
-            <div class="modal-body">
-                <ul class="list-group">
-                    <li class="list-group-item"><i class="ri-information-fill align-middle me-2"></i>Rusak oi</li>
-                    <li class="list-group-item"><i class="ri-information-fill align-middle me-2"></i>Send over all the
-                        documentation.</li>
-                </ul>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
-                {{-- <button type="button" class="btn btn-primary ">Save Changes</button> --}}
-            </div>
-
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 @endsection
 @section('script')
 {{-- Jquery CDN --}}
@@ -247,21 +222,44 @@
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<!-- apexcharts -->
-{{-- <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
-{{-- <script src="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.js') }}"></script> --}}
-{{-- <script src="{{ URL::asset('assets/libs/jsvectormap//world-merc.js') }}"></script> --}}
+{{-- Swal 2 --}}
+<script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/pages/sweetalerts.init.js') }}"></script>
 
 <!-- dashboard init -->
-{{-- <script src="{{ URL::asset('/assets/js/pages/dashboard-analytics.init.js') }}"></script> --}}
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-{{-- <script src="{{ URL::asset('assets/js/pages/datatables.init.js') }}"></script> --}}
+
 
 <script>
     $('document').ready(function () {
         $('#rpuList').DataTable();
         // $('#spbList').DataTable();
+        // $('#ping').on('click', function(){
+            $('#approveList').on('click', function(){
+            // alert('test');
+            Swal.fire({
+            title: 'Approve Permintaan Barang?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#405189',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Terima'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                'Success!',
+                'Permintaan telah di terima',
+                'success'
+                )
+            }
+            })
     })
+
+       
+    })
+
+    
+   
 
 </script>
 @endsection
