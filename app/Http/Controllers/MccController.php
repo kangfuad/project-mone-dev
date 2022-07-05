@@ -43,7 +43,7 @@ class MccController extends Controller
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
-        $rpus = Mpe_rpu::with(['foreman'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->OrderBy('id', 'DESC')->get();
+        $rpus = Mpe_rpu::with(['foreman', 'status'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->OrderBy('id', 'DESC')->get();
         $passing = [
             'title' => 'RPU - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',
@@ -57,19 +57,21 @@ class MccController extends Controller
     public function mcc_rpu_create()
     {
         $GET_MENU = new UtilFunction();
+        $pf = new ProsessFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
         $foreman = User::with(['count_foreman'])->where(['role_id' => 3, 'is_active' => 1])->OrderBy('name', 'ASC')->get();
         // dd(count($foreman[0]['count_foreman']));
         $unit_list = Mpe_rpu::select(['nomer_unit'])->where(['is_active' => 1])->whereNot('status_id', 100)->get();
         $units = Master_unit::where(['is_active' => 1])->whereNotIn('UNIT_ID', $unit_list)->OrderBy('UNIT_ID', 'ASC')->get();
+        $barang = $pf->get_master_barang();
         $passing = [
             'title' => 'Buat - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',
             'menu' => $menu,
             'menu_head' => $menu_head,
             'foreman' => $foreman,
-            'units' => $units
+            'units' => $units,
         ];
         return view('PAGES.PAGES_MCC.MCC_RPU.create', get_defined_vars());
     }
@@ -103,7 +105,4 @@ class MccController extends Controller
         ];
         return view('PAGES.PAGES_MCC.MCC_SOB.index', get_defined_vars());
     }
-
-
-
 }

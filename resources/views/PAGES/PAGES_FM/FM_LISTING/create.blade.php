@@ -25,8 +25,8 @@
     </div>
 </div>
 
-<div class="row">
-    <form action="{{route('mcc.rpu.post')}}" method="POST">
+<div class="row" id="postListBarang">
+    <form action="{{route('post.list.barang')}}" method="POST">
         <div class="col-lg-12">
             {{-- Card RPU Form --}}
             <div class="card">
@@ -45,6 +45,8 @@
                 <div class="card-body">
 
                     @csrf
+                    <input type="hidden" name="no_rpu" value="{{$passing['rpu']['no_rpu']}}">
+                    <input type="hidden" name="id_mcc" value="{{$passing['rpu']['created_by']}}">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
@@ -113,20 +115,10 @@
                                         <th width="20%">Jumlah</th>
                                         <th>Action</th>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <select class="js-example-basic-single" name="state">
-                                                <option value="AL">Alabama</option>
-                                                <option value="MA">Madrid</option>
-                                                <option value="TO">Toronto</option>
-                                                <option value="LO">Londan</option>
-                                                <option value="WY">Wyoming</option>
-                                            </select>
-                                        </td>
-                                        <td>#</td>
-                                        <td>#</td>
-                                    </tr>
                                 </thead>
+                                <tbody id="tbody{{$kel->id}}">
+
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -135,15 +127,12 @@
             {{-- @endfor --}}
         </div>
 
-        {{-- <div class="row"> --}}
-            <a type="button" id="" href="{{route('list.barang')}}"
-                class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
-                    class=" ri-arrow-left-down-line label-icon align-middle fs-16 me-2"></i>Kembali</a>
-            <button type="submit" id="" class="btn btn-primary btn-label waves-effect waves-light float-end mb-2"><i
-                    class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
-
-            {{--
-        </div> --}}
+        <a type="button" id="" href="{{route('list.barang')}}"
+            class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
+                class=" ri-arrow-left-down-line label-icon align-middle fs-16 me-2"></i>Kembali</a>
+        <button type="butoon" id="SubmitListBarang"
+            class="btn btn-primary btn-label waves-effect waves-light float-end mb-2"><i
+                class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
 
 </div>
 
@@ -195,7 +184,9 @@
 <script>
     $(document).ready(function () {
         let _token   = $('meta[name="csrf-token"]').attr('content');
+        var id = '';
         var option = function () {
+            console.log(id);
             var tmp = null;
             $.ajax({
                 async: false,
@@ -208,16 +199,9 @@
                     _token : _token
                 },
                 success: (data) => {
-                    // console.log(data.pesan)   
+                    
                     if(data.pesan == "sukses"){
-                        var html = '';
-                        var i;
-                        
-                        for(i=0; i<data.data.length;i++){
-                            html += '<option value="'+data.data[i].kode_barang+'">'+data.data[i].kode_barang+' - '+data.data[i].nama_barang+' (Stock : '+data.data[i].jumlah+')</option>';
-                        }
-
-
+                        tmp = data.data;
                     }else {
                         Swal.fire({
                             html: '<div class="mt-3">' +
@@ -235,17 +219,23 @@
                             showCloseButton: true
                         })
                     }
-                    tmp = html;
-
-                    
                 },
                 error: function(data){
-                    // $("body").removeClass("spinner");
-                    // swal({
-                    //     title: "Opss..",
-                    //     text: "Terjadi kesalahan.",
-                    //     icon: "error"
-                    // });
+                    Swal.fire({
+                        html: '<div class="mt-3">' +
+                            '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                            '<div class="mt-4 pt-2 fs-15">' +
+                            '<h4>Oops...! Terjadi kesalahan !</h4>' +
+                            '<p class="text-muted mx-4 mb-0">Silahkan coba kembali nanti atau hubungi tim support!</p>' +
+                            '</div>' +
+                            '</div>',
+                        showCancelButton: true,
+                        showConfirmButton: false,
+                        cancelButtonClass: 'btn btn-primary w-xs mb-1',
+                        cancelButtonText: 'Tutup',
+                        buttonsStyling: false,
+                        showCloseButton: true
+                    })
                 }
             });
             return tmp;
@@ -254,35 +244,56 @@
         
         $('#loop_item').on('click', '#addRowBarang', function(){
             var id = $(this).data('id');
-            // console.log(id);
-            
             addrows(id);
         });
 
 
+        var counter = 0;
 
         function addrows(id){
-            // console.log(id);
             var t = $('#add-rows'+id).DataTable();
-            var counter = 1;
-            // $('#addRowBarang').on('click', function () {
-                // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
-                t.row.add([
-                    `<div>
-                        <select class="form-select js-example-basic-single" name="barang[]" id="barang[]">
-                            <option>Kode Barang - Nama Barang (Stock)</option>
-                            `+option+`
-                        </select>
-                    </div>`,
-                    `<div>
-                        <input type="number" class="form-control" id="jumlah_barang" name="jumlah_barang" min="0">
-                    </div>`,
-                    '<button class="btn btn-danger" id="delteRow">Hapus</button>'
-                ]).draw(false);
-                counter++;
-            // }); // Automatically add a first row of data
 
-            // $('#addRowBarang').click();
+            initSelect2();
+			function initSelect2() {
+				$('.myselect').each(function(index, element) {
+					$(this).select2({
+						placeholder: "Pilih Barang"
+					})
+				})
+			}
+            t.row.add([
+                `<div id="menuAddRows">
+                </div>`,
+                `<div>
+                    <input type="number" class="form-control" id="jumlah_barang[]" name="barang[`+counter+`][jumlah_barang]" min="0">
+                    <input type="hidden" class="form-control" name="barang[`+counter+`][id_keluhan]" value="`+id+`" min="0">
+                </div>`,
+                '<button class="btn btn-danger" id="delteRow">Hapus</button>'
+            ]).draw(false);
+            var html = '';
+            var i;
+
+            // console.log(option)
+            
+            for(i=0; i<option.length;i++){
+                html += '<option value="'+option[i].kode_barang+'--&&--'+option[i].nama_barang+'">'+option[i].kode_barang+' - '+option[i].nama_barang+' (Stock : '+option[i].jumlah+')</option>';
+            }
+
+            let select = document.createElement('select')
+                select.className = 'myselect form-control'
+                select.id = 'barang'+counter
+                select.name = 'barang['+counter+'][kode_barang]'
+                select.innerHTML = '<option hidden selected disabled></option>'+html
+
+                var elements = document.querySelectorAll('[id="menuAddRows"]');
+                for(var i = 0; i < elements.length; i++) {
+                    elements[i].appendChild(select);
+                }
+                initSelect2();
+
+            counter++;
+            
+
             $('#add-rows'+id+' tbody').on('click', '#delteRow', function () {
                 t
                     .row($(this).parents('tr'))
@@ -290,6 +301,26 @@
                     .draw();
             });
         }
+
+        // $("#SubmitListBarang").on('click',function(){
+        //     console.log("MASUK");
+        // })
+
+        // function handleFormSubmit(event) {
+        // event.preventDefault();
+
+        // const data = new FormData(event.target);
+
+        // const formJSON = Object.fromEntries(data.entries());
+        
+        // // for multi-selects, we need special handling
+        // formJSON.id_keluhan = data.getAll('id_keluhan');
+        // formJSON.barang = data.getAll('barang');
+        // formJSON.jumlah_barang = data.getAll('jumlah_barang');
+        // console.log(JSON.stringify(formJSON, null, 2))
+        // }
+        // const form = document.querySelector('#postListBarang');
+        // form.addEventListener('submit', handleFormSubmit);
 
     });
 </script>

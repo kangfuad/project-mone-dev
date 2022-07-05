@@ -15,6 +15,11 @@ class Mpe_rpu extends Model
         return $this->belongsTo(User::class, 'id_pic_foreman', 'id');
     }
 
+    public function status()
+    {
+        return $this->belongsTo(MasterStatus::class, 'status_id', 'kode_status');
+    }
+
     public function mcc()
     {
         return $this->belongsTo(User::class, 'created_by', 'id');

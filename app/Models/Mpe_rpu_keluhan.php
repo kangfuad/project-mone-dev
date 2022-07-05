@@ -12,6 +12,6 @@ class Mpe_rpu_keluhan extends Model
     public $timestamps = true;
     public function barang()
     {
-        return $this->belongsTo(Mpe_rpu_keluhan_listbarang::class, 'id', 'id_mpe_rpu_keluhan');
+        return $this->hasMany(Mpe_rpu_keluhan_listbarang::class, 'id_mpe_rpu_keluhan', 'id');
     }
 }

@@ -59,6 +59,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>No. RPU</th>
+                                            <th>Status</th>
                                             <th>Tanggal</th>
                                             <th>Nomor Unit</th>
                                             <th>Lokasi</th>
@@ -74,6 +75,7 @@
                                         <tr class="">
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $rpu->no_rpu }}</td>
+                                            <td>{{ $rpu['status']['deskripsi_status'] }}</td>
                                             <td>{{ $rpu->created_at }}</td>
                                             <td>{{ $rpu->nomer_unit }}</td>
                                             <td>{{ $rpu->lokasi }}</td>
@@ -96,7 +98,7 @@
                                                             <a class="dropdown-item edit-item-btn"
                                                                 data-no-rpu="{{$rpu->no_rpu}}"><i
                                                                     class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                History RPU
+                                                                Riwayat RPU
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -249,7 +251,6 @@
                     _token : _token
                 },
                 success: (data) => {
-                    // console.log(data.data)   
                     var html = '';
                     var i;
                     for(i=0; i<data.data.length;i++){
