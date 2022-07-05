@@ -47,14 +47,14 @@
                     </div>
                 </div> --}}
                 <div class="timeline-item @if ($loop->odd) left @else right @endif">
-                    <i class="icon ri-close-circle-fill text-danger"></i>
+                    <i class="icon ri-checkbox-circle-fill text-success"></i>
                     <div class="date text-white">{{ $passing['until']->hari_tanggal($log->created_at) }}</div>
                     <div class="content">
                         <h5>{{$log['status']['deskripsi_status']}} <span
                                 class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
                         <h6>{{ $log['user']['name'] }} - ( <i> {{$log['role']['nama_role']}} </i> )</h6>
-                        <p class="text-muted mb-2">
-                            {{ $log->catatan }}
+                        <p class="text-muted mp-3 mb-2" style="min-height: 35px;">
+                            @if($log->catatan) {{$log->catatan}} @else Tidak ada catatan @endif
                         </p>
                     </div>
                 </div>

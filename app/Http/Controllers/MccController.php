@@ -43,7 +43,7 @@ class MccController extends Controller
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
-        $rpus = Mpe_rpu::with(['foreman', 'status'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->OrderBy('id', 'DESC')->get();
+        $rpus = Mpe_rpu::with(['foreman', 'status'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->whereIn('status_id', [11])->OrderBy('id', 'DESC')->get();
         $passing = [
             'title' => 'RPU - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',
