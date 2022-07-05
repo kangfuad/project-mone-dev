@@ -37,12 +37,5 @@ class LoginController extends Controller
         }
     }
 
-    public function history_page(){
-        $menu_head = "ADMIN MENU"; // dd($menu);
-        $passing = [
-            'title' => 'History Unit',
-            'title-page' => 'Halaman History'
-        ];
-        return view('PAGES.HISTORY.index', get_defined_vars());
-    }
+   
 }
