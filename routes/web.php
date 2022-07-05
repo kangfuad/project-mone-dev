@@ -28,7 +28,7 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 
 // History
-Route::get('/history', [LoginController::class, 'history_page'])->name('history.page');
+Route::get('/history/{kode_rpu}', [PublicController::class, 'history_page'])->name('history.page');
 
 Auth::routes(['verify' => true]);
 

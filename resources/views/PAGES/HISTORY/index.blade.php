@@ -12,7 +12,7 @@
 
 
 <div class="container-fluid pt-2 bg-primary">
-    <h4 class="text-white">No RPU : SR-1656748725	</h4>
+    <h4 class="text-white">No RPU : {{$kode_rpu}}	</h4>
     <div class="row">
         <div class="col-lg-12">
             {{-- <div class="card">
@@ -23,64 +23,27 @@
             </div> --}}
         </div>
         <div class="col-lg-12 mt-5">
-            <div>
-                <div class="timeline">
-                    <div class="timeline-item left">
-                        <i class="icon ri-close-circle-fill text-danger"></i>
-                        <div class="date text-white">10 Jul 2021</div>
-                        <div class="content">
-                            <h5>New ticket received <span class="badge bg-danger text-white fs-10 align-middle ms-1">Menunggu</span></h5>
-                            <p class="text-muted mb-2">
-                                It is important for us that we receive email notifications when a ticket is created as our IT staff are mobile and will not always be looking at the dashboard for new tickets.
-                            </p>
-                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
-                        </div>
-                    </div>
-                    <div class="timeline-item right">
+            <div class="timeline">
+                @foreach($logs as $log)
+                    <div class="timeline-item @if ($loop->odd) left @else right @endif">
                         <i class="icon ri-alert-fill text-danger"></i>
-                        <div class="date text-white">18 May 2021</div>
+                        <div class="date text-white">{{date('d M Y',strtotime($log->created_at))}}</div>
                         <div class="content">
                             <h5>New ticket received <span class="badge bg-warning text-white fs-10 align-middle ms-1">Dalam Proses</span></h5>
                             <p class="text-muted mb-2">
-                                It is important for us that we receive email notifications when a ticket is created as our IT staff are mobile and will not always be looking at the dashboard for new tickets.
+                               {{$log->deskripsi_status}}
                             </p>
-                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
-                        </div>
-                    </div>
-                    <div class="timeline-item left">
-                        <i class="icon ri-checkbox-circle-fill text-success"></i>
-                        <div class="date text-white">10 Feb 2021</div>
-                        <div class="content">
-                            <div class="row d-flex align-item-center">
-                                <div class="col-6 ">
-                                    <h5>Pengambilan Barang <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
-                                    <p class="text-muted mb-2">
-                                        Barang Sudah diambil mekanik
-                                    </p>
-                                </div>
+                            {{-- <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a> --}}
+                            @if($log->foto != '')
                                 <div class="col-6">
                                     <div class="border border-dashed rounded gx-2 p-2">
-                                            <img src="{{ URL::asset('assets/images/bukti1.jfif') }}" alt="" class="img-fluid rounded w-50">
-                                    </div><!--end row-->
+                                            <img src="{{ URL::asset('assets/images/',$log->foto) }}" alt="" class="img-fluid rounded w-50">
+                                    </div>
                                 </div>
-                            </div>
-                            
-
-                            
+                            @endif
                         </div>
                     </div>
-                    <div class="timeline-item right">
-                        <i class="icon ri-checkbox-circle-fill text-success"></i>
-                        <div class="date text-white">01 Jan 2021</div>
-                        <div class="content">
-                            <h5>New ticket received <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
-                            <p class="text-muted mb-2">
-                                It is important for us that we receive email notifications when a ticket is created as our IT staff are mobile and will not always be looking at the dashboard for new tickets.
-                            </p>
-                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         <!--end col-->

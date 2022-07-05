@@ -93,9 +93,7 @@
                                                     </button>
                                                     <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
                                                         <li>
-                                                            <a class="dropdown-item edit-item-btn"
-                                                                data-no-rpu="{{$rpu->no_rpu}}"><i
-                                                                    class="ri-pencil-fill align-bottom me-2 text-muted"></i>
+                                                            <a href="{{route('history.page',$rpu->no_rpu)}}" target="_blank" class="dropdown-item edit-item-btn" ><i class="ri-pencil-fill align-bottom me-2 text-muted"></i>
                                                                 History RPU
                                                             </a>
                                                         </li>
