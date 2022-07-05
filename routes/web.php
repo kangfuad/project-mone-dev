@@ -45,7 +45,10 @@ Route::group(['middleware' => ['auth', 'role:1', 'PreventBackHistory'], 'prefix'
     Route::post('/user-manajemen', [AdminController::class, 'tambah_user_manajemen']);
     Route::get('/icon', [AdminController::class, 'icon']);
 
-    Route::get('/unit-manajemen', [AdminController::class, 'unit_manajemen']);
+    Route::get('/unit-manajemen', [AdminController::class, 'unit_manajemen'])->name('unit.index');
+    Route::get('/unit-manajemen-create', [AdminController::class, 'unit_manajemen_create'])->name('unit.create');
+
+    Route::get('/satuan-manajemen', [AdminController::class, 'satuan_manajemen']);
 });
 
 Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix' => '/mcc'], function () {
@@ -78,3 +81,6 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
 // AJAX
 Route::post('/get-kerusakan-with-barang', [HomeController::class, 'get_kerusakan_with_barang'])->name('get.kerusakan.with.barang');
 Route::post('/get-all-items', [HomeController::class, 'get_all_items'])->name('get.all.items');
+
+// Test
+Route::get('/get-all-items1', [HomeController::class, 'get_all_items'])->name('get.all.items1');
