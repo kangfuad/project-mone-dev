@@ -32,7 +32,7 @@ class UtilFunction
         if ($no_rpu == 'ALL') {
             $rpu = Mpe_rpu::with(['mcc', 'keluhan'])->where(['is_active' => 1])->OrderBy('updated_at', 'DESC')->get();
         } else if ($no_rpu == 'ANALISA-FOREMAN') {
-            $rpu = Mpe_rpu::with(['mcc', 'keluhan'])->where(['status_id' => 11, 'is_active' => 1])->OrderBy('updated_at', 'DESC')->get();
+            $rpu = Mpe_rpu::with(['mcc', 'keluhan'])->where(['status_id' => 11, 'id_pic_foreman' => Auth::user()->id, 'is_active' => 1])->OrderBy('updated_at', 'DESC')->get();
         } else {
             $rpu = Mpe_rpu::with(['mcc', 'keluhan'])->where(['no_rpu' => $no_rpu, 'is_active' => 1])->OrderBy('updated_at', 'DESC')->first();
         }
