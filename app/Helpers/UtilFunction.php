@@ -92,5 +92,17 @@ class UtilFunction
             return date("l, F j Y");
         }
     }
+
+    function jam_menit($strdate, $lang = "id")
+    {
+        global $date_day_id, $date_month_id;
+
+        $sttime = @strtotime($strdate);
+        if ($lang == "id") {
+            return date("H:i", $sttime);
+        } else {
+            return date("l, F j Y");
+        }
+    }
     // END DATE FORMATER
 }
