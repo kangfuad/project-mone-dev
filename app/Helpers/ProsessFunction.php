@@ -86,6 +86,56 @@ class ProsessFunction
         return false;
     }
 
+    function createListingBarang($status, $req, $flaging)
+    {
+        if (count($req->barang) > 0) {
+            foreach ($req->barang as $kl) {
+                $c = explode("--&&--", $kl['kode_barang']);
+
+
+                Mpe_rpu_keluhan_listbarang::create(
+                    [
+                        'no_rpu' => trim($req->no_rpu),
+                        'id_mpe_rpu_keluhan' => trim($kl['id_keluhan']),
+                        'kode_barang' => trim($c[0]),
+                        'nama_barang' => trim($c[1]),
+                        'jumlah_barang' => trim($kl['jumlah_barang']),
+                        'id_mcc_created_keluhan' => trim($req->id_mcc),
+                        'flaging' => trim($flaging),
+                        'created_by' => Auth::user()->id
+                    ]
+                );
+            }
+        }
+
+        $cek_keluhan_list = Mpe_rpu_keluhan_listbarang::where(['no_rpu' => $req->no_rpu, 'flaging' => $flaging, 'is_active' => 1])->get();
+
+        if (count($cek_keluhan_list) == count($req->barang)) {
+            $this->updatestatusrpu($status, $req->no_rpu, '', '');
+            return true;
+        } else {
+            Mpe_rpu_keluhan_listbarang::where(['no_rpu' => $req->no_rpu, 'flaging' => $flaging, 'is_active' => 1])->delete();
+            return false;
+        }
+        return false;
+    }
+
+    function updatestatusrpu($status, $no_rpu, $catatan, $foto)
+    {
+        $rpu = Mpe_rpu::where('no_rpu', $no_rpu)
+            ->update([
+                'status_id' => $status,
+                'updated_by' => Auth::user()->id
+            ]);
+
+        if ($rpu) {
+            $this->insert_log($status, $no_rpu, '', '');
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     function insert_log($status, $rpu, $catatan, $foto)
     {
 

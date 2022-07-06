@@ -28,7 +28,7 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [LoginController::class, 'index'])->name('login');
 
 // History
-Route::get('/history', [LoginController::class, 'history_page'])->name('history.page');
+Route::get('/history/{kode_rpu}', [PublicController::class, 'history_page'])->name('history.page');
 
 Auth::routes(['verify' => true]);
 
@@ -69,6 +69,7 @@ Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix'
     Route::get('/', [ForemanController::class, 'index']);
     Route::get('/list-barang', [ForemanController::class, 'list_barang'])->name('list.barang');
     Route::get('/list-barang/create/{no_rpu}', [ForemanController::class, 'list_barang_create'])->name('list.barang.create');
+    Route::post('/list-barang/create', [ForemanController::class, 'post_list_barang_create'])->name('post.list.barang');
 });
 
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/warehouse'], function () {
