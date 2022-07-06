@@ -25,13 +25,24 @@
         <div class="col-lg-12 mt-5">
             <div>
                 <div class="timeline">
+                    <div class="timeline-item right">
+                        <i class="icon ri-checkbox-circle-fill text-success"></i>
+                        <div class="date text-white">01 Jan 2021</div>
+                        <div class="content">
+                            <h5>MCC <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
+                            <p class="text-muted mb-2">
+                                (Deskripsi) Work Order Selesai
+                            </p>
+                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
                     <div class="timeline-item left">
                         <i class="icon ri-close-circle-fill text-danger"></i>
                         <div class="date text-white">10 Jul 2021</div>
                         <div class="content">
-                            <h5>New ticket received <span class="badge bg-danger text-white fs-10 align-middle ms-1">Menunggu</span></h5>
+                            <h5>Foreman <span class="badge bg-danger text-white fs-10 align-middle ms-1">Menunggu</span></h5>
                             <p class="text-muted mb-2">
-                                It is important for us that we receive email notifications when a ticket is created as our IT staff are mobile and will not always be looking at the dashboard for new tickets.
+                                (Deskripsi) Work Order telah diterima / Work Order dalam proses pengerjaan
                             </p>
                             <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
                         </div>
@@ -40,9 +51,31 @@
                         <i class="icon ri-alert-fill text-danger"></i>
                         <div class="date text-white">18 May 2021</div>
                         <div class="content">
-                            <h5>New ticket received <span class="badge bg-warning text-white fs-10 align-middle ms-1">Dalam Proses</span></h5>
+                            <h5>MCC <span class="badge bg-warning text-white fs-10 align-middle ms-1">Dalam Proses</span></h5>
                             <p class="text-muted mb-2">
-                                It is important for us that we receive email notifications when a ticket is created as our IT staff are mobile and will not always be looking at the dashboard for new tickets.
+                                (Deskripsi) SPB telah diterima / Work Order dalam proses pembuatan
+                            </p>
+                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="timeline-item left">
+                        <i class="icon ri-close-circle-fill text-danger"></i>
+                        <div class="date text-white">10 Jul 2021</div>
+                        <div class="content">
+                            <h5>Warehouse <span class="badge bg-danger text-white fs-10 align-middle ms-1">Menunggu</span></h5>
+                            <p class="text-muted mb-2">
+                               SOB telah diterima dan sedang di analisa / Dalam Proses Pembuatan SPB / SPB Telah dikirim ke MCC
+                            </p>
+                            <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <i class="icon ri-alert-fill text-danger"></i>
+                        <div class="date text-white">18 May 2021</div>
+                        <div class="content">
+                            <h5>MCC <span class="badge bg-warning text-white fs-10 align-middle ms-1">Dalam Proses</span></h5>
+                            <p class="text-muted mb-2">
+                                (Deskripsi) SOB Sedang proses pembuatan
                             </p>
                             <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
                         </div>
@@ -52,17 +85,17 @@
                         <div class="date text-white">10 Feb 2021</div>
                         <div class="content">
                             <div class="row d-flex align-item-center">
-                                <div class="col-6 ">
-                                    <h5>Pengambilan Barang <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
+                                <div class="col-12 ">
+                                    <h5>Foreman <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
                                     <p class="text-muted mb-2">
-                                        Barang Sudah diambil mekanik
+                                       (Deskripsi) RPU Sudah dianalisa foreman dengan SOB
                                     </p>
                                 </div>
-                                <div class="col-6">
+                                {{-- <div class="col-6">
                                     <div class="border border-dashed rounded gx-2 p-2">
                                             <img src="{{ URL::asset('assets/images/bukti1.jfif') }}" alt="" class="img-fluid rounded w-50">
-                                    </div><!--end row-->
-                                </div>
+                                    </div>
+                                </div> --}}
                             </div>
                             
 
@@ -73,9 +106,9 @@
                         <i class="icon ri-checkbox-circle-fill text-success"></i>
                         <div class="date text-white">01 Jan 2021</div>
                         <div class="content">
-                            <h5>New ticket received <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
+                            <h5>MCC <span class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
                             <p class="text-muted mb-2">
-                                It is important for us that we receive email notifications when a ticket is created as our IT staff are mobile and will not always be looking at the dashboard for new tickets.
+                               (Deskripsi Status Di MCC) Contoh : RPU Sudah dibuat oleh MCC.
                             </p>
                             <a href="javascript:void(0);" class="link-primary text-decoration-underline">Read More <i class="ri-arrow-right-line"></i></a>
                         </div>
