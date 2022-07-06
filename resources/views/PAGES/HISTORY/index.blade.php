@@ -11,7 +11,7 @@
 @section('content')
 
 
-<div class="container-fluid pt-2 bg-primary">
+<div class="container-fluid pt-2">
     <h4 class="text-white">No RPU : {{$passing['kode_rpu']}} </h4>
     <div class="row">
         <div class="col-lg-12">
@@ -49,6 +49,7 @@
                 <div class="timeline-item @if ($loop->odd) left @else right @endif">
                     <i class="icon ri-checkbox-circle-fill text-success"></i>
                     <div class="date text-white">{{ $passing['until']->hari_tanggal($log->created_at) }}</div>
+                    <div class="date text-white mt-4">{{ $passing['until']->jam_menit($log->created_at) }}</div>
                     <div class="content">
                         <h5>{{$log['status']['deskripsi_status']}} <span
                                 class="badge bg-success text-white fs-10 align-middle ms-1">Selesai</span></h5>
