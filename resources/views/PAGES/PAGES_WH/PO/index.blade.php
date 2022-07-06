@@ -35,9 +35,9 @@
                         <h5 class="card-title mb-0">Daftar Purchase Order</h5>
                     </div>
                     <div class="col-6">
-                        <a type="button" href="{{route('mcc.rpu.create')}}"
+                        <a type="button" href="{{route('warehouse.purchase_order.create')}}"
                             class="btn btn-primary btn-label waves-effect waves-light float-end"><i
-                                class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> Buat Request</a>
+                                class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> Buat Purchase Order</a>
                     </div>
                 </div>
             </div>
@@ -45,72 +45,70 @@
                 <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="rpuList"
+                            <table id="poList"
                                 class="table dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
                                 style="width: 100%;" aria-describedby="example_info">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>No. RPU</th>
-                                        <th>List Sparepart</th>
-                                        <th>PIC MCC</th>
+                                        <th>No. PO</th>
+                                        <th>Tanggal</th>
+                                        <th>PIC Warehouse</th>
+                                        <th>Supplier</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for($i = 1; $i < 100; $i++)
+                                    @for($i = 1; $i < 10; $i++)
                                         <tr class="">
                                             <td width="10%" class="">{{$i}}</td>
-                                            <td width="15%" class="">SR-16565350{{$i}}</td>
-                                            <td width="55%">
-                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="accordionwithiconExample2{{$i}}">
-                                                            <button class="accordion-button collapsed" type="button"
-                                                                data-bs-toggle="collapse"
-                                                                data-bs-target="#accor_iconExamplecollapse2{{$i}}"
-                                                                aria-expanded="false"
-                                                                aria-controls="accor_iconExamplecollapse2">
-                                                                <i class="ri-user-location-line"></i> Tampilkan List Sparepart
-                                                            </button>
-                                                        </h2>
-                                                        <div id="accor_iconExamplecollapse2{{$i}}"
-                                                            class="accordion-collapse collapse"
-                                                            aria-labelledby="accordionwithiconExample2"
-                                                            data-bs-parent="#accordionWithicon">
-                                                            <div class="accordion-body">
-                                                                <ul class="list-group">
-                                                                    <li class="list-group-item"><i
-                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send the
-                                                                        billing agreement</li>
-                                                                    <li class="list-group-item"><i
-                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Send over
-                                                                        all the documentation.</li>
-                                                                    <li class="list-group-item"><i
-                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Meeting
-                                                                        with daron to review the intake form</li>
-                                                                    <li class="list-group-item"><i
-                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Check
-                                                                        uikings theme and give customer support</li>
-                                                                    <li class="list-group-item"><i
-                                                                            class="mdi mdi-check-bold align-middle lh-1 me-2"></i> Start
-                                                                        making a presentation</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            <td width="15%" class="">PO-16565350{{$i}}</td>                                            
+                                            <td width="15%" class="">22 Juni 2022</td>                                            
+                                            <td width="10%" class="">Daffa</td>
+                                            <td width="15%" class="">PT ABC Logistik</td>                                            
+                                            <td width="15%" class=""><span class="badge badge-soft-success">Diterima</span></td>                                            
+                                            <td width="10%" class="">
+                                                <div class="dropup d-inline-block">
+                                                    <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="ri-more-fill align-middle"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
+                                                        <li>
+                                                            <a href=""
+                                                                target="" class="dropdown-item edit-item-btn"  data-bs-toggle="modal" data-bs-target="#myModal"><i
+                                                                    class=" ri-eye-fill align-bottom me-2 text-muted"></i>
+                                                                Detail Barang
+                                                            </a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </td>
+                                        </tr>
+                                        <tr class="">
+                                            <td width="10%" class="">{{$i}}</td>
+                                            <td width="15%" class="">PO-16565350{{$i}}</td>                                            
+                                            <td width="15%" class="">28 Juni 2022</td>                                            
                                             <td width="10%" class="">Daffa</td>
+                                            <td width="15%" class="">PT ABC Logistik</td>                                            
+                                            <td width="15%" class=""><span class="badge badge-soft-warning">Pending</span></td>                                            
                                             <td width="10%" class="">
-                                                <button type="button"
-                                                    class="btn btn-success btn-label waves-effect waves-light" id="approveList"><i
-                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2" ></i>
-                                                    Terima</button>
-                                                <button type="button"
-                                                    class="btn btn-danger btn-label waves-effect waves-light"><i
-                                                        class=" ri-close-circle-fill label-icon align-middle fs-16 me-2"></i>
-                                                    Tolak</button>
+                                                <div class="dropup d-inline-block">
+                                                    <button class="btn btn-soft-secondary btn-sm dropdown" type="button"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="ri-more-fill align-middle"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end" style="z-index: 1;">
+                                                        <li>
+                                                            <a href=""
+                                                                target="" class="dropdown-item edit-item-btn"  data-bs-toggle="modal" data-bs-target="#myModal"><i
+                                                                    class=" ri-eye-fill align-bottom me-2 text-muted"></i>
+                                                                Detail Barang
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endfor
@@ -124,6 +122,31 @@
     </div>
     <!--end col-->
 </div>
+{{-- Modal detail barang --}}
+<div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"><span class="badge bg-primary p-2">Detail Barang ( PO-165653501 )</span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
+            </div>
+            <div class="modal-body">                    
+                <ol class="list-group list-group-numbered">
+                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                </ol>
+            </div>
+            {{-- <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary ">Save Changes</button>
+            </div> --}}
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection
 @section('script')
 {{-- Jquery CDN --}}
@@ -143,7 +166,7 @@
 
 <script>
     $('document').ready(function () {
-        $('#rpuList').DataTable();
+        $('#poList').DataTable();
         // $('#spbList').DataTable();
         // $('#ping').on('click', function(){
             $('#approveList').on('click', function(){
