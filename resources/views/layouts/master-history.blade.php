@@ -12,7 +12,7 @@
         @include('layouts.head-css')
     </head>
 
-    <body>
+    <body class="bg-primary">
     @yield('body')
 
     @yield('content')
