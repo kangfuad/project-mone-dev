@@ -78,6 +78,8 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
     Route::get('/spb/index', [warehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
     Route::get('/purchase-order', [warehouseController::class, 'purchase_order'])->name('warehouse.purchase_order.index');
     Route::get('/purchase-order/create', [warehouseController::class, 'purchase_order_create'])->name('warehouse.purchase_order.create');
+
+    Route::get('/inventory', [warehouseController::class, 'inventory'])->name('warehouse.inventory.index');
 });
 
 

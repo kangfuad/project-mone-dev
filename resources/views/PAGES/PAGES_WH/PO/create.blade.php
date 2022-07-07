@@ -78,47 +78,50 @@
 
                 </div>
             </div>
-            {{-- Card Daftar kerusakan --}}
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <h5 class="card-title mb-0">Daftar Barang</h5>
-                        </div>
-                        <div class="col-6">
-                            <button type="button" id="addRow"
-                                class="btn btn-primary btn-label waves-effect waves-light float-end"><i
-                                    class="ri-tools-fill label-icon align-middle fs-16 me-2"></i>Tambah Data Barang</button>
+             {{-- Card List Kerusakan --}}
+             <div id="loop_item">
+                 <div class="card ribbon-box border shadow-none mb-3">
+                    <div class="card-body">
+                        <div class="ribbon ribbon-primary round-shape">List Barang</div>
+                        <button type="button" data-id="" id="addRowBarang"
+                            class="btn btn-sm btn-primary btn-label waves-effect waves-light float-end mb-2 py-2"><i
+                                class="ri-add-fill label-icon align-middle fs-16 me-2"></i>Tambah Sparepart</button>
+                        <div class="ribbon-content mt-4 text-muted">
+                            <table id="add-rows"
+                                class="table table-nowrap dt-responsive table-bordered display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th width="70%">Barang</th>
+                                        <th width="20%">Jumlah</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <table id="add-items" class="table table-nowrap dt-responsive table-bordered display"
-                        style="width:100%">
-                        <thead>
-                            <tr>
-                                <th width="80%">Barang</th>
-                                <th width="10%">Jumlah</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="card-footer">
-                    <a type="submit" href="{{route('warehouse.purchase_order.index')}}"
-                        class="btn btn-danger btn-label waves-effect waves-light float-start mt-3"><i
-                            class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
-                    <button type="submit" class="btn btn-primary btn-label waves-effect waves-light float-end mt-3"><i
-                            class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
-                </div>
             </div>
+
+           <div class="card">
+            <div class="card-header">
+                <a type="button" id="" href="{{route('warehouse.purchase_order.index')}}"
+                class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
+                    class=" ri-delete-back-2-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
+                 <button type="butoon" id="SubmitListBarang"
+                class="btn btn-primary btn-label waves-effect waves-light float-end mb-2"><i
+                    class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
+            </div>
+           </div>
         </div>
 
         <!--end col-->
     </form>
 </div>
 
-
+<meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
 
 @endsection
@@ -143,32 +146,145 @@
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 <script>
     $(document).ready(function () {
-    var t = $('#add-items').DataTable();
-    var counter = 1;
-    $('#addRow').on('click', function () {
-        // t.row.add([counter + '.1', counter + '.2', counter + '.3', counter + '.4', counter + '.5', counter + '.6', counter + '.7', counter + '.8', counter + '.9', counter + '.10', counter + '.11', counter + '.12']).draw(false);
-        t.row.add([
-            `<div>
-                <select class="js-example-basic-single form-control" name="items" id="items">
-                    <option>BR001 - Baut (Stock : 200)</option>
-                    <option>BR002 - Baut (Stock : 200)</option>
-                    <option>BR003 - Baut (Stock : 200)</option>
-                    <option>BR004 - Baut (Stock : 200)</option>
-                </select>
-            </div>`,
-            '<div><input type="number" class="form-control" id="qty" name="qty"></div>',
-            '<button class="btn btn-danger" id="delteRow">Hapus</button>'
-        ]).draw(false);
-        counter++;
-    }); // Automatically add a first row of data
+        let _token   = $('meta[name="csrf-token"]').attr('content');
+        var id = '';
+        var option = function () {
+            console.log(id);
+            var tmp = null;
+            $.ajax({
+                async: false,
+                type:'POST',
+                url: "{{ url('/get-all-items') }}",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    _token : _token
+                },
+                success: (data) => {
+                    
+                    if(data.pesan == "sukses"){
+                        tmp = data.data;
+                    }else {
+                        Swal.fire({
+                            html: '<div class="mt-3">' +
+                                '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                                '<div class="mt-4 pt-2 fs-15">' +
+                                '<h4>Oops...! Terjadi kesalahan !</h4>' +
+                                '<p class="text-muted mx-4 mb-0">Silahkan coba kembali nanti atau hubungi tim support!</p>' +
+                                '</div>' +
+                                '</div>',
+                            showCancelButton: true,
+                            showConfirmButton: false,
+                            cancelButtonClass: 'btn btn-primary w-xs mb-1',
+                            cancelButtonText: 'Tutup',
+                            buttonsStyling: false,
+                            showCloseButton: true
+                        })
+                    }
+                },
+                error: function(data){
+                    Swal.fire({
+                        html: '<div class="mt-3">' +
+                            '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                            '<div class="mt-4 pt-2 fs-15">' +
+                            '<h4>Oops...! Terjadi kesalahan !</h4>' +
+                            '<p class="text-muted mx-4 mb-0">Silahkan coba kembali nanti atau hubungi tim support!</p>' +
+                            '</div>' +
+                            '</div>',
+                        showCancelButton: true,
+                        showConfirmButton: false,
+                        cancelButtonClass: 'btn btn-primary w-xs mb-1',
+                        cancelButtonText: 'Tutup',
+                        buttonsStyling: false,
+                        showCloseButton: true
+                    })
+                }
+            });
+            return tmp;
+        }();
 
-    $('#addRow').click();
-    $('#add-items tbody').on('click', '#delteRow', function () {
-        t
-            .row($(this).parents('tr'))
-            .remove()
-            .draw();
+        
+        $('#loop_item').on('click', '#addRowBarang', function(){
+            var id = $(this).data('id');
+            addrows(id);
+        });
+
+
+        var counter = 0;
+
+        function addrows(id){
+            var t = $('#add-rows'+id).DataTable();
+
+            initSelect2();
+			function initSelect2() {
+				$('.myselect').each(function(index, element) {
+					$(this).select2({
+						placeholder: "Pilih Barang"
+					})
+				})
+			}
+            t.row.add([
+                `<div id="menuAddRows">
+                </div>`,
+                `<div>
+                    <input type="number" class="form-control" id="jumlah_barang[]" name="barang[`+counter+`][jumlah_barang]" min="0">
+                    <input type="hidden" class="form-control" name="barang[`+counter+`][id_keluhan]" value="`+id+`" min="0">
+                </div>`,
+                '<button class="btn btn-danger" id="delteRow">Hapus</button>'
+            ]).draw(false);
+            var html = '';
+            var i;
+
+            // console.log(option)
+            
+            for(i=0; i<option.length;i++){
+                html += '<option value="'+option[i].kode_barang+'--&&--'+option[i].nama_barang+'">'+option[i].kode_barang+' - '+option[i].nama_barang+' (Stock : '+option[i].jumlah+')</option>';
+            }
+
+            let select = document.createElement('select')
+                select.className = 'myselect form-control'
+                select.id = 'barang'+counter
+                select.name = 'barang['+counter+'][kode_barang]'
+                select.innerHTML = '<option hidden selected disabled></option>'+html
+
+                var elements = document.querySelectorAll('[id="menuAddRows"]');
+                for(var i = 0; i < elements.length; i++) {
+                    elements[i].appendChild(select);
+                }
+                initSelect2();
+
+            counter++;
+            
+
+            $('#add-rows'+id+' tbody').on('click', '#delteRow', function () {
+                t
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+            });
+        }
+
+        $("#SubmitListBarang").on('click',function(){
+            console.log("MASUK");
+        })
+
+        function handleFormSubmit(event) {
+        event.preventDefault();
+
+        const data = new FormData(event.target);
+
+        const formJSON = Object.fromEntries(data.entries());
+        
+        // for multi-selects, we need special handling
+        formJSON.id_keluhan = data.getAll('id_keluhan');
+        formJSON.barang = data.getAll('barang');
+        formJSON.jumlah_barang = data.getAll('jumlah_barang');
+        console.log(JSON.stringify(formJSON, null, 2))
+        }
+        const form = document.querySelector('#postListBarang');
+        form.addEventListener('submit', handleFormSubmit);
+
     });
-});
-</script>
+</script>7
 @endsection

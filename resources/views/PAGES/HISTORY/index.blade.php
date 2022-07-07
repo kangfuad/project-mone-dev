@@ -1,4 +1,4 @@
-@extends('layouts.master-without-nav')
+@extends('layouts.master-history')
 @section('title')
 @lang('translation.signin')
 @endsection
