@@ -1,3 +1,7 @@
+<?php
+$trigerUlr = explode(":8888",Request::url());
+// dd($trigerUlr);
+?>
 <!-- ========== App Menu ========== -->
 <div class="app-menu navbar-menu">
     <!-- LOGO -->
@@ -34,8 +38,13 @@
 
             <ul class="navbar-nav mt-1" id="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="/">
-                        <i class="ri-dashboard-2-line"></i> <span>BERANDA</span>
+                    <a class="nav-link menu-link 
+                        {{ $trigerUlr[1] == '/mcc' ? 'active' : '' }} 
+                        {{ $trigerUlr[1] == '/foreman' ? 'active' : '' }} 
+                        {{ $trigerUlr[1] == '/warehouse' ? 'active' : '' }} 
+                        {{ $trigerUlr[1] == '/admin' ? 'active' : '' }} 
+                        " href="/">
+                        <i class="ri-dashboard-2-line"></i> <span>BERANDA </span>
                     </a>
                 </li>
 
@@ -55,9 +64,10 @@
                 </li> --}}
                 <li class="menu-title"><i class="ri-more-fill"></i> <span>{{$passing['menu_head']}}</span></li>
                 @foreach($passing['menu'] as $m)
-                    
+
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ url($m->path_menu) }}" style="font-size: 7">
+                    <a class="nav-link menu-link {{ $trigerUlr[1] == $m->path_menu ? 'active' : '' }}"
+                        href="{{ url($m->path_menu) }}" style="font-size: 7">
                         <i class="{{$m->icon_sub_menu}}"></i> <span data-key="t-widgets">{{$m->nama_sub_menu}}</span>
                     </a>
                 </li>
