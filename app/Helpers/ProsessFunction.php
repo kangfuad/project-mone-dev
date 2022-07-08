@@ -20,6 +20,7 @@ use App\Models\Mpe_rpu_wo;
 use App\Models\Mpe_rpu_keluhan_listbarang;
 use App\Models\Mpe_rpu_sob;
 use App\Models\Mpe_rpu_spb;
+use App\Models\Mpe_sob;
 
 // END MODELS
 
@@ -118,6 +119,22 @@ class ProsessFunction
             return false;
         }
         return false;
+    }
+
+    function create_sob($status, $req, $flaging)
+    {
+        $sob = new Mpe_rpu_sob();
+        $sob->no_rpu = trim($req->no_rpu);
+        $sob->id_sob = trim($req->no_sob);
+        $sob->id_pic_wharehouse = trim($req->user_warehouse);
+        $sob->flaging = trim($flaging);
+        $sob->created_by = trim(Auth::user()->id);
+        if ($sob->save()) {
+            $this->updatestatusrpu($status, $req->no_rpu, '', '');
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function updatestatusrpu($status, $no_rpu, $catatan, $foto)

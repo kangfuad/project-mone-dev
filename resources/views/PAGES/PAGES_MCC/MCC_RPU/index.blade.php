@@ -66,7 +66,7 @@
                                             <th>Hour Mater (HM)</th>
                                             <th>Kilo Meter (KM)</th>
                                             <th>Laporan Kerusakan</th>
-                                            <th>PIC MCC</th>
+                                            <th>PIC FOREMAN</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -207,6 +207,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
+
 @endsection
 @section('script')
 

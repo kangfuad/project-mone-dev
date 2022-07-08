@@ -60,7 +60,8 @@ Route::group(['middleware' => ['auth', 'role:2', 'PreventBackHistory'], 'prefix'
     Route::get('/sob', [MccController::class, 'mcc_sob_index'])->name('mcc.sob.index');
 
 
-
+    // AJAX
+    Route::post('/ajukan-sob', [MccController::class, 'ajukan_sob'])->name('ajukan.sob');
     // END AJAX
 });
 

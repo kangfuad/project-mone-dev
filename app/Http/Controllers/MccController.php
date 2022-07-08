@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Helpers\ProsessFunction;
 use App\Helpers\UtilFunction;
+use Illuminate\Support\Facades\DB;
 // USE MODEL
 use App\Models\User;
 use App\Models\Mpe_rpu;
@@ -43,7 +44,7 @@ class MccController extends Controller
         $GET_MENU = new UtilFunction();
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "ADMIN MENU";
-        $rpus = Mpe_rpu::with(['foreman', 'status'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->OrderBy('id', 'DESC')->get();
+        $rpus = Mpe_rpu::with(['foreman', 'status'])->where(['is_Active' => 1, 'created_by' => Auth::user()->id])->WhereIn('status_id', [11])->OrderBy('id', 'DESC')->get();
         $passing = [
             'title' => 'RPU - Request Perbaikan Unit',
             'title-page' => 'Request Perbaikan Unit',
@@ -94,15 +95,38 @@ class MccController extends Controller
 
     public function mcc_sob_index()
     {
-        $GET_MENU = new UtilFunction();
-        $menu = $GET_MENU->GET_MENU();
+        $Until = new UtilFunction();
+        $menu = $Until->GET_MENU();
         $menu_head = "ADMIN MENU";
+        $sob = $Until->GET_RPU_WITH_DETIL_BARANG(['12']);
+        $warehouse = User::with(['count_warehouse'])->where(['role_id' => 4, 'is_active' => 1])->OrderBy('name', 'ASC')->get();
         $passing = [
             'title' => 'Buat - Surat Order Barang',
             'title-page' => 'Order Barang',
             'menu' => $menu,
-            'menu_head' => $menu_head
+            'menu_head' => $menu_head,
+            'sob' => $sob,
+            'until' => $Until,
+            'warehouse' => $warehouse
+
         ];
         return view('PAGES.PAGES_MCC.MCC_SOB.index', get_defined_vars());
+    }
+
+    public function ajukan_sob(Request $req)
+    {
+        $pf = new ProsessFunction();
+        $flaging = $pf->get_flaging($req->no_rpu) + 1;
+
+        $create = $pf->create_sob(20, $req, $flaging);
+
+        if ($create == true) {
+            $pesan = "SUCCESS";
+        } else {
+            $pesan = "ERROR";
+        }
+        return response()->json([
+            'pesan' => $pesan,
+        ]);
     }
 }
