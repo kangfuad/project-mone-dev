@@ -54,6 +54,6 @@ class User extends Authenticatable
 
     public function count_warehouse()
     {
-        return $this->hasMany(Mpe_sob::class, 'id_pic_wharehouse', 'id')->where('is_active', '=', 1);
+        return $this->hasMany(Mpe_rpu_sob::class, 'id_pic_wharehouse', 'id')->where('is_active', '=', 1);
     }
 }
