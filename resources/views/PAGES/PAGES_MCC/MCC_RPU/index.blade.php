@@ -229,8 +229,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
 <script src="{{ URL::asset('assets/js/pages/datatables.init.js')}}"></script>
-<!-- App js -->
-<script src="{{ URL::asset('assets/js/app.js')}}"></script>
 
 <script>
     $('document').ready(function () {
