@@ -628,6 +628,10 @@
 </div><!-- end row -->
 @endsection
 @section('script')
+<!-- JAVASCRIPT -->
+{{-- <script src="{{ URL::asset('assets/libs/simplebar/simplebar.min.js')}}"></script> --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- apexcharts -->
 <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 <script src="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.js') }}"></script>
@@ -636,4 +640,6 @@
 <!-- dashboard init -->
 <script src="{{ URL::asset('/assets/js/pages/dashboard-analytics.init.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+<!-- App js -->
+{{-- <script src="{{ URL::asset('assets/js/app.js')}}"></script> --}}
 @endsection
