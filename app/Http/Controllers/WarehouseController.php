@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 // Use Model
 use App\Models\Mpe_master_barang;
 
-class warehouseController extends Controller
+class WarehouseController extends Controller
 {
     public function index()
     {
