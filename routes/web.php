@@ -10,7 +10,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MccController;
 use App\Http\Controllers\ForemanController;
-use App\Http\Controllers\warehouseController;
+use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\PublicController;
 // END CONTROLLER
 
@@ -75,12 +75,12 @@ Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix'
 
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/warehouse'], function () {
 
-    Route::get('/', [warehouseController::class, 'index']);
-    Route::get('/spb/index', [warehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
-    Route::get('/purchase-order', [warehouseController::class, 'purchase_order'])->name('warehouse.purchase_order.index');
-    Route::get('/purchase-order/create', [warehouseController::class, 'purchase_order_create'])->name('warehouse.purchase_order.create');
+    Route::get('/', [WarehouseController::class, 'index']);
+    Route::get('/spb/index', [WarehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
+    Route::get('/purchase-order', [WarehouseController::class, 'purchase_order'])->name('warehouse.purchase_order.index');
+    Route::get('/purchase-order/create', [WarehouseController::class, 'purchase_order_create'])->name('warehouse.purchase_order.create');
 
-    Route::get('/inventory', [warehouseController::class, 'inventory'])->name('warehouse.inventory.index');
+    Route::get('/inventory', [WarehouseController::class, 'inventory'])->name('warehouse.inventory.index');
 });
 
 
