@@ -70,7 +70,7 @@
                                                             data-bs-target="#accor_iconExamplecollapse2{{$loop->iteration}}"
                                                             aria-expanded="false"
                                                             aria-controls="accor_iconExamplecollapse2">
-                                                            <i class="ri-user-location-line"></i> Tampilkan List
+                                                            <i class="ri-survey-fill"></i> &nbsp; Tampilkan List
                                                             Sparepart Unit {{ $rpu['nomer_unit'] }}
                                                         </button>
                                                     </h2>
@@ -84,12 +84,12 @@
 
                                                                 <li class="list-group-item">
                                                                     <i
-                                                                        lass="mdi mdi-check-bold align-middle lh-1 me-2"></i>
+                                                                        class="ri-pushpin-fill align-middle lh-1 me-2"></i>
                                                                     {{$keluhan['keluhan']}}
-                                                                    <ul>
+                                                                    <ul class="list-group list-group-numbered">
                                                                         @if(isset($keluhan['listing']) > 0)
                                                                         @foreach($keluhan['listing'] as $list)
-                                                                        <li>
+                                                                        <li class="mt-1">
                                                                             {{$list['nama_barang']}}
                                                                         </li>
                                                                         @endforeach
@@ -108,9 +108,9 @@
                                         <td width="10%" class="">{{ $rpu['pic_foreman'] }}</td>
                                         <td width="10%" class="">
                                             <button type="button" data-rpu="{{ $rpu['no_rpu'] }}"
-                                                class="btn btn-success btn-label waves-effect waves-light"
+                                                class="btn btn-primary btn-label waves-effect waves-light"
                                                 id="approveList"><i
-                                                    class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
+                                                    class="ri-edit-2-fill label-icon align-middle fs-16 me-2"></i>
                                                 Buat SOB</button>
                                         </td>
                                     </tr>

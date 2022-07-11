@@ -41,7 +41,7 @@
                         <h5 class="card-title mb-0">Daftar Request Perbaikan Unit (RPU)</h5>
                     </div>
                     <div class="col-6">
-                        <a type="button" href="{{route('mcc.rpu.create')}}"
+                        <a href="{{route('mcc.rpu.create')}}"
                             class="btn btn-primary btn-label waves-effect waves-light float-end"><i
                                 class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> Buat Request</a>
                     </div>

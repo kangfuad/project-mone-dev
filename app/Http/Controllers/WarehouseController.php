@@ -21,6 +21,20 @@ class WarehouseController extends Controller
             'menu' => $menu,
             'menu_head' => $menu_head
         ];
+        return view('PAGES.PAGES_WH.index', ['passing' => $passing]);
+    }
+
+    // SPB
+    public function spb(){
+        $GET_MENU = new UtilFunction();
+        $menu = $GET_MENU->GET_MENU();
+        $menu_head = "Warehouse MENU";
+        $passing = [
+            'title' => 'Surat Pengadaan Barang',
+            'title-page' => 'Halaman Surat Pengadaan Barang',
+            'menu' => $menu,
+            'menu_head' => $menu_head
+        ];
         return view('PAGES.PAGES_WH.SPB.index', ['passing' => $passing]);
     }
 

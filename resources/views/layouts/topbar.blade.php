@@ -50,7 +50,8 @@
                 </div>
 
                 {{-- NOTIF --}}
-                <div class="dropdown topbar-head-dropdown ms-1 header-item">
+
+                {{-- <div class="dropdown topbar-head-dropdown ms-1 header-item">
                     <button type="button" class="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
                         id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">
@@ -290,7 +291,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
+                {{-- End Notifications --}}
 
                 <div class="dropdown ms-sm-3 header-item topbar-user">
                     <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
@@ -300,7 +302,7 @@
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{Auth::user()->name}}</span>
-                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">Founder</span>
+                                <span class="d-none d-xl-block ms-1 fs-12 text-muted user-name-sub-text">-</span>
                             </span>
                         </span>
                     </button>
