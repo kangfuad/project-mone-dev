@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth', 'role:3', 'PreventBackHistory'], 'prefix'
 Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix' => '/warehouse'], function () {
 
     Route::get('/', [WarehouseController::class, 'index']);
-    Route::get('/spb/index', [WarehouseController::class, 'warehouse_spb'])->name('warehouse.spb.index');
+    Route::get('/surat-pengadaan-barang', [WarehouseController::class, 'spb'])->name('warehouse.spb.index');
     Route::get('/purchase-order', [WarehouseController::class, 'purchase_order'])->name('warehouse.purchase_order.index');
     Route::get('/purchase-order/create', [WarehouseController::class, 'purchase_order_create'])->name('warehouse.purchase_order.create');
 

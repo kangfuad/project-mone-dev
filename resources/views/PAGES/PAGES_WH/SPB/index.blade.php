@@ -3,6 +3,10 @@
 @section('css')
 
 <link href="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.css') }}" rel="stylesheet">
+<!-- Filepond css -->
+<link rel="stylesheet" href="{{ URL::asset('assets/libs/filepond/filepond.min.css') }}" type="text/css" />
+<link rel="stylesheet"
+    href="{{ URL::asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css') }}">
 
 @endsection
 @section('content')
@@ -25,291 +29,272 @@
     </div>
 </div>
 
-{{-- <div class="row">
-    <div class="col-xl-12">
-        <div class="card crm-widget">
-            <div class="card-body p-0">
-                <div class="row row-cols-md-3 row-cols-1">
-                    <div class="col col-lg border-end">
-                        <div class="py-4 px-3">
-                            <h5 class="text-muted text-uppercase fs-13">Campaign Sent <i
-                                    class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i>
-                            </h5>
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <i class="ri-space-ship-line display-6 text-muted"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h2 class="mb-0"><span class="counter-value" data-target="197">197</span></h2>
-                                </div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-pills nav-custom-light animation-nav nav-justified nav-danger mb-3" role="tablist">
+                    <li class="nav-item ">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#border-navs-home" role="tab">Daftar Surat
+                            Order Barang ( SOB )</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#border-navs-profile" role="tab">Daftar Surat
+                            Pengadaan Barang ( SPB )</a>
+                    </li>
+                </ul><!-- Tab panes -->
+                <div class="tab-content text-muted">
+                    <div class="tab-pane active" id="border-navs-home" role="tabpanel">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="spbList"
+                                    class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
+                                    style="width: 100%;" aria-describedby="example_info">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>No. SOB</th>
+                                            <th>Tanggal</th>
+                                            <th>Barang</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <td class="text-center"  width="5%">1</td>
+                                            <td class="text-center"  width="15%">SOB-00010002</td>
+                                            <td class="text-center"  width="10%">23 Mei 2022</td>
+                                            <td class=""  width="60%">
+                                                <!-- Accordions with Icons -->
+                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="listItemSOB">
+                                                            <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#accor_iconExamplecollapse1"
+                                                                aria-expanded="true"
+                                                                aria-controls="accor_iconExamplecollapse1">
+                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar Barang
+                                                            </button>
+                                                        </h2>
+                                                        <div id="accor_iconExamplecollapse1"
+                                                            class="accordion-collapse collapse show"
+                                                            aria-labelledby="listItemSOB"
+                                                            data-bs-parent="#accordionWithicon">
+                                                            <div class="accordion-body">
+                                                                <ol class="list-group list-group-numbered">
+                                                                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" >
+                                                <button type="button" class="btn btn-primary " data-bs-toggle="modal"
+                                                    data-bs-target="#myModal">Generate</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div><!-- end col -->
-                    <div class="col col-lg border-end">
-                        <div class="mt-3 mt-md-0 py-4 px-3">
-                            <h5 class="text-muted text-uppercase fs-13">Annual Profit <i
-                                    class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i></h5>
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <i class="ri-exchange-dollar-line display-6 text-muted"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h2 class="mb-0">$<span class="counter-value" data-target="489.4">489.4</span>k</h2>
-                                </div>
+                    </div>
+                    <div class="tab-pane" id="border-navs-profile" role="tabpanel">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="sobList"
+                                    class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
+                                    style="width: 100%;" aria-describedby="example_info">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>No. SPB</th>
+                                            <th>No. SOB</th>
+                                            <th>Tanggal</th>
+                                            <th>Barang</th>
+                                            <th>PIC Warehouse</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="">
+                                            <td class="text-center">1</td>
+                                            <td class="text-center" width="15%">01</td>
+                                            <td class="text-center" width="15%">VLZ-452</td>
+                                            <td class="text-center" width="8%">VLZ1400087402</td>
+                                            <td class="" width="60%">
+                                                <!-- Accordions with Icons -->
+                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="listItemSPB">
+                                                            <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#accor_iconExamplecollapse1"
+                                                                aria-expanded="true"
+                                                                aria-controls="accor_iconExamplecollapse1">
+                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar Barang
+                                                            </button>
+                                                        </h2>
+                                                        <div id="accor_iconExamplecollapse1"
+                                                            class="accordion-collapse collapse show"
+                                                            aria-labelledby="listItemSPB"
+                                                            data-bs-parent="#accordionWithicon">
+                                                            <div class="accordion-body">
+                                                                <ol class="list-group list-group-numbered">
+                                                                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center"><span class="badge badge-soft-primary fs-6">Daffa A</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                    </div><!-- end col -->
-                    <div class="col col-lg border-end">
-                        <div class="mt-3 mt-md-0 py-4 px-3">
-                            <h5 class="text-muted text-uppercase fs-13">
-                                Lead Coversation <i
-                                    class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i>
-                            </h5>
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <i class="ri-pulse-line display-6 text-muted"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h2 class="mb-0"><span class="counter-value" data-target="32.89">32.89</span>%</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- end col -->
-                    <div class="col col-lg border-end">
-                        <div class="mt-3 mt-lg-0 py-4 px-3">
-                            <h5 class="text-muted text-uppercase fs-13">
-                                Daily Average Income <i
-                                    class="ri-arrow-up-circle-line text-success fs-18 float-end align-middle"></i>
-                            </h5>
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <i class="ri-trophy-line display-6 text-muted"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h2 class="mb-0">$<span class="counter-value" data-target="1596.5">1,596.5</span>
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- end col -->
-                    <div class="col col-lg">
-                        <div class="mt-3 mt-lg-0 py-4 px-3">
-                            <h5 class="text-muted text-uppercase fs-13">
-                                Annual Deals <i
-                                    class="ri-arrow-down-circle-line text-danger fs-18 float-end align-middle"></i>
-                            </h5>
-                            <div class="d-flex align-items-center">
-                                <div class="flex-shrink-0">
-                                    <i class="ri-service-line display-6 text-muted"></i>
-                                </div>
-                                <div class="flex-grow-1 ms-3">
-                                    <h2 class="mb-0"><span class="counter-value" data-target="2659">2,659</span></h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end card body -->
-        </div><!-- end card -->
-    </div><!-- end col -->
-</div> --}}
+                    </div>
+                </div>
+            </div><!-- end card-body -->
+        </div>
+    </div>
+    <!--end col-->
+</div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Daftar Surat Order Barang (SOB)</h5>
+<!-- Default Modals -->
+
+<div id="myModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Generate SPB</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
             </div>
-            <div class="card-body">
-                <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="sobList"
-                                class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
-                                style="width: 100%;" aria-describedby="example_info">
-                                <thead>
-                                    {{-- <tr>
-                                        <th scope="col" style="width: 17.4px;" class="sorting sorting_asc" tabindex="0"
-                                            aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending"
-                                            aria-label=": activate to sort column descending">
-                                            #
-                                        </th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 41.4px;"
-                                            aria-label="SR No.: activate to sort column ascending">No. RPU</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 32.4px;"
-                                            aria-label="ID: activate to sort column ascending">No. SPB</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 78.4px;"
-                                            aria-label="Purchase ID: activate to sort column ascending">Nama Sparepart</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 262.4px;"
-                                            aria-label="Title: activate to sort column ascending">Jumlah</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 71.4px;"
-                                            aria-label="User: activate to sort column ascending">PIC MCC</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            style="width: 80.4px;"
-                                            aria-label="Assigned To: activate to sort column ascending">PIC Warehouse</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            style="width: 73.4px;"
-                                            aria-label="Created By: activate to sort column ascending">Foto</th>
-                                    </tr> --}}
-                                    <tr>
-                                        <th>#</th>
-                                        <th>No. RPU</th>
-                                        <th>No. SPB</th>
-                                        <th>Nama Sparepart</th>
-                                        <th>Jumlah</th>
-                                        <th>PIC MCC</th>
-                                        <th>PIC Warehouse</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="">
-                                        <td>1</td>
-                                        <td>01</td>
-                                        <td>VLZ-452</td>
-                                        <td>VLZ1400087402</td>
-                                        <td>14</td>
-                                        <td>Joseph Parker</td>
-                                        <td>Alexis Clarke</td>
-                                        <td>
-                                            <button class="btn btn-primary">Generate</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>1</td>
-                                        <td>01</td>
-                                        <td>VLZ-452</td>
-                                        <td>VLZ1400087402</td>
-                                        <td>14</td>
-                                        <td>Joseph Parker</td>
-                                        <td>Alexis Clarke</td>
-                                        <td>Daffa Parker</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title mb-0">Unggah Foto</h4>
+                    </div><!-- end card header -->
+
+                    <div class="card-body">
+                        <div class="mx-auto">
+                            <input type="file" class="filepond filepond-input-circle" name="filepond"
+                                accept="image/png, image/jpeg, image/gif" />
                         </div>
+
                     </div>
+                    <!-- end card body -->
                 </div>
             </div>
-        </div>
-    </div>
-    <!--end col-->
-</div>
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title mb-0">Daftar SPB</h5>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary ">Submit</button>
             </div>
-            <div class="card-body">
-                <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <table id="spbList"
-                                class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
-                                style="width: 100%;" aria-describedby="example_info">
-                                <thead>
-                                    {{-- <tr>
-                                        <th scope="col" style="width: 17.4px;" class="sorting sorting_asc" tabindex="0"
-                                            aria-controls="example" rowspan="1" colspan="1" aria-sort="ascending"
-                                            aria-label=": activate to sort column descending">
-                                            #
-                                        </th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 41.4px;"
-                                            aria-label="SR No.: activate to sort column ascending">No. RPU</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 32.4px;"
-                                            aria-label="ID: activate to sort column ascending">No. SPB</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 78.4px;"
-                                            aria-label="Purchase ID: activate to sort column ascending">Nama Sparepart</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 262.4px;"
-                                            aria-label="Title: activate to sort column ascending">Jumlah</th>
-                                        <th data-ordering="false" class="sorting" tabindex="0" aria-controls="example"
-                                            rowspan="1" colspan="1" style="width: 71.4px;"
-                                            aria-label="User: activate to sort column ascending">PIC MCC</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            style="width: 80.4px;"
-                                            aria-label="Assigned To: activate to sort column ascending">PIC Warehouse</th>
-                                        <th class="sorting" tabindex="0" aria-controls="example" rowspan="1" colspan="1"
-                                            style="width: 73.4px;"
-                                            aria-label="Created By: activate to sort column ascending">Foto</th>
-                                    </tr> --}}
-                                    <tr>
-                                        <th>#</th>
-                                        <th>No. RPU</th>
-                                        <th>No. SPB</th>
-                                        <th>Nama Sparepart</th>
-                                        <th>Jumlah</th>
-                                        <th>PIC MCC</th>
-                                        <th>PIC Warehouse</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="">
-                                        <td>1</td>
-                                        <td>01</td>
-                                        <td>VLZ-452</td>
-                                        <td>VLZ1400087402</td>
-                                        <td>14</td>
-                                        <td>Joseph Parker</td>
-                                        <td>Alexis Clarke</td>
-                                        <td>
-                                            <button class="btn btn-primary">Generate</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>1</td>
-                                        <td>01</td>
-                                        <td>VLZ-452</td>
-                                        <td>VLZ1400087402</td>
-                                        <td>14</td>
-                                        <td>Joseph Parker</td>
-                                        <td>Alexis Clarke</td>
-                                        <td>Daffa Parker</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--end col-->
-</div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 @endsection
 @section('script')
 {{-- Jquery CDN --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-{{-- Data Table JS --}}
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-<!-- apexcharts -->
-{{-- <script src="{{ URL::asset('/assets/libs/apexcharts/apexcharts.min.js') }}"></script> --}}
-{{-- <script src="{{ URL::asset('assets/libs/jsvectormap/jsvectormap.min.js') }}"></script> --}}
-{{-- <script src="{{ URL::asset('assets/libs/jsvectormap//world-merc.js') }}"></script> --}}
 
-<!-- dashboard init -->
-{{-- <script src="{{ URL::asset('/assets/js/pages/dashboard-analytics.init.js') }}"></script> --}}
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
+
+<script src="{{ URL::asset('assets/libs/datatables/jquery-3.6.0.min.js') }}"></script>
+{{-- Data Table JS --}}
+
+{{-- <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script> --}}
+
+<script src="{{ URL::asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables/dataTables.bootstrap5.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
 <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
-{{-- <script src="{{ URL::asset('assets/js/pages/datatables.init.js') }}"></script> --}}
+
+<!-- filepond js -->
+<script src="{{ URL::asset('assets/libs/filepond/filepond.min.js') }}"></script>
+<script src="{{ URL::asset('assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js') }}">
+</script>
+<script
+    src="{{ URL::asset('assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js') }}">
+</script>
+<script
+    src="{{ URL::asset('assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js') }}">
+</script>
+<script src="{{ URL::asset('assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
+<!-- File upload js -->
+<script src="{{ URL::asset('assets/js/pages/form-file-upload.init.js') }}"></script>
 
 <script>
-
     $('document').ready(function () {
         $('#sobList').DataTable();
         $('#spbList').DataTable();
     })
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Register any plugins
+        FilePond.registerPlugin(FilePondPluginImagePreview);
+
+        // Create FilePond object
+        const inputElement = document.querySelector('input[type="file"]');
+        const pond = FilePond.create(inputElement);
+    });
+
+    /*
+We need to register the required plugins to do image manipulation and previewing.
+*/
+    FilePond.registerPlugin(
+        // encodes the file as base64 data
+        FilePondPluginFileEncode,
+
+        // validates files based on input type
+        FilePondPluginFileValidateType,
+
+        // corrects mobile image orientation
+        FilePondPluginImageExifOrientation,
+
+        // previews the image
+        FilePondPluginImagePreview,
+
+        // crops the image to a certain aspect ratio
+        FilePondPluginImageCrop,
+
+        // resizes the image to fit a certain size
+        FilePondPluginImageResize,
+
+        // applies crop and resize information on the client
+        FilePondPluginImageTransform
+    );
+
+    // Select the file input and use create() to turn it into a pond
+    // in this example we pass properties along with the create method
+    // we could have also put these on the file input element itself
+    FilePond.create(
+        document.querySelector('input'), {
+            labelIdle: `Klik untuk ambil gambar`,
+            imagePreviewHeight: 170,
+            imageCropAspectRatio: '1:1',
+            imageResizeTargetWidth: 200,
+            imageResizeTargetHeight: 200,
+            stylePanelLayout: 'compact circle',
+            styleLoadIndicatorPosition: 'center bottom',
+            styleButtonRemoveItemPosition: 'center bottom'
+        }
+    );
 
 </script>
 @endsection

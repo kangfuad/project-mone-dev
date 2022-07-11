@@ -33,7 +33,7 @@
                 <div class="card-header bg-primary">
                     <div class="row">
                         <div class="col-6">
-                            <h5 class="card-title mb-0 text-white">Form Request Perbaikan Unit (RPU)</h5>
+                            <h5 class="card-title mb-0 text-white" style="font-size: 1.6vh">Form Request Perbaikan Unit (RPU)</h5>
                         </div>
                         <div class="col-6">
                             <h4 class="card-title mb-0 float-end"><span
@@ -127,9 +127,8 @@
                         </div>
                         <div class="col-6">
                             <button type="button" id="addRow"
-                                class="btn btn-primary btn-label waves-effect waves-light float-end"><i
-                                    class="ri-tools-fill label-icon align-middle fs-16 me-2"></i>Tambah Laporan
-                                Kerusakan</button>
+                                class="btn btn-primary btn-label waves-effect waves-light float-end" style="font-size: 1.2vh"><i
+                                    class="ri-tools-fill label-icon align-middle me-2"></i>Tambah Keluhan</button>
                         </div>
                     </div>
                 </div>
@@ -145,11 +144,9 @@
                     </table>
                 </div>
                 <div class="card-footer">
-                    <a type="submit" href="{{route('mcc.rpu.index')}}"
-                        class="btn btn-danger btn-label waves-effect waves-light float-start mt-3"><i
-                            class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
+                    <a type="" href="{{route('mcc.rpu.index')}}" class="btn btn-danger btn-label waves-effect waves-light float-start mt-3"><i class="ri-delete-back-2-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
                     <button type="submit" class="btn btn-primary btn-label waves-effect waves-light float-end mt-3"><i
-                            class=" ri-checkbox-circle-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
+                            class=" ri-check-double-fill label-icon align-middle fs-16 me-2"></i>Submit</button>
                 </div>
             </div>
         </div>
