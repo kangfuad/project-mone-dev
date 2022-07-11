@@ -36,11 +36,11 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-pills nav-custom-light animation-nav nav-justified nav-danger mb-3" role="tablist">
                     <li class="nav-item ">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#border-navs-home" role="tab">Daftar Surat
+                        <a class="nav-link active" data-bs-toggle="tab" href="#border-navs-home" role="tab" style="font-size: 1.3vh">Daftar Surat
                             Order Barang ( SOB )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#border-navs-profile" role="tab">Daftar Surat
+                        <a class="nav-link" data-bs-toggle="tab" href="#border-navs-profile" role="tab" style="font-size: 1.3vh">Daftar Surat
                             Pengadaan Barang ( SPB )</a>
                     </li>
                 </ul><!-- Tab panes -->
