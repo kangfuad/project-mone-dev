@@ -1,6 +1,6 @@
 <?php
-//$trigerUlr = explode(":8888",Request::url());
-$trigerUlr = explode(".com",Request::url());
+$trigerUlr = explode(":8888",Request::url());
+// $trigerUlr = explode(".com",Request::url());
 // dd($trigerUlr);
 ?>
 <!-- ========== App Menu ========== -->
