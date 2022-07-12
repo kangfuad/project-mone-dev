@@ -35,9 +35,9 @@
                         <h5 class="card-title mb-0">Daftar Purchase Order</h5>
                     </div>
                     <div class="col-6">
-                        <a type="button" href="{{route('warehouse.purchase_order.create')}}"
+                        <a  href="{{route('warehouse.purchase_order.create')}}"
                             class="btn btn-primary btn-label waves-effect waves-light float-end"><i
-                                class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> Buat Purchase Order</a>
+                                class="ri-edit-2-fill label-icon align-middle fs-16 me-2"></i> Buat PO</a>
                     </div>
                 </div>
             </div>

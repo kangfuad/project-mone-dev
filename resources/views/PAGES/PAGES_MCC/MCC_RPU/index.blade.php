@@ -43,7 +43,7 @@
                     <div class="col-6">
                         <a href="{{route('mcc.rpu.create')}}"
                             class="btn btn-primary btn-label waves-effect waves-light float-end"><i
-                                class="ri-user-smile-line label-icon align-middle fs-16 me-2"></i> Buat Request</a>
+                                class="ri-edit-2-fill label-icon align-middle fs-16 me-2"></i> Buat Request</a>
                     </div>
                 </div>
             </div>
