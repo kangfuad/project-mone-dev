@@ -30,8 +30,8 @@ class WarehouseController extends Controller
         $menu = $GET_MENU->GET_MENU();
         $menu_head = "Warehouse MENU";
         $passing = [
-            'title' => 'Surat Pengadaan Barang',
-            'title-page' => 'Halaman Surat Pengadaan Barang',
+            'title' => 'SOB / SPB',
+            'title-page' => 'Halaman SOB / SPB',
             'menu' => $menu,
             'menu_head' => $menu_head
         ];
