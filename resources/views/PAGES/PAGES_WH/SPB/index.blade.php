@@ -41,7 +41,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#border-navs-profile" role="tab" style="font-size: 1.3vh">Daftar Surat
-                            Pengadaan Barang ( SPB )</a>
+                            Penerimaan Barang ( SPB )</a>
                     </li>
                 </ul><!-- Tab panes -->
                 <div class="tab-content text-muted">
@@ -79,7 +79,7 @@
                                                             </button>
                                                         </h2>
                                                         <div id="accor_iconExamplecollapse1"
-                                                            class="accordion-collapse collapse show"
+                                                            class="accordion-collapse collapse"
                                                             aria-labelledby="listItemSOB"
                                                             data-bs-parent="#accordionWithicon">
                                                             <div class="accordion-body">
@@ -96,8 +96,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-center" >
-                                                <button type="button" class="btn btn-primary " data-bs-toggle="modal"
-                                                    data-bs-target="#myModal">Generate</button>
+                                                <button type="button" class="btn btn-primary btn-label waves-effect waves-light"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i> Terima</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -109,7 +108,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="sobList"
-                                    class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
+                                   class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
                                     style="width: 100%;" aria-describedby="example_info">
                                     <thead>
                                         <tr>
@@ -118,16 +117,18 @@
                                             <th>No. SOB</th>
                                             <th>Tanggal</th>
                                             <th>Barang</th>
+                                            <th>Status</th>
                                             <th>PIC Warehouse</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="">
                                             <td class="text-center">1</td>
-                                            <td class="text-center" width="15%">01</td>
-                                            <td class="text-center" width="15%">VLZ-452</td>
-                                            <td class="text-center" width="8%">VLZ1400087402</td>
-                                            <td class="" width="60%">
+                                            <td class="text-center" width="10%">SPB-00010002</td>
+                                            <td class="text-center"  width="10%">SOB-00010002</td>
+                                            <td class="text-center"  width="10%">23 Mei 2022</td>
+                                            <td class="" width="40%">
                                                 <!-- Accordions with Icons -->
                                                 <div class="accordion custom-accordionwithicon" id="accordionWithicon">
                                                     <div class="accordion-item">
@@ -141,7 +142,7 @@
                                                             </button>
                                                         </h2>
                                                         <div id="accor_iconExamplecollapse1"
-                                                            class="accordion-collapse collapse show"
+                                                            class="accordion-collapse collapse"
                                                             aria-labelledby="listItemSPB"
                                                             data-bs-parent="#accordionWithicon">
                                                             <div class="accordion-body">
@@ -157,7 +158,52 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-center"><span class="badge badge-soft-primary fs-6">Daffa A</span></td>
+                                            <td class="text-center"><span class="badge badge-soft-warning fs-6">Dalam Proses</span></td>                                           
+                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa A</span></td>
+                                            <td class="text-center" width="10%">
+                                                <button type="button" class="btn btn-primary btn-label waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#myModal"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Konfirmasi</button>
+                                            </td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-center">1</td>
+                                            <td class="text-center" width="10%">SPB-00010002</td>
+                                            <td class="text-center"  width="10%">SOB-00010002</td>
+                                            <td class="text-center"  width="10%">23 Mei 2022</td>
+                                            <td class="" width="40%">
+                                                <!-- Accordions with Icons -->
+                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="listItemSPB">
+                                                            <button class="accordion-button" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#accor_iconExamplecollapse1"
+                                                                aria-expanded="true"
+                                                                aria-controls="accor_iconExamplecollapse1">
+                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar Barang
+                                                            </button>
+                                                        </h2>
+                                                        <div id="accor_iconExamplecollapse1"
+                                                            class="accordion-collapse collapse"
+                                                            aria-labelledby="listItemSPB"
+                                                            data-bs-parent="#accordionWithicon">
+                                                            <div class="accordion-body">
+                                                                <ol class="list-group list-group-numbered">
+                                                                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                </ol>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="text-center"><span class="badge badge-soft-success fs-6">Dalam Pengiriman</span></td>                                           
+                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa A</span></td>
+                                            <td class="text-center" width="10%">
+                                                <button type="button" class="btn btn-outline-primary btn-label waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#myModal" disabled><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Terkonfirmasi</button>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -178,21 +224,17 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel">Generate SPB</h5>
+                <h5 class="modal-title" id="myModalLabel">Bukti Penerimaan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"> </button>
             </div>
             <div class="modal-body">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title mb-0">Unggah Foto</h4>
-                    </div><!-- end card header -->
-
                     <div class="card-body">
                         <div class="mx-auto">
                             <input type="file" class="filepond filepond-input-circle" name="filepond"
                                 accept="image/png, image/jpeg, image/gif" />
                         </div>
-
+                       
                     </div>
                     <!-- end card body -->
                 </div>
