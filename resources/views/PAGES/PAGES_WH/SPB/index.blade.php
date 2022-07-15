@@ -20,7 +20,7 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item"><a href="javascript: void(0);">{{ $passing['title'] }}</a></li>
                     {{-- @if(isset($title))
-                        <li class="breadcrumb-item active">{{ $title }}</li>
+                    <li class="breadcrumb-item active">{{ $title }}</li>
                     @endif --}}
                 </ol>
             </div>
@@ -36,11 +36,13 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-pills nav-custom-light animation-nav nav-justified nav-danger mb-3" role="tablist">
                     <li class="nav-item ">
-                        <a class="nav-link active" data-bs-toggle="tab" href="#border-navs-home" role="tab" style="font-size: 1.3vh">Daftar Surat
+                        <a class="nav-link active" data-bs-toggle="tab" href="#border-navs-home" role="tab"
+                            style="font-size: 1.3vh">Daftar Surat
                             Order Barang ( SOB )</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="tab" href="#border-navs-profile" role="tab" style="font-size: 1.3vh">Daftar Surat
+                        <a class="nav-link" data-bs-toggle="tab" href="#border-navs-profile" role="tab"
+                            style="font-size: 1.3vh">Daftar Surat
                             Penerimaan Barang ( SPB )</a>
                     </li>
                 </ul><!-- Tab panes -->
@@ -61,44 +63,71 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($passing['sob'] as $sob)
+
                                         <tr class="">
-                                            <td class="text-center"  width="5%">1</td>
-                                            <td class="text-center"  width="15%">SOB-00010002</td>
-                                            <td class="text-center"  width="10%">23 Mei 2022</td>
-                                            <td class=""  width="60%">
+                                            <td class="text-center" width="5%">{{ $loop->iteration}}</td>
+                                            <td class="text-center" width="15%">{{ $sob['data']['id_sob'] }}</td>
+                                            <td class="text-center" width="10%">{{
+                                                $passing['until']->hari_tanggal($sob['data']['tgl_sob']) }}</td>
+                                            <td class="" width="60%">
                                                 <!-- Accordions with Icons -->
                                                 <div class="accordion custom-accordionwithicon" id="accordionWithicon">
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="listItemSOB">
                                                             <button class="accordion-button" type="button"
                                                                 data-bs-toggle="collapse"
-                                                                data-bs-target="#accor_iconExamplecollapse1"
+                                                                data-bs-target="#accor_iconExamplecollapse1{{ $loop->iteration}}"
                                                                 aria-expanded="true"
-                                                                aria-controls="accor_iconExamplecollapse1">
-                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar Barang
+                                                                aria-controls="accor_iconExamplecollapse1{{ $loop->iteration}}">
+                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar
+                                                                Barang
                                                             </button>
                                                         </h2>
-                                                        <div id="accor_iconExamplecollapse1"
+                                                        <div id="accor_iconExamplecollapse1{{ $loop->iteration}}"
                                                             class="accordion-collapse collapse"
                                                             aria-labelledby="listItemSOB"
                                                             data-bs-parent="#accordionWithicon">
                                                             <div class="accordion-body">
                                                                 <ol class="list-group list-group-numbered">
-                                                                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    @foreach($sob['listing'] as $list)
+                                                                    @if($list['triger'] == 1)
+                                                                    <strike>
+                                                                        <li class="list-group-item">
+                                                                            {{$list['kode_barang']}}
+                                                                            - {{$list['nama_barang']}} <span
+                                                                                class="badge bg-danger float-end p-2">{{
+                                                                                $list['stock'] - $list['req_stock']
+                                                                                }}</span></li>
+                                                                    </strike>
+                                                                    @else
+                                                                    <li class="list-group-item">{{$list['kode_barang']}}
+                                                                        - {{$list['nama_barang']}} <span
+                                                                            class="badge bg-success float-end p-2">{{$list['req_stock']}}</span>
+                                                                    </li>
+                                                                    @endif
+                                                                    @endforeach
                                                                 </ol>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-center" >
-                                                <button type="button" class="btn btn-primary btn-label waves-effect waves-light"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i> Terima</button>
+                                            <td class="text-center">
+                                                @if($sob['data']['status_id'] == 23)
+                                                <button type="button" disabled
+                                                    class="btn btn-danger btn-label waves-effect waves-light"><i
+                                                        class="ri-close-line label-icon align-middle fs-16 me-2"></i>
+                                                    Pending</button>
+                                                @else
+                                                <button type="button"
+                                                    class="btn btn-primary btn-label waves-effect waves-light"><i
+                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
+                                                    Terima</button>
+                                                @endif
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -108,7 +137,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <table id="sobList"
-                                   class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
+                                    class="table table-bordered dt-responsive nowrap table-striped align-middle dataTable no-footer dtr-inline collapsed"
                                     style="width: 100%;" aria-describedby="example_info">
                                     <thead>
                                         <tr>
@@ -126,8 +155,8 @@
                                         <tr class="">
                                             <td class="text-center">1</td>
                                             <td class="text-center" width="10%">SPB-00010002</td>
-                                            <td class="text-center"  width="10%">SOB-00010002</td>
-                                            <td class="text-center"  width="10%">23 Mei 2022</td>
+                                            <td class="text-center" width="10%">SOB-00010002</td>
+                                            <td class="text-center" width="10%">23 Mei 2022</td>
                                             <td class="" width="40%">
                                                 <!-- Accordions with Icons -->
                                                 <div class="accordion custom-accordionwithicon" id="accordionWithicon">
@@ -138,7 +167,8 @@
                                                                 data-bs-target="#accor_iconExamplecollapse1"
                                                                 aria-expanded="true"
                                                                 aria-controls="accor_iconExamplecollapse1">
-                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar Barang
+                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar
+                                                                Barang
                                                             </button>
                                                         </h2>
                                                         <div id="accor_iconExamplecollapse1"
@@ -147,28 +177,43 @@
                                                             data-bs-parent="#accordionWithicon">
                                                             <div class="accordion-body">
                                                                 <ol class="list-group list-group-numbered">
-                                                                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Selang Bensin <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Velg <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
                                                                 </ol>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-center"><span class="badge badge-soft-warning fs-6">Dalam Proses</span></td>                                           
-                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa A</span></td>
+                                            <td class="text-center"><span class="badge badge-soft-warning fs-6">Dalam
+                                                    Proses</span></td>
+                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa
+                                                    A</span></td>
                                             <td class="text-center" width="10%">
-                                                <button type="button" class="btn btn-primary btn-label waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#myModal"><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Konfirmasi</button>
+                                                <button type="button"
+                                                    class="btn btn-primary btn-label waves-effect waves-light"
+                                                    data-bs-toggle="modal" data-bs-target="#myModal"><i
+                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Konfirmasi</button>
                                             </td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-center">1</td>
                                             <td class="text-center" width="10%">SPB-00010002</td>
-                                            <td class="text-center"  width="10%">SOB-00010002</td>
-                                            <td class="text-center"  width="10%">23 Mei 2022</td>
+                                            <td class="text-center" width="10%">SOB-00010002</td>
+                                            <td class="text-center" width="10%">23 Mei 2022</td>
                                             <td class="" width="40%">
                                                 <!-- Accordions with Icons -->
                                                 <div class="accordion custom-accordionwithicon" id="accordionWithicon">
@@ -179,7 +224,8 @@
                                                                 data-bs-target="#accor_iconExamplecollapse1"
                                                                 aria-expanded="true"
                                                                 aria-controls="accor_iconExamplecollapse1">
-                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar Barang
+                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar
+                                                                Barang
                                                             </button>
                                                         </h2>
                                                         <div id="accor_iconExamplecollapse1"
@@ -188,21 +234,36 @@
                                                             data-bs-parent="#accordionWithicon">
                                                             <div class="accordion-body">
                                                                 <ol class="list-group list-group-numbered">
-                                                                    <li class="list-group-item">Selang Bensin <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Velg <span class="badge bg-primary float-end p-2">10 pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span class="badge bg-primary float-end p-2">10 pcs</span></li>
+                                                                    <li class="list-group-item">Selang Bensin <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Velg <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
+                                                                    <li class="list-group-item">Ban Dalam <span
+                                                                            class="badge bg-primary float-end p-2">10
+                                                                            pcs</span></li>
                                                                 </ol>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-center"><span class="badge badge-soft-success fs-6">Dalam Pengiriman</span></td>                                           
-                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa A</span></td>
+                                            <td class="text-center"><span class="badge badge-soft-success fs-6">Dalam
+                                                    Pengiriman</span></td>
+                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa
+                                                    A</span></td>
                                             <td class="text-center" width="10%">
-                                                <button type="button" class="btn btn-outline-primary btn-label waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#myModal" disabled><i class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Terkonfirmasi</button>
+                                                <button type="button"
+                                                    class="btn btn-outline-primary btn-label waves-effect waves-light"
+                                                    data-bs-toggle="modal" data-bs-target="#myModal" disabled><i
+                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Terkonfirmasi</button>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -234,7 +295,7 @@
                             <input type="file" class="filepond filepond-input-circle" name="filepond"
                                 accept="image/png, image/jpeg, image/gif" />
                         </div>
-                       
+
                     </div>
                     <!-- end card body -->
                 </div>

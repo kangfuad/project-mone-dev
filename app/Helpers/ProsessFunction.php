@@ -112,7 +112,8 @@ class ProsessFunction
         $cek_keluhan_list = Mpe_rpu_keluhan_listbarang::where(['no_rpu' => $req->no_rpu, 'flaging' => $flaging, 'is_active' => 1])->get();
 
         if (count($cek_keluhan_list) == count($req->barang)) {
-            $this->updatestatusrpu($status, $req->no_rpu, '', '');
+            // ['status id','no rpu','catatan','foto','id warehouse']
+            $this->updatestatusrpu($status, $req->no_rpu, '', '', '');
             return true;
         } else {
             Mpe_rpu_keluhan_listbarang::where(['no_rpu' => $req->no_rpu, 'flaging' => $flaging, 'is_active' => 1])->delete();
@@ -130,14 +131,15 @@ class ProsessFunction
         $sob->flaging = trim($flaging);
         $sob->created_by = trim(Auth::user()->id);
         if ($sob->save()) {
-            $this->updatestatusrpu($status, $req->no_rpu, '', '');
+            // ['status id','no rpu','catatan','foto','id warehouse']
+            $this->updatestatusrpu($status, $req->no_rpu, '', '', $req->user_warehouse);
             return true;
         } else {
             return false;
         }
     }
 
-    function updatestatusrpu($status, $no_rpu, $catatan, $foto)
+    function updatestatusrpu($status, $no_rpu, $catatan, $foto, $pic_warehouse)
     {
         $rpu = Mpe_rpu::where('no_rpu', $no_rpu)
             ->update([
@@ -160,8 +162,8 @@ class ProsessFunction
         $log->no_rpu = trim($rpu);
         $log->role_id = trim(Auth::user()->role_id);
         $log->status_id = trim(isset($status) ? $status : '');
-        $log->catatn = trim(isset($foto) ? $catatan : '');
-        $log->foto = trim($foto);
+        $log->catatn = trim(isset($catatan) ? $catatan : '');
+        $log->foto = trim(isset($foto) ? $foto : '');
         $log->created_by = trim(Auth::user()->id);
         $log->save();
     }
