@@ -56,6 +56,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>No. RPU</th>
                                             <th>No. SOB</th>
                                             <th>Tanggal</th>
                                             <th>Barang</th>
@@ -67,6 +68,7 @@
 
                                         <tr class="">
                                             <td class="text-center" width="5%">{{ $loop->iteration}}</td>
+                                            <td class="text-center" width="15%">{{ $sob['data']['no_rpu'] }}</td>
                                             <td class="text-center" width="15%">{{ $sob['data']['id_sob'] }}</td>
                                             <td class="text-center" width="10%">{{
                                                 $passing['until']->hari_tanggal($sob['data']['tgl_sob']) }}</td>
@@ -142,8 +144,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>No. SPB</th>
-                                            <th>No. SOB</th>
+                                            <th>Detail</th>
                                             <th>Tanggal</th>
                                             <th>Barang</th>
                                             <th>Status</th>
@@ -154,8 +155,18 @@
                                     <tbody>
                                         <tr class="">
                                             <td class="text-center">1</td>
-                                            <td class="text-center" width="10%">SPB-00010002</td>
-                                            <td class="text-center" width="10%">SOB-00010002</td>
+                                            <td class="text-start" width="10%">
+                                                <small>
+                                                    <p>
+                                                        <b>No. RPU</b><br>
+                                                        <i>SR-1657464815</i><br>
+                                                        <b>No. SOB</b><br>
+                                                        <i>SOB-1657553715/1657464815</i><br>
+                                                        <b>No. SPB</b><br>
+                                                        <i>SPB-1657464815/1657553715/1657464815</i>
+                                                    </p>
+                                                </small>
+                                            </td>
                                             <td class="text-center" width="10%">23 Mei 2022</td>
                                             <td class="" width="40%">
                                                 <!-- Accordions with Icons -->
