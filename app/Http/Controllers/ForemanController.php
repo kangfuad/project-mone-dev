@@ -74,7 +74,8 @@ class ForemanController extends Controller
         if (count($req->barang) > 0) {
             $create = $pf->createListingBarang(12, $req, $flaging);
         } else {
-            $create = $pf->updatestatusrpu(14, $req->no_rpu, '', '');
+            // ['status id','no rpu','catatan','foto','id warehouse']
+            $create = $pf->updatestatusrpu(14, $req->no_rpu, '', '', $req->user_warehouse);
         }
 
 
