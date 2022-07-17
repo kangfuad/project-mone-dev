@@ -129,4 +129,18 @@ class MccController extends Controller
             'pesan' => $pesan,
         ]);
     }
+
+    public function mcc_wo_index(){
+        $Until = new UtilFunction();
+        $menu = $Until->GET_MENU();
+        $menu_head = "ADMIN MENU";
+        $passing = [
+            'title' => 'WO - Work Order',
+            'title-page' => 'Halaman Work Order',
+            'menu' => $menu,
+            'menu_head' => $menu_head
+
+        ];
+        return view('PAGES.PAGES_MCC.MCC_WO.index', get_defined_vars());
+    }
 }

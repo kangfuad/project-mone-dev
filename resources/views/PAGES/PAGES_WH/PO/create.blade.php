@@ -107,7 +107,7 @@
 
            <div class="card">
             <div class="card-header">
-                <a type="button" id="" href="{{route('warehouse.purchase_order.index')}}"
+                <a id="" href="{{route('warehouse.purchase_order.index')}}"
                 class="btn btn-danger btn-label waves-effect waves-light float-start mb-2"><i
                     class=" ri-delete-back-2-fill label-icon align-middle fs-16 me-2"></i>Kembali</a>
                  <button type="butoon" id="SubmitListBarang"

@@ -105,7 +105,7 @@
                         <div class="ribbon ribbon-primary round-shape">{{ $loop->iteration }}. {{ $kel->keluhan }}</div>
                         <button type="button" data-id="{{$kel->id}}" id="addRowBarang"
                             class="btn btn-sm btn-primary btn-label waves-effect waves-light float-end mb-2"><i
-                                class="ri-tools-fill label-icon align-middle fs-16 me-2"></i>Tambah Sparepart</button>
+                                class="ri-add-fill label-icon align-middle fs-16 me-2"></i>Tambah Sparepart</button>
                         <div class="ribbon-content mt-4 text-muted">
                             <table id="add-rows{{$kel->id}}"
                                 class="table table-nowrap dt-responsive table-bordered display" style="width:100%">
