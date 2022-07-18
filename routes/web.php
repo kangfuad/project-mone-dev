@@ -82,6 +82,10 @@ Route::group(['middleware' => ['auth', 'role:4', 'PreventBackHistory'], 'prefix'
     Route::get('/purchase-order/create', [WarehouseController::class, 'purchase_order_create'])->name('warehouse.purchase_order.create');
 
     Route::get('/inventory', [WarehouseController::class, 'inventory'])->name('warehouse.inventory.index');
+
+    // AJAX
+    Route::post('/terima-sob', [WarehouseController::class, 'terima_sob'])->name('terima.sob');
+    // END AJAX
 });
 
 
