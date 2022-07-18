@@ -217,8 +217,8 @@
                                                 </div>
                                             </td>
                                             <td class="text-center"><span class="badge bg-primary p-2 fs-6">
-                                            {{ $spb['data']['pic_mcc'] }}    
-                                            </span></td>
+                                                    {{ $spb['data']['pic_mcc'] }}
+                                                </span></td>
                                             <td class="text-center" width="10%">
                                                 <button type="button"
                                                     class="btn btn-primary btn-label waves-effect waves-light"

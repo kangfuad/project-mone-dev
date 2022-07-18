@@ -138,11 +138,12 @@ class ProsessFunction
         }
     }
 
-    function updatestatusrpu($status, $no_rpu, $catatan, $foto)
+    function updatestatusrpu($status, $no_rpu, $catatan, $foto, $userwarehouse)
     {
         $rpu = Mpe_rpu::where('no_rpu', $no_rpu)
             ->update([
                 'status_id' => $status,
+                'id_pic_wharehouse' => $userwarehouse,
                 'updated_by' => Auth::user()->id
             ]);
 
@@ -405,7 +406,7 @@ class ProsessFunction
         $spb->created_by = trim(Auth::user()->id);
         if ($spb->save()) {
             $this->insert_log(22, $req->norpu, '', '');
-            $this->updatestatusrpu(30, $req->norpu, '', '');
+            $this->updatestatusrpu(30, $req->norpu, '', '', '');
             return true;
         } else {
             return false;
