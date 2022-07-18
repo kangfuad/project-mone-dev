@@ -143,7 +143,7 @@ class ProsessFunction
         $rpu = Mpe_rpu::where('no_rpu', $no_rpu)
             ->update([
                 'status_id' => $status,
-                'id_pic_wharehouse' => $userwarehouse,
+                // 'id_pic_wharehouse' => $userwarehouse ? $userwarehouse : 'NULL',
                 'updated_by' => Auth::user()->id
             ]);
 
