@@ -35,20 +35,16 @@ class Mpe_rpu extends Model
 
     public function listing()
     {
-        // return $this->hasManyThrough(
-        //     Mpe_rpu_keluhan_listbarang::class,
-        //     Mpe_rpu_keluhan::class,
-        //     'no_rpu', // Foreign key on the environments table...
-        //     'id_mpe_rpu_keluhan', // Foreign key on the deployments table...
-        //     'no_rpu', // Local key on the projects table...
-        //     'id' // Local key on the environments table...
-        // );
-
         return $this->hasMany(Mpe_rpu_keluhan_listbarang::class, 'no_rpu', 'no_rpu')->where('is_active', '=', 1);
     }
 
     public function sob()
     {
         return $this->belongsTo(Mpe_rpu_sob::class, 'no_rpu', 'no_rpu')->where(['is_active' => 1, 'id_pic_wharehouse' => Auth::user()->id]);
+    }
+
+    public function spb()
+    {
+        return $this->belongsTo(Mpe_rpu_spb::class, 'no_rpu', 'no_rpu')->where(['is_active' => 1, 'created_by' => Auth::user()->id]);
     }
 }

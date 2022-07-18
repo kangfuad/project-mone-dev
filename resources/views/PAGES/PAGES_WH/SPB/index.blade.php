@@ -122,7 +122,10 @@
                                                         class="ri-close-line label-icon align-middle fs-16 me-2"></i>
                                                     Pending</button>
                                                 @else
-                                                <button type="button"
+                                                <button type="button" id="btnTerimaSob"
+                                                    data-norpu="{{ $sob['data']['no_rpu'] }}"
+                                                    data-idsob="{{ $sob['data']['id_sob'] }}"
+                                                    data-idmcc="{{ $sob['data']['created_by'] }}"
                                                     class="btn btn-primary btn-label waves-effect waves-light"><i
                                                         class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>
                                                     Terima</button>
@@ -145,32 +148,34 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Detail</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Diterima</th>
                                             <th>Barang</th>
-                                            <th>Status</th>
-                                            <th>PIC Warehouse</th>
+                                            <th>PIC MCC</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($passing['spb'] as $spb)
                                         <tr class="">
-                                            <td class="text-center">1</td>
-                                            <td class="text-start" width="10%">
+                                            <td class="text-center">{{ $loop->iteration}}</td>
+                                            <td class="text-start" width="25%">
                                                 <small>
                                                     <p>
                                                         <b>No. RPU</b><br>
-                                                        <i>SR-1657464815</i><br>
+                                                        <i>{{ $spb['data']['no_rpu'] }}</i><br>
                                                         <b>No. SOB</b><br>
-                                                        <i>SOB-1657553715/1657464815</i><br>
+                                                        <i>{{ $spb['data']['id_sob'] }}</i><br>
                                                         <b>No. SPB</b><br>
-                                                        <i>SPB-1657464815/1657553715/1657464815</i>
+                                                        <i>{{ $spb['data']['id_spb'] }}</i>
                                                     </p>
                                                 </small>
                                             </td>
-                                            <td class="text-center" width="10%">23 Mei 2022</td>
-                                            <td class="" width="40%">
+                                            <td class="text-center" width="10%">{{
+                                                $passing['until']->hari_tanggal($spb['data']['tgl_spb']) }}</td>
+                                            <td class="" width="30%">
                                                 <!-- Accordions with Icons -->
-                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
+                                                <div class="accordion custom-accordionwithicon"
+                                                    id="accordionWithicon{{ $loop->iteration}}">
                                                     <div class="accordion-item">
                                                         <h2 class="accordion-header" id="listItemSPB">
                                                             <button class="accordion-button" type="button"
@@ -185,34 +190,35 @@
                                                         <div id="accor_iconExamplecollapse1"
                                                             class="accordion-collapse collapse"
                                                             aria-labelledby="listItemSPB"
-                                                            data-bs-parent="#accordionWithicon">
+                                                            data-bs-parent="#accordionWithicon{{ $loop->iteration}}">
                                                             <div class="accordion-body">
                                                                 <ol class="list-group list-group-numbered">
-                                                                    <li class="list-group-item">Selang Bensin <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Velg <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
+                                                                    @foreach($spb['listing'] as $list)
+                                                                    @if($list['triger'] == 1)
+                                                                    <strike>
+                                                                        <li class="list-group-item">
+                                                                            {{$list['kode_barang']}}
+                                                                            - {{$list['nama_barang']}} <span
+                                                                                class="badge bg-danger float-end p-2">{{
+                                                                                $list['stock'] - $list['req_stock']
+                                                                                }}</span></li>
+                                                                    </strike>
+                                                                    @else
+                                                                    <li class="list-group-item">{{$list['kode_barang']}}
+                                                                        - {{$list['nama_barang']}} <span
+                                                                            class="badge bg-success float-end p-2">{{$list['req_stock']}}</span>
+                                                                    </li>
+                                                                    @endif
+                                                                    @endforeach
                                                                 </ol>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-center"><span class="badge badge-soft-warning fs-6">Dalam
-                                                    Proses</span></td>
-                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa
-                                                    A</span></td>
+                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">
+                                            {{ $spb['data']['pic_mcc'] }}    
+                                            </span></td>
                                             <td class="text-center" width="10%">
                                                 <button type="button"
                                                     class="btn btn-primary btn-label waves-effect waves-light"
@@ -220,63 +226,7 @@
                                                         class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Konfirmasi</button>
                                             </td>
                                         </tr>
-                                        <tr class="">
-                                            <td class="text-center">1</td>
-                                            <td class="text-center" width="10%">SPB-00010002</td>
-                                            <td class="text-center" width="10%">SOB-00010002</td>
-                                            <td class="text-center" width="10%">23 Mei 2022</td>
-                                            <td class="" width="40%">
-                                                <!-- Accordions with Icons -->
-                                                <div class="accordion custom-accordionwithicon" id="accordionWithicon">
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="listItemSPB">
-                                                            <button class="accordion-button" type="button"
-                                                                data-bs-toggle="collapse"
-                                                                data-bs-target="#accor_iconExamplecollapse1"
-                                                                aria-expanded="true"
-                                                                aria-controls="accor_iconExamplecollapse1">
-                                                                <i class=" ri-file-list-2-fill"></i> &nbsp; Daftar
-                                                                Barang
-                                                            </button>
-                                                        </h2>
-                                                        <div id="accor_iconExamplecollapse1"
-                                                            class="accordion-collapse collapse"
-                                                            aria-labelledby="listItemSPB"
-                                                            data-bs-parent="#accordionWithicon">
-                                                            <div class="accordion-body">
-                                                                <ol class="list-group list-group-numbered">
-                                                                    <li class="list-group-item">Selang Bensin <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Velg <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                    <li class="list-group-item">Ban Dalam <span
-                                                                            class="badge bg-primary float-end p-2">10
-                                                                            pcs</span></li>
-                                                                </ol>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="text-center"><span class="badge badge-soft-success fs-6">Dalam
-                                                    Pengiriman</span></td>
-                                            <td class="text-center"><span class="badge bg-primary p-2 fs-6">Daffa
-                                                    A</span></td>
-                                            <td class="text-center" width="10%">
-                                                <button type="button"
-                                                    class="btn btn-outline-primary btn-label waves-effect waves-light"
-                                                    data-bs-toggle="modal" data-bs-target="#myModal" disabled><i
-                                                        class="ri-check-double-line label-icon align-middle fs-16 me-2"></i>Terkonfirmasi</button>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -319,6 +269,7 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<meta name="csrf-token" id="csrf-token" content="{{ csrf_token() }}">
 
 @endsection
 @section('script')
@@ -337,7 +288,6 @@
 <script src="{{ URL::asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ URL::asset('assets/libs/datatables/dataTables.bootstrap5.min.js') }}"></script>
 <script src="{{ URL::asset('assets/libs/datatables/dataTables.responsive.min.js') }}"></script>
-<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
 
 <!-- filepond js -->
 <script src="{{ URL::asset('assets/libs/filepond/filepond.min.js') }}"></script>
@@ -352,11 +302,104 @@
 <script src="{{ URL::asset('assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js') }}"></script>
 <!-- File upload js -->
 <script src="{{ URL::asset('assets/js/pages/form-file-upload.init.js') }}"></script>
+<!-- Lord Icon -->
+<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
+{{-- Swal 2 --}}
+<script src="{{ URL::asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+<script src="{{ URL::asset('/assets/js/pages/sweetalerts.init.js') }}"></script>
+
+<script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+
+
 
 <script>
     $('document').ready(function () {
         $('#sobList').DataTable();
         $('#spbList').DataTable();
+
+        $('#spbList tbody').on( 'click', '#btnTerimaSob', function () {
+            var norpu = $(this).data('norpu'); 
+            var idsob = $(this).data('idsob'); 
+            var idmcc = $(this).data('idmcc'); 
+            Swal.fire({
+                title: 'Terima Sob?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonColor: '#405189',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Prosess'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    let _token   = $('meta[name="csrf-token"]').attr('content');
+                    $.ajax({
+                        type:'POST',
+                        url: "{{ url('/warehouse/terima-sob') }}",
+                        data: {
+                            norpu :norpu,
+                            idsob : idsob,
+                            idmcc : idmcc,
+                            _token : _token
+
+                        },
+                        success: (data) => {
+                            if (data.pesan == "SUCCESS") {
+                                Swal.fire({
+                                    html: '<div class="mt-3">' +
+                                        '<lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>' +
+                                        '<div class="mt-4 pt-2 fs-15">' +
+                                        '<h4>SOB Diterima</h4>' +
+                                        '<p class="text-muted mx-4 mb-0">SOB berhasil diteima, silahkan lanjutkan proses di tab SPB.!</p>' +
+                                        '</div>' +
+                                        '</div>',
+                                    showCancelButton: true,
+                                    showConfirmButton: false,
+                                    cancelButtonClass: 'btn btn-primary w-xs mb-1',
+                                    cancelButtonText: 'Oke',
+                                    buttonsStyling: false,
+                                    showCloseButton: true
+                                })
+                                location.reload();
+                            } else {
+                                Swal.fire({
+                                    html: '<div class="mt-3">' +
+                                        '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                                        '<div class="mt-4 pt-2 fs-15">' +
+                                        '<h4>Oops...! Terjadi kesalahan !</h4>' +
+                                        '<p class="text-muted mx-4 mb-0">Silakukan cobalagi nanti atau hubungi tim support</p>' +
+                                        '</div>' +
+                                        '</div>',
+                                    showCancelButton: true,
+                                    showConfirmButton: false,
+                                    cancelButtonClass: 'btn btn-primary w-xs mb-1',
+                                    cancelButtonText: 'Tutup',
+                                    buttonsStyling: false,
+                                    showCloseButton: true
+                                })
+                            }
+                        },
+                        error: function(data){
+                            Swal.fire({
+                                html: '<div class="mt-3">' +
+                                    '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>' +
+                                    '<div class="mt-4 pt-2 fs-15">' +
+                                    '<h4>Oops...! Terjadi kesalahan !</h4>' +
+                                    '<p class="text-muted mx-4 mb-0">Silakukan cobalagi nanti atau hubungi tim support</p>' +
+                                    '</div>' +
+                                    '</div>',
+                                showCancelButton: true,
+                                showConfirmButton: false,
+                                cancelButtonClass: 'btn btn-primary w-xs mb-1',
+                                cancelButtonText: 'Tutup',
+                                buttonsStyling: false,
+                                showCloseButton: true
+                            })
+                        }
+                    });
+                } else{
+                    location.reload();
+                }
+            });
+        });
     })
 
     document.addEventListener('DOMContentLoaded', function () {
